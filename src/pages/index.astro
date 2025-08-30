@@ -1,11 +1,226 @@
 ---
-import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+import LinkItem from '../components/LinkItem.astro';
+import TeamItem from '../components/TeamItem.astro';
 ---
 
-<Layout>
-	<Welcome />
+<Layout title="Patrick Rall">
+  <main class="main-container">
+    <div class="content-wrapper">
+      
+      <div class="header-section animate-appear" style="animation-delay: 0.1s;">
+        <div class="header-title">
+          <p class="title-english">Patrick Rall</p>
+        </div>
+        <p class="header-index">[ 1 ]</p>
+      </div>
+
+      <div class="bio-section animate-appear" style="animation-delay: 0.2s;">
+        <p class="bio-text">
+          Computer Science student at Purdue University with experience in full-stack development and high-performance computing. Passionate about building robust software systems and low-level systems.
+        </p>
+      </div>
+
+      <div class="status-section animate-appear" style="animation-delay: 0.3s;">
+        <p class="status-text">
+          Currently contributing to open-source projects and seeking new opportunities in software engineering.
+        </p>
+      </div>
+
+      <div class="work-link-section animate-appear" style="animation-delay: 0.4s;">
+        <div class="work-link-wrapper">
+          <LinkItem href="/projects" text="Pet Projects" isExternal={true} justify="flex-start" gap={5} />
+        </div>
+      </div>
+
+      <div class="links-container animate-appear" style="animation-delay: 0.5s;">
+        <div class="contact-column">
+          <div class="column-header">
+            <p class="column-title">CONTACT</p>
+            <p class="column-index">[ 2 ]</p>
+          </div>
+          <div class="links-list">
+            <LinkItem href="https://github.com/patwrall" text="Github" sup="1" />
+            <LinkItem href="mailto:patrickwrall@gmail.com" text="Mail" sup="2" />
+            <LinkItem href="https://www.linkedin.com/in/patrickrall/" text="LinkedIn" sup="3" />
+          </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="teams-column">
+          <div class="column-header">
+            <p class="column-title">TEAMS</p>
+            <p class="column-index">[ 3 ]</p>
+          </div>
+          <div class="teams-list">
+            <TeamItem team="RobustMQ" year="2025 –" />
+            <TeamItem team="Ruoff Mortgage" year="2024" />
+            <TeamItem team="Sharma Laboratory" year="2023 – 2024" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
 </Layout>
+
+<style>
+  .main-container {
+    display: flex;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 0;
+  }
+
+  .content-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 520px;
+    height: 100vh;
+  }
+
+  /* Header */
+  .header-section {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    gap: 10px;
+    padding-bottom: 16px;
+  }
+
+  .header-title {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .title-english {
+    font-family: 'ABC Marist Unlicensed Trial Book', sans-serif;
+    font-size: 18px;
+    letter-spacing: -0.03em;
+    line-height: 22px;
+  }
+
+  .title-chinese {
+    font-family: 'KaiTi Regular', 'ABC Marist Unlicensed Trial Book', sans-serif;
+    font-size: 18px;
+    letter-spacing: -0.01em;
+    line-height: 22px;
+  }
+
+  .header-index {
+    flex: 1;
+    text-align: right;
+    font-family: 'ABC Marist Unlicensed Trial Book', sans-serif;
+    font-size: 11px;
+    letter-spacing: .015em;
+    line-height: 13px;
+  }
+
+  /* Bio & Status */
+  .bio-section, .status-section {
+    padding-bottom: 16px;
+  }
+
+  .bio-text {
+    font-family: 'ABC Marist Unlicensed Trial Book', sans-serif;
+    font-size: 13px;
+    letter-spacing: -0.01em;
+    line-height: 15px;
+    font-weight: 300;
+    color: rgb(59, 61, 65);
+  }
+
+  .bio-text strong {
+    font-family: 'KaiTi Regular', sans-serif;
+    font-weight: bold;
+  }
+  
+  .status-text {
+    font-family: 'ABC Marist Unlicensed Trial Book', sans-serif;
+    font-size: 13px;
+    letter-spacing: -0.01em;
+    line-height: 15px;
+    color: rgb(59, 61, 65);
+  }
+
+  /* Work Link */
+  .work-link-section {
+    padding-bottom: 32px;
+    border-bottom: 0.5px solid var(--border-color);
+  }
+
+  .work-link-wrapper {
+    width: 130px; 
+  }
+
+  /* Links Container */
+  .links-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 40px;
+    padding: 32px 0;
+    width: 100%;
+  }
+
+  .contact-column, .teams-column {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .column-header {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .column-title, .column-index {
+    font-family: 'ABC Marist Unlicensed Trial Book', sans-serif;
+    font-size: 11px;
+    letter-spacing: .015em;
+    line-height: 13px;
+  }
+
+  .links-list {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  
+  .teams-list {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .divider {
+    width: 1px;
+    height: 60px;
+    align-self: center;
+    background-color: var(--border-color);
+  }
+
+  /* Responsive Design */
+  @media (max-width: 809px) {
+    .content-wrapper {
+      width: 100%;
+      padding: 0 16px;
+    }
+    .links-container {
+      flex-direction: column;
+      gap: 24px;
+      align-items: center;
+    }
+    .contact-column, .teams-column {
+      width: 100%;
+    }
+    .divider {
+      display: none;
+    }
+  }
+</style>
+

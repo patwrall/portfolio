@@ -1,0 +1,35 @@
+---
+const { href, text, isExternal = true, sup, justify = 'space-between', gap = 0 } = Astro.props;
+---
+<a href={href} target={isExternal ? "_blank" : "_self"} rel={isExternal ? "noopener" : ""} class="link-item" style=`justify-content: ${justify}; gap: ${gap}px;`>
+  <p class="link-text">
+    {sup && <sup>{sup}</sup>}
+    {text}
+  </p>
+  <p class="link-arrow">↗</p>
+</a>
+
+<style>
+  .link-item {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    font-family: 'ABC Marist Unlicensed Trial Book', sans-serif;
+    font-size: 13px;
+    letter-spacing: -0.01em;
+    line-height: 1.1;
+  }
+  .link-text sup {
+    font-size: 0.55em;
+    font-weight: bold;
+    vertical-align: super;
+    margin-right: 1.1;
+    position: relative;
+    top: 0px;
+  }
+  .link-item:hover .link-text, .link-item:hover .link-arrow {
+    color: #888;
+  }
+</style>
+
+

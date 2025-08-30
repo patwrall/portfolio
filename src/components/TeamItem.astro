@@ -1,0 +1,64 @@
+---
+const { team, year } = Astro.props;
+
+const stringToHash = (str: string) => {
+  let hash = 0;
+  if (str.length === 0) return hash;
+  for (let i = 0; i < str.length; i++) {
+    const char = str.charCodeAt(i);
+    hash = ((hash << 5) - hash) + char;
+    hash |= 0;
+  }
+  return hash;
+};
+
+const PREDEFINED_COLORS = ['#c10000', '#2f80eb', '#2a1f69', '#000000', '#EB5757', '#2D9CDB', '#9B51E0', '#4F4F4F'];
+
+const getColorForString = (str: string) => {
+  const hash = stringToHash(str);
+  const index = Math.abs(hash % PREDEFINED_COLORS.length);
+  return PREDEFINED_COLORS[index];
+};
+
+const generatedColor = getColorForString(team);
+---
+<div class="team-item">
+  <div class="team-dot" style={`background-color: ${generatedColor};`}></div>
+  <p class="team-name">{team}</p>
+  <p class="team-year">{year}</p>
+</div>
+
+<style>
+  .team-item {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    width: 100%;
+  }
+
+  .team-dot {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    aspect-ratio: 1 / 1;
+  }
+
+  .team-name {
+    flex: 1;
+    font-family: 'ABC Marist Unlicensed Trial Book', sans-serif;
+    font-size: 13px;
+    letter-spacing: -0.01em;
+    line-height: 15px;
+    color: rgb(59, 61, 65); 
+  }
+
+  .team-year {
+    font-family: 'ABC Marist Unlicensed Trial Book', sans-serif;
+    font-size: 13px;
+    letter-spacing: -0.01em;
+    line-height: 15px;
+    color: rgb(59, 61, 65); 
+  }
+</style>
+
+
