@@ -1,6 +1,8 @@
 # build output
 dist/
 
+.direnv/
+
 # generated types
 .astro/
 
