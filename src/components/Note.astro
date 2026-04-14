@@ -1,0 +1,63 @@
+---
+interface Props {
+  label?: string;
+}
+
+const { label = 'NOTE' } = Astro.props;
+---
+
+<aside class="note">
+  <span class="note-label">{label}</span>
+  <div class="note-body"><slot /></div>
+</aside>
+
+<style>
+  .note {
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    border-left: 2px solid var(--border-color);
+    padding: 10px 0 10px 14px;
+    margin: 20px 0;
+  }
+
+  .note-label {
+    font-family: 'ABC Marist Unlicensed Trial Book', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.06em;
+    line-height: 19px;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: rgb(140, 143, 148);
+    flex-shrink: 0;
+    user-select: none;
+  }
+
+  .note-body {
+    font-family: 'ABC Marist Unlicensed Trial Book', sans-serif;
+    font-size: 12px;
+    letter-spacing: -0.01em;
+    line-height: 17px;
+    color: rgb(80, 83, 88);
+  }
+
+  .note-body :global(p) {
+    margin: 0;
+  }
+
+  .note-body :global(p + p) {
+    margin-top: 6px;
+  }
+
+  .note-body :global(a) {
+    text-decoration: underline;
+    text-decoration-color: rgba(80, 83, 88, 0.35);
+    text-underline-offset: 2px;
+    color: inherit;
+    transition: color 0.15s;
+  }
+
+  .note-body :global(a:hover) {
+    color: #888;
+  }
+</style>

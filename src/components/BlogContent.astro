@@ -1,0 +1,260 @@
+---
+---
+
+<div class="post-content" id="post-content">
+  <slot />
+</div>
+
+<script is:inline>
+  function numberHeadings() {
+    const content = document.getElementById('post-content');
+    if (!content) return;
+
+    const headings = content.querySelectorAll('h2');
+    let counter = 1;
+
+    headings.forEach((h2) => {
+      const slug = h2.textContent.trim().toLowerCase().replace(/\s+/g, '-').replace(/[^\w-]/g, '');
+      h2.id = slug;
+
+      const wrapper = document.createElement('div');
+      wrapper.className = 'h2-wrapper';
+
+      const newH2 = document.createElement('h2');
+      newH2.textContent = h2.textContent;
+      newH2.id = slug;
+
+      const indexSpan = document.createElement('span');
+      indexSpan.textContent = `[ ${counter} ]`;
+      indexSpan.className = 'h2-index';
+
+      wrapper.appendChild(newH2);
+      wrapper.appendChild(indexSpan);
+
+      h2.replaceWith(wrapper);
+      counter++;
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', numberHeadings);
+  } else {
+    numberHeadings();
+  }
+</script>
+
+<style>
+  .post-content {
+    font-family: 'ABC Marist Unlicensed Trial Book', sans-serif;
+    font-size: 13px;
+    letter-spacing: -0.01em;
+    line-height: 19px;
+    color: rgb(59, 61, 65);
+  }
+
+  /* --- Headings --- */
+
+  .post-content :global(.h2-wrapper) {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin: 32px 0 12px 0;
+    padding-bottom: 6px;
+    border-bottom: 0.5px solid var(--border-color);
+  }
+
+  .post-content :global(h2) {
+    font-family: 'ABC Marist Unlicensed Trial Book', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.05em;
+    line-height: 14px;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin: 0;
+  }
+
+  .post-content :global(.h2-index) {
+    font-size: 11px;
+    letter-spacing: 0.015em;
+    color: rgb(59, 61, 65);
+    flex-shrink: 0;
+  }
+
+  .post-content :global(h3) {
+    font-family: 'ABC Marist Unlicensed Trial Book', sans-serif;
+    font-size: 12px;
+    letter-spacing: -0.01em;
+    line-height: 16px;
+    font-weight: bold;
+    margin: 20px 0 6px 0;
+  }
+
+  /* --- Body copy --- */
+
+  .post-content :global(p) {
+    margin: 10px 0;
+  }
+
+  /* --- Lists --- */
+
+  .post-content :global(ul),
+  .post-content :global(ol) {
+    margin: 10px 0 10px 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .post-content :global(ul li),
+  .post-content :global(ol li) {
+    margin: 4px 0;
+    padding-left: 14px;
+    position: relative;
+  }
+
+  .post-content :global(ul li::before) {
+    content: '–';
+    position: absolute;
+    left: 0;
+    color: rgb(140, 140, 140);
+  }
+
+  .post-content :global(ol) {
+    counter-reset: ol-counter;
+  }
+
+  .post-content :global(ol li::before) {
+    counter-increment: ol-counter;
+    content: counter(ol-counter) '.';
+    position: absolute;
+    left: 0;
+    color: rgb(140, 140, 140);
+    font-size: 11px;
+  }
+
+  /* --- Code --- */
+
+  .post-content :global(code) {
+    font-family: monospace;
+    font-size: 11px;
+    background: #F0EBE4;
+    padding: 1px 4px;
+    border-radius: 2px;
+    letter-spacing: 0;
+  }
+
+  .post-content :global(pre) {
+    background: #F7F3EE !important;
+    border: 0.5px solid #E5DFD6;
+    border-radius: 3px;
+    padding: 14px 16px;
+    overflow-x: auto;
+    margin: 16px 0;
+    font-size: 11px;
+    line-height: 1.6;
+  }
+
+  .post-content :global(pre code) {
+    background: none;
+    padding: 0;
+    font-size: inherit;
+    letter-spacing: 0;
+  }
+
+  /* --- Blockquote --- */
+
+  .post-content :global(blockquote) {
+    border-left: 2px solid var(--border-color);
+    margin: 16px 0;
+    padding: 2px 0 2px 14px;
+    font-style: italic;
+    color: rgb(100, 103, 108);
+  }
+
+  .post-content :global(blockquote p) {
+    margin: 0;
+  }
+
+  /* --- Links --- */
+
+  .post-content :global(a) {
+    text-decoration: underline;
+    text-decoration-color: rgba(59, 61, 65, 0.35);
+    text-underline-offset: 2px;
+    color: rgb(59, 61, 65);
+    transition: color 0.15s;
+  }
+
+  .post-content :global(a:hover) {
+    color: #888;
+    text-decoration-color: #bbb;
+  }
+
+  /* --- Tables --- */
+
+  .post-content :global(table) {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 16px 0;
+    font-size: 12px;
+  }
+
+  .post-content :global(th),
+  .post-content :global(td) {
+    border: 0.5px solid var(--border-color);
+    padding: 7px 10px;
+    text-align: left;
+  }
+
+  .post-content :global(th) {
+    font-size: 11px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    font-weight: bold;
+    background: rgba(0, 0, 0, 0.02);
+  }
+
+  /* --- Media --- */
+
+  .post-content :global(img),
+  .post-content :global(video) {
+    max-width: 100%;
+    display: block;
+    margin: 16px 0;
+  }
+
+  /* --- Math (KaTeX) --- */
+
+  .post-content :global(p:has(.katex-display)) {
+    text-align: center;
+    margin: 20px 0;
+    overflow-x: auto;
+    overflow-y: hidden;
+  }
+
+  .post-content :global(.katex-display) {
+    margin: 0 !important;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding: 4px 0;
+  }
+
+  @media (max-width: 809px) {
+    .post-content :global(.katex) {
+      font-size: 0.9em;
+    }
+  }
+
+  @media (max-width: 520px) {
+    .post-content :global(.katex) {
+      font-size: 0.75em;
+    }
+  }
+
+  /* --- Horizontal rule --- */
+
+  .post-content :global(hr) {
+    border: none;
+    border-top: 0.5px solid var(--border-color);
+    margin: 28px 0;
+  }
+</style>

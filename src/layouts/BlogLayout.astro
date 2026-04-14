@@ -1,0 +1,123 @@
+---
+import Layout from './Layout.astro';
+import BlogContent from '../components/BlogContent.astro';
+
+interface Props {
+  title: string;
+  date: Date;
+  description?: string;
+  readingTime?: number;
+}
+
+const { title, date, description, readingTime } = Astro.props;
+
+const formattedDate = date.toLocaleDateString('en-US', {
+  month: 'long',
+  day: 'numeric',
+  year: 'numeric',
+});
+---
+
+<Layout title={title} description={description} type="article">
+  <main class="blog-container">
+    <article class="blog-post">
+
+      <nav class="top-nav">
+        <a href="/" class="nav-back">← home</a>
+      </nav>
+
+      <header class="post-header">
+        <p class="post-meta">
+          {formattedDate}
+          {readingTime && <span class="post-reading-time">· {readingTime} min read</span>}
+        </p>
+        <h1 class="post-title">{title}</h1>
+      </header>
+
+      <BlogContent>
+        <slot />
+      </BlogContent>
+
+      <footer class="post-footer">
+        <a href="/" class="nav-back">← back to index</a>
+      </footer>
+
+    </article>
+  </main>
+</Layout>
+
+<style>
+  .blog-container {
+    display: flex;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 40px 1rem 80px;
+  }
+
+  .blog-post {
+    width: 100%;
+    max-width: 520px;
+  }
+
+  .top-nav {
+    margin-bottom: 24px;
+  }
+
+  .nav-back {
+    font-family: 'ABC Marist Unlicensed Trial Book', sans-serif;
+    font-size: 11px;
+    letter-spacing: -0.01em;
+    line-height: 13px;
+    color: rgb(59, 61, 65);
+    text-decoration: none;
+    transition: color 0.15s;
+  }
+
+  .nav-back:hover {
+    color: rgb(0, 0, 0);
+  }
+
+  .post-header {
+    padding-bottom: 16px;
+    margin-bottom: 16px;
+    border-bottom: 0.5px solid var(--border-color);
+  }
+
+  .post-meta {
+    font-family: 'ABC Marist Unlicensed Trial Book', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.015em;
+    line-height: 13px;
+    color: rgb(59, 61, 65);
+    margin: 0 0 8px 0;
+  }
+
+  .post-reading-time {
+    color: rgb(140, 143, 148);
+  }
+
+  .post-title {
+    font-family: 'ABC Marist Unlicensed Trial Book', sans-serif;
+    font-size: 18px;
+    letter-spacing: -0.03em;
+    line-height: 22px;
+    font-weight: 400;
+    margin: 0;
+  }
+
+  .post-footer {
+    margin-top: 48px;
+    padding-top: 16px;
+    border-top: 0.5px solid var(--border-color);
+  }
+
+  @media (max-width: 809px) {
+    .blog-container {
+      padding: 24px 16px 60px;
+    }
+
+    .blog-post {
+      max-width: 100%;
+    }
+  }
+</style>
