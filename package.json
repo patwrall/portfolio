@@ -9,6 +9,12 @@
     "astro": "astro"
   },
   "dependencies": {
-    "astro": "^5.13.5"
+    "@astrojs/mdx": "^4.3.9",
+    "@astrojs/rss": "^4.0.18",
+    "astro": "^5.13.5",
+    "astro-typst": "^0.12.1",
+    "bibtex-parse": "^2.1.0",
+    "rehype-katex": "^7.0.1",
+    "remark-math": "^6.0.0"
   }
 }
