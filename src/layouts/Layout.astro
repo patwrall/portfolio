@@ -90,6 +90,8 @@ const {
 
   .animate-appear {
     animation: appear 0.5s ease-out forwards;
-    opacity: 0; 
+    opacity: 0;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
   }
 </style>
