@@ -1,13 +1,20 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import ArticleItem from '../components/ArticleItem.astro'
 import LinkItem from '../components/LinkItem.astro';
 import TeamItem from '../components/TeamItem.astro';
+import { getCollection } from 'astro:content';
+
+const blogPosts = await getCollection('blog');
+const sortedPosts = blogPosts
+  .filter((p) => !p.data.draft)
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
 ---
 
 <Layout title="Patrick Rall">
   <main class="main-container">
     <div class="content-wrapper">
-      
+
       <div class="header-section animate-appear" style="animation-delay: 0.1s;">
         <div class="header-title">
           <p class="title-english">Patrick Rall</p>
@@ -17,21 +24,16 @@ import TeamItem from '../components/TeamItem.astro';
 
       <div class="bio-section animate-appear" style="animation-delay: 0.2s;">
         <p class="bio-text">
-          Computer Science student at Purdue University with experience in full-stack development and high-performance computing. Passionate about building robust software systems and low-level systems.
+          Computer Science student focused on the intersection of low-level systems and accelerated computing. Currently developing
+          expertise in GPU programming to accelerate core machine learning workloads in the world of finance.
         </p>
       </div>
 
-      <div class="status-section animate-appear" style="animation-delay: 0.3s;">
-        <p class="status-text">
-          Currently contributing to open-source projects and seeking new opportunities in software engineering.
-        </p>
-      </div>
-
-      <div class="work-link-section animate-appear" style="animation-delay: 0.4s;">
+      {/* <div class="work-link-section animate-appear" style="animation-delay: 0.4s;">
         <div class="work-link-wrapper">
           <LinkItem href="/projects" text="Pet Projects" isExternal={true} justify="flex-start" gap={5} />
         </div>
-      </div>
+      </div> */}
 
       <div class="links-container animate-appear" style="animation-delay: 0.5s;">
         <div class="contact-column">
@@ -54,12 +56,35 @@ import TeamItem from '../components/TeamItem.astro';
             <p class="column-index">[ 3 ]</p>
           </div>
           <div class="teams-list">
+            <TeamItem team="General Dynamics" year="2025 –" />
             <TeamItem team="RobustMQ" year="2025 –" />
             <TeamItem team="Ruoff Mortgage" year="2024" />
-            <TeamItem team="Sharma Laboratory" year="2023 – 2024" />
+            <!-- <TeamItem team="Sharma Laboratory" year="2023 – 2024" /> -->
           </div>
         </div>
+
       </div>
+
+      {sortedPosts.length > 0 && <div class="articles-column animate-appear" style="animation-delay: .7s;">
+        <div class="column-header">
+           <p class="column-title">ARTICLES</p>
+            <p class="column-index">[ 4 ]</p>
+        </div>
+        <div class="articles-list">
+          {sortedPosts.map((post) => (
+            <ArticleItem
+              date={post.data.date.toLocaleDateString('en-US', {
+                day: '2-digit',
+                month: '2-digit',
+                year: 'numeric',
+              })}
+              title={post.data.title}
+              href={`/blog/${post.slug}`}
+              isExternal={false}
+            />
+          ))}
+        </div>
+      </div>}
     </div>
   </main>
 </Layout>
@@ -94,7 +119,7 @@ import TeamItem from '../components/TeamItem.astro';
     display: flex;
     gap: 10px;
   }
-  
+
   .title-english {
     font-family: 'ABC Marist Unlicensed Trial Book', sans-serif;
     font-size: 18px;
@@ -120,7 +145,8 @@ import TeamItem from '../components/TeamItem.astro';
 
   /* Bio & Status */
   .bio-section, .status-section {
-    padding-bottom: 16px;
+    padding-bottom: 32px;
+    border-bottom: 0.5px solid var(--border-color);
   }
 
   .bio-text {
@@ -136,7 +162,7 @@ import TeamItem from '../components/TeamItem.astro';
     font-family: 'KaiTi Regular', sans-serif;
     font-weight: bold;
   }
-  
+
   .status-text {
     font-family: 'ABC Marist Unlicensed Trial Book', sans-serif;
     font-size: 13px;
@@ -152,7 +178,7 @@ import TeamItem from '../components/TeamItem.astro';
   }
 
   .work-link-wrapper {
-    width: 130px; 
+    width: 130px;
   }
 
   /* Links Container */
@@ -163,6 +189,19 @@ import TeamItem from '../components/TeamItem.astro';
     gap: 40px;
     padding: 32px 0;
     width: 100%;
+    border-bottom: 0.5px solid var(--border-color);
+  }
+
+  .articles-column {
+    display: grid;
+    padding: 32px 0;
+    gap: 4px;
+  }
+
+  .articles-list {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
   }
 
   .contact-column, .teams-column {
@@ -190,7 +229,7 @@ import TeamItem from '../components/TeamItem.astro';
     flex-direction: column;
     gap: 2px;
   }
-  
+
   .teams-list {
     display: flex;
     flex-direction: column;
@@ -223,4 +262,3 @@ import TeamItem from '../components/TeamItem.astro';
     }
   }
 </style>
-

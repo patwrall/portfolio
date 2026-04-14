@@ -1,0 +1,48 @@
+---
+const { href, date, title, isExternal = true, justify = 'space-between', gap = 0 } = Astro.props;
+---
+<div class="article-item" style=`justify-content: ${justify}; gap: ${gap}px;`>
+  <span class="article-date">{date}:</span>
+  <a href={href} target={isExternal ? "_blank" : "_self"} rel={isExternal ? "noopener" : ""} class="article-link">
+    <span class="article-title">{title}</span>
+    <span class="article-arrow">{isExternal ? '↗' : '→'}</span>
+  </a>
+</div>
+
+<style>
+  .article-item {
+    display: flex;
+    align-items: center;
+    font-family: 'ABC Marist Unlicensed Trial Book', sans-serif;
+    font-size: 12px;
+    letter-spacing: -0.01em;
+    line-height: 1.1;
+  }
+
+  .article-date {
+    cursor: default;
+    user-select: none;
+    flex-shrink: 0;
+  }
+
+  .article-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    color: currentColor;
+    text-decoration: none;
+    flex: 1;
+  }
+
+  .article-title {
+    font-weight: bold;
+    text-decoration: underline;
+    margin-left: 6px;
+  }
+
+  .article-link:hover .article-title,
+  .article-link:hover .article-arrow {
+    color: #888;
+  }
+</style>
