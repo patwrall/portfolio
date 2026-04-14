@@ -5,6 +5,8 @@ import remarkMath from "remark-math";
 import rehypeKatex from "rehype-katex";
 import fs from "fs";
 
+import cloudflare from "@astrojs/cloudflare";
+
 // https://astro.build/config
 
 const earlGreyTheme = JSON.parse(
@@ -14,6 +16,7 @@ const earlGreyTheme = JSON.parse(
 export default defineConfig({
   // TODO: update to your production domain before deploying
   site: 'https://patrickrall.com',
+
   integrations: [
     mdx({
       syntaxHighlight: "shiki",
@@ -24,4 +27,6 @@ export default defineConfig({
       rehypePlugins: [rehypeKatex],
     }),
   ],
+
+  adapter: cloudflare()
 });
