@@ -1,0 +1,70 @@
+---
+title: "Quick Overview of Order Book Matching"
+date: 2025-10-30
+description: "A brief technical exploration of limit order book data structures and matching engine design."
+draft: true
+---
+
+import Note from '../../components/Note.astro';
+
+## Introduction
+
+A limit order book is the core data structure for electronic markets. Orders are organized by price level, where all orders at the same price are aggregated together. The book maintains two sides: bids (buy orders) sorted descending by price, and asks (sell orders) sorted ascending.
+
+<Note>
+  Price-time priority is the standard matching rule in most exchanges. FIFO within a price level ensures fairness — earlier resting orders execute first.
+</Note>
+
+## Order Matching Engine
+
+The matching engine executes trades when incoming orders cross the spread. An aggressive buy order at price `P` sweeps all resting ask levels `≤ P` in ascending order until either filled or the book is exhausted.
+
+```cpp
+class OrderBook {
+private:
+  std::map<Price, PriceLevel, std::greater<Price>> bids;
+  std::map<Price, PriceLevel> asks;
+  OrderPool order_pool;
+
+public:
+  void match_order(Order* order) {
+    if (order->side == Side::BUY) {
+      match_against_asks(order);
+    } else {
+      match_against_bids(order);
+    }
+  }
+
+  void add_order(Order* order) {
+    auto& level = get_level(order->price, order->side);
+    level.insert(order);
+    order_pool.track(order);
+  }
+
+  double mid_price() const {
+    return (best_bid() + best_ask()) / 2.0;
+  }
+};
+```
+
+## Performance
+
+Latency targets for a production matching engine are aggressive. Using aggregated price levels with a flat hash map for direct price lookup and a sorted structure for sweep operations:
+
+- Order insertion: ~500 ns
+- Order cancellation: ~800 ns
+- Trade matching: ~300 ns per level
+
+The Hawkes process log-likelihood for a self-exciting point process gives a useful model for order arrival intensity:
+
+$$\ell = \sum_{i=1}^{n} \log\left(\lambda + \alpha \sum_{j=1}^{i-1} e^{-\beta(t_i - t_j)}\right) - \lambda T + \frac{\alpha}{\beta}\sum_{i=1}^{n}\left(e^{-\beta(T - t_i)} - 1\right)$$
+
+<Note label="TRIVIA">
+  Jane Street and Citadel both run custom FPGA-based matching engines that push latency below 100 ns end-to-end. The bottleneck at that point is wire propagation delay, not computation.
+</Note>
+
+## Conclusion
+
+Efficient order book implementations require careful data structure selection. Using aggregated price levels with proper caching significantly improves throughput for high-frequency workloads.
+
+See [StackOverflow](https://stackoverflow.com) and the [Aeron documentation](https://aeron.io) for more on low-latency messaging patterns.
