@@ -7,6 +7,7 @@ import rehypeExternalLinks from "rehype-external-links";
 import fs from "fs";
 
 import cloudflare from "@astrojs/cloudflare";
+import sitemap from "@astrojs/sitemap";
 
 // https://astro.build/config
 
@@ -58,6 +59,7 @@ export default defineConfig({
         [rehypeExternalLinks, { target: "_blank", rel: ["noopener", "noreferrer"] }],
       ],
     }),
+    sitemap(),
   ],
 
   adapter: cloudflare()
