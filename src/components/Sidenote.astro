@@ -1,0 +1,71 @@
+---
+import { randomUUID } from 'node:crypto';
+
+const id = `sidenote-${randomUUID()}`;
+---
+
+<label for={id} class="sidenote-number" aria-label="Show note"></label>
+<input type="checkbox" id={id} class="sidenote-toggle" />
+<span class="sidenote"><slot /></span>
+
+<style>
+  .sidenote-toggle {
+    display: none;
+  }
+
+  .sidenote-number {
+    display: inline;
+    cursor: pointer;
+    font-size: 0.7em;
+    font-weight: bold;
+    vertical-align: super;
+    color: rgb(70, 73, 77);
+    user-select: none;
+    margin-right: 3px;
+  }
+
+  .sidenote-number::before {
+    counter-increment: sidenote-counter;
+    content: counter(sidenote-counter);
+  }
+
+  .sidenote {
+    display: none;
+    font-family: 'ABC Marist Unlicensed Trial Book', sans-serif;
+    font-size: 12px;
+    letter-spacing: -0.01em;
+    line-height: 16px;
+    color: rgb(100, 103, 108);
+    border-left: 2px solid var(--border-color);
+    padding: 6px 0 6px 12px;
+    margin: 10px 0;
+  }
+
+  .sidenote-toggle:checked ~ .sidenote {
+    display: block;
+  }
+
+  .sidenote::before {
+    content: counter(sidenote-counter) '. ';
+    color: rgb(70, 73, 77);
+  }
+
+  @media (min-width: 1300px) {
+    .sidenote-number {
+      cursor: default;
+      pointer-events: none;
+    }
+
+    .sidenote {
+      display: block !important;
+      float: right;
+      clear: right;
+      width: 180px;
+      margin-top: 2px;
+      margin-right: -260px;
+      margin-bottom: 8px;
+      border-left: none;
+      padding: 0;
+    }
+  }
+</style>
