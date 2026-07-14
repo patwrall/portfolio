@@ -14,6 +14,33 @@ const earlGreyTheme = JSON.parse(
   fs.readFileSync("./earl-grey-theme.json", "utf-8"),
 );
 
+const cudaQualifiers = new Set([
+  "__global__",
+  "__device__",
+  "__host__",
+  "__shared__",
+  "__constant__",
+  "__forceinline__",
+  "__noinline__",
+  "__restrict__",
+  "__launch_bounds__",
+]);
+
+const cudaQualifierTransformer = {
+  name: "cuda-qualifiers",
+  tokens(lines) {
+    for (const line of lines) {
+      for (const token of line) {
+        if (cudaQualifiers.has(token.content.trim())) {
+          token.color = "#3B3D41";
+          token.fontStyle = 2;
+        }
+      }
+    }
+    return lines;
+  },
+};
+
 export default defineConfig({
   // TODO: update to your production domain before deploying
   site: 'https://patrickrall.com',
@@ -23,6 +50,7 @@ export default defineConfig({
       syntaxHighlight: "shiki",
       shikiConfig: {
         theme: earlGreyTheme,
+        transformers: [cudaQualifierTransformer],
       },
       remarkPlugins: [remarkMath],
       rehypePlugins: [
