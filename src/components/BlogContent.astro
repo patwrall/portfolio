@@ -131,23 +131,24 @@
   /* --- Code --- */
 
   .post-content :global(code) {
-    font-family: monospace;
-    font-size: 11px;
-    background: #F0EBE4;
+    font-family: 'JetBrains Mono', 'SF Mono', Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+    font-size: 13px;
+    background: rgba(0, 0, 0, 0.03);
     padding: 1px 4px;
     border-radius: 2px;
     letter-spacing: 0;
+    overflow-wrap: break-word;
   }
 
   .post-content :global(pre) {
-    background: #F7F3EE !important;
-    border: 0.5px solid #E5DFD6;
+    background: var(--white-color) !important;
+    border: 1px solid rgb(205, 209, 214);
     border-radius: 3px;
     padding: 14px 16px;
     overflow-x: auto;
     margin: 16px 0;
-    font-size: 11px;
-    line-height: 1.6;
+    font-size: 13px;
+    line-height: 1.65;
   }
 
   .post-content :global(pre code) {
