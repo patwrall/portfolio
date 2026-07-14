@@ -17,7 +17,7 @@ const sortedPosts = blogPosts
 
       <div class="header-section animate-appear" style="animation-delay: 0.1s;">
         <div class="header-title">
-          <p class="title-english">Patrick Rall</p>
+          <h1 class="title-english">Patrick Rall</h1>
         </div>
         <p class="header-index">[ 1 ]</p>
       </div>
@@ -38,7 +38,7 @@ const sortedPosts = blogPosts
       <div class="links-container animate-appear" style="animation-delay: 0.5s;">
         <div class="contact-column">
           <div class="column-header">
-            <p class="column-title">CONTACT</p>
+            <h2 class="column-title">CONTACT</h2>
             <p class="column-index">[ 2 ]</p>
           </div>
           <div class="links-list">
@@ -52,7 +52,7 @@ const sortedPosts = blogPosts
 
         <div class="teams-column">
           <div class="column-header">
-            <p class="column-title">TEAMS</p>
+            <h2 class="column-title">TEAMS</h2>
             <p class="column-index">[ 3 ]</p>
           </div>
           <div class="teams-list">
@@ -67,7 +67,7 @@ const sortedPosts = blogPosts
 
       {sortedPosts.length > 0 && <div class="articles-column animate-appear" style="animation-delay: .7s;">
         <div class="column-header">
-           <p class="column-title">ARTICLES</p>
+           <h2 class="column-title">ARTICLES</h2>
             <p class="column-index">[ 4 ]</p>
         </div>
         <div class="articles-list">
@@ -123,6 +123,7 @@ const sortedPosts = blogPosts
   .title-english {
     font-family: 'ABC Marist Unlicensed Trial Book', sans-serif;
     font-size: 20px;
+    font-weight: normal;
     letter-spacing: -0.03em;
     line-height: 24px;
   }
@@ -220,6 +221,7 @@ const sortedPosts = blogPosts
   .column-title, .column-index {
     font-family: 'ABC Marist Unlicensed Trial Book', sans-serif;
     font-size: 12px;
+    font-weight: normal;
     letter-spacing: .015em;
     line-height: 14px;
   }
