@@ -1,0 +1,220 @@
+---
+title: "Style Guide"
+date: 2025-11-01
+description: "Reference page exercising every content structure the blog layout supports."
+draft: true
+---
+
+import Note from '../../components/Note.astro';
+import Sidenote from '../../components/Sidenote.astro';
+import Figure from '../../components/Figure.astro';
+
+## Text and Emphasis
+
+A paragraph with **bold text**, *italic text*, ~~strikethrough~~, and `inline code`. Here's a sidenote attached to this sentence.<Sidenote>A margin note, floated right on wide screens and shown inline on narrow ones.</Sidenote> And a bare autolink: https://example.com.
+
+### A Subheading
+
+Subheadings (h3) sit inside a section without their own index number or divider.
+
+## Lists
+
+Unordered, with nesting:
+
+- First item
+- Second item
+  - Nested item one
+  - Nested item two
+- Third item
+
+Ordered:
+
+1. First step
+2. Second step
+3. Third step
+
+Task list:
+
+- [x] Done task
+- [ ] Open task
+
+## Blockquote
+
+> A blockquote for pulled quotes or references. Efficient order book implementations require careful data structure selection.
+
+## Code
+
+Inline `const x = 1` and a fenced block:
+
+```python
+def match_order(order, book):
+    if order.side == "buy":
+        return book.match_against_asks(order)
+    return book.match_against_bids(order)
+```
+
+## Table
+
+| Operation | Latency | Notes |
+| :--- | ---: | :--- |
+| Insertion | 500 ns | flat hash map |
+| Cancellation | 800 ns | pool free |
+| Matching | 300 ns / level | sorted sweep |
+
+## Images
+
+A plain image (real posts should use a local image file so Astro can optimize it automatically; a raw `<img>` tag is used here only because this placeholder is an inline data URI):
+
+<img src="data:image/svg+xml;utf8,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='800'%20height='450'%3E%3Crect%20width='100%25'%20height='100%25'%20fill='%23F0EBE4'/%3E%3Ctext%20x='50%25'%20y='50%25'%20font-family='sans-serif'%20font-size='24'%20fill='%238C8F94'%20text-anchor='middle'%20dy='.3em'%3Eplain%20image%3C/text%3E%3C/svg%3E" alt="placeholder" width="800" height="450" />
+
+A captioned figure via the `Figure` component:
+
+<Figure src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='800' height='450'><rect width='100%25' height='100%25' fill='%23F0EBE4'/><text x='50%25' y='50%25' font-family='sans-serif' font-size='24' fill='%238C8F94' text-anchor='middle' dy='.3em'>Figure component</text></svg>" caption="Figure caption text, describing what the image shows." />
+
+## Notes
+
+<Note>
+  Default note, label defaults to NOTE.
+</Note>
+
+<Note label="WARNING">
+  A note with a custom label.
+</Note>
+
+## Math
+
+Inline math: $E = mc^2$.
+
+Display math:
+
+$$\ell = \sum_{i=1}^{n} \log\left(\lambda + \alpha \sum_{j=1}^{i-1} e^{-\beta(t_i - t_j)}\right) - \lambda T$$
+
+## Links
+
+An [internal link](/) to the homepage, and an [external link](https://astro.build) that opens in a new tab.
+
+## Stress Test
+
+A long inline equation to check wrapping: $\int_0^\infty e^{-x^2} \, dx = \frac{\sqrt{\pi}}{2} \quad \text{and} \quad \sum_{n=1}^{\infty} \frac{1}{n^2} = \frac{\pi^2}{6} \quad \text{and} \quad \lim_{x \to 0} \frac{\sin x}{x} = 1$ sitting inline with the rest of this sentence to see how it reflows at narrow widths.
+
+A wide matrix equation:
+
+$$
+\begin{pmatrix} a & b & c \\ d & e & f \\ g & h & i \end{pmatrix}
+\begin{pmatrix} x \\ y \\ z \end{pmatrix} =
+\begin{pmatrix} ax+by+cz \\ dx+ey+fz \\ gx+hy+iz \end{pmatrix}
+$$
+
+A moderately long single-line equation, wider than the column but not absurdly so:
+
+$$a_1 x_1 + a_2 x_2 + a_3 x_3 + a_4 x_4 + a_5 x_5 + a_6 x_6 + a_7 x_7 + a_8 x_8 = b$$
+
+An extremely long single-line equation that should still scroll no matter how much it shrinks:
+
+$$f(x) = c_0 + c_1 x + c_2 x^2 + c_3 x^3 + c_4 x^4 + c_5 x^5 + c_6 x^6 + c_7 x^7 + c_8 x^8 + c_9 x^9 + c_{10} x^{10} + c_{11} x^{11} + c_{12} x^{12}$$
+
+A long unbroken string with no spaces to check overflow handling: `Supercalifragilisticexpialidocious0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZthisisaveryveryverylongtokenwithoutspacesorbreaksanywhereinit`
+
+A wide table with many columns:
+
+| A | B | C | D | E | F | G | H |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 |
+| 10 | 20 | 30 | 40 | 50 | 60 | 70 | 80 |
+
+A long unwrapped code line:
+
+```python
+result = some_function_with_a_really_long_name(argument_one, argument_two, argument_three, argument_four, keyword_argument=some_value)
+```
+
+A token-coverage test across a few languages, to check every highlight category at once (keywords, strings, comments, numbers, functions, types):
+
+```python
+# single-line comment
+import asyncio
+from typing import Optional
+
+class OrderBook:
+    """Triple-quoted docstring."""
+
+    def __init__(self, symbol: str, tick_size: float = 0.01):
+        self.symbol = symbol
+        self.tick_size = tick_size
+        self.count = 0x1F
+        self.rate = 1.5e-3
+        self.label = f"book-{symbol}-{self.count}"
+
+    async def match(self, order: Optional[dict]) -> bool:
+        if order is None or self.count >= 1_000_000:
+            return False
+        return True
+```
+
+```cpp
+// single-line comment
+#include <vector>
+
+template <typename T>
+class RingBuffer {
+public:
+    static const int kDefaultCapacity = 128;
+
+    explicit RingBuffer(int capacity = kDefaultCapacity)
+        : capacity_(capacity), head_(0) {}
+
+    bool push(const T& value) {
+        /* block comment */
+        if (size_ >= capacity_) return false;
+        buffer_[head_] = value;
+        head_ = (head_ + 1) % capacity_;
+        return true;
+    }
+
+private:
+    std::vector<T> buffer_;
+    int capacity_;
+    int head_;
+    double load_factor_ = 0.75f;
+};
+```
+
+A CUDA kernel, to check `reinterpret_cast`, pointer types, and CUDA-specific qualifiers/built-ins:
+
+```cpp
+// single-line comment
+__global__ void sgemm_vectorized(int M, int N, int K, float alpha,
+                                  const float* A, const float* B,
+                                  float beta, float* C) {
+    __shared__ float As[128];
+    __shared__ float Bs[128];
+
+    const uint threadRow = threadIdx.x / 8;
+    const uint threadCol = threadIdx.x % 8;
+
+    float4 tmp = reinterpret_cast<float4*>(&A[threadRow * K])[0];
+    As[threadCol] = tmp.x;
+
+    float threadResults[8] = {0.0f};
+
+    for (int dotIdx = 0; dotIdx < 8; ++dotIdx) {
+        float regA = As[dotIdx];
+        for (int i = 0; i < 8; ++i) {
+            threadResults[i] += regA * Bs[dotIdx * 8 + i];
+        }
+    }
+
+    reinterpret_cast<float4*>(&C[threadRow * N + threadCol * 4])[0] =
+        reinterpret_cast<float4*>(threadResults)[0];
+}
+```
+
+A sidenote with much longer content than the others, to check how a tall margin note behaves next to short paragraph text.<Sidenote>This sidenote is intentionally much longer than the others on this page, spanning several lines, to verify that a tall margin note on a wide screen doesn't overlap the next paragraph or heading, and that on narrow screens it doesn't look awkward once expanded inline.</Sidenote> The rest of this sentence continues normally after the note reference.
+
+## Horizontal Rule
+
+Below is a horizontal rule.
+
+---
+
+Text after the rule.
