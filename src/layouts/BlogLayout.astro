@@ -16,9 +16,24 @@ const formattedDate = date.toLocaleDateString('en-US', {
   day: 'numeric',
   year: 'numeric',
 });
+
+const articleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  headline: title,
+  description,
+  datePublished: date.toISOString(),
+  author: {
+    '@type': 'Person',
+    name: 'Patrick Rall',
+    url: 'https://patrickrall.com',
+  },
+  url: Astro.url.href,
+};
 ---
 
 <Layout title={title} description={description} type="article">
+  <script type="application/ld+json" set:html={JSON.stringify(articleSchema)} />
   <main class="blog-container">
     <article class="blog-post">
 
