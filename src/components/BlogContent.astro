@@ -190,6 +190,12 @@
     text-decoration-color: #bbb;
   }
 
+  .post-content :global(a[target="_blank"]::after) {
+    content: '\00a0↗';
+    margin-right: 3px;
+    font-size: 0.75em;
+  }
+
   /* --- Tables --- */
 
   .post-content :global(table) {
