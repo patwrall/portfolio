@@ -230,6 +230,14 @@
 
   /* --- Math (KaTeX) --- */
 
+  .post-content :global(.katex) {
+    display: inline-block;
+    max-width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    vertical-align: middle;
+  }
+
   .post-content :global(p:has(.katex-display)) {
     text-align: center;
     margin: 20px 0;
