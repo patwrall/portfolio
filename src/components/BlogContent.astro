@@ -100,36 +100,32 @@
 
   .post-content :global(ul),
   .post-content :global(ol) {
-    margin: 10px 0 10px 0;
-    padding: 0;
-    list-style: none;
+    margin: 10px 0;
+    padding-left: 22px;
   }
 
-  .post-content :global(ul li),
-  .post-content :global(ol li) {
-    margin: 4px 0;
-    padding-left: 14px;
-    position: relative;
+  .post-content :global(ul) {
+    list-style-type: disc;
   }
 
-  .post-content :global(ul li::before) {
-    content: '–';
-    position: absolute;
-    left: 0;
-    color: rgb(140, 140, 140);
+  .post-content :global(ul ul) {
+    list-style-type: circle;
+  }
+
+  .post-content :global(ul ul ul) {
+    list-style-type: square;
   }
 
   .post-content :global(ol) {
-    counter-reset: ol-counter;
+    list-style-type: decimal;
   }
 
-  .post-content :global(ol li::before) {
-    counter-increment: ol-counter;
-    content: counter(ol-counter) '.';
-    position: absolute;
-    left: 0;
-    color: rgb(140, 140, 140);
-    font-size: 11px;
+  .post-content :global(li) {
+    margin: 4px 0;
+  }
+
+  .post-content :global(li::marker) {
+    color: rgb(59, 61, 65);
   }
 
   /* --- Code --- */
@@ -199,25 +195,27 @@
   /* --- Tables --- */
 
   .post-content :global(table) {
-    border-collapse: collapse;
-    width: 100%;
-    margin: 16px 0;
-    font-size: 12px;
+    border-collapse: separate;
+    border-spacing: 2px 0;
+    width: auto;
+    max-width: 100%;
+    margin: 16px 0 16px -10px;
+    font-size: 13px;
   }
 
   .post-content :global(th),
   .post-content :global(td) {
-    border: 0.5px solid var(--border-color);
-    padding: 7px 10px;
+    padding: 7px 8px;
     text-align: left;
   }
 
   .post-content :global(th) {
-    font-size: 11px;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
     font-weight: bold;
-    background: rgba(0, 0, 0, 0.02);
+    border-bottom: 1px solid rgb(59, 61, 65);
+  }
+
+  .post-content :global(tbody tr:nth-child(odd) td) {
+    background: rgba(0, 0, 0, 0.025);
   }
 
   /* --- Media --- */
