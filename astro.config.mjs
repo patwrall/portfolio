@@ -44,7 +44,7 @@ const cudaQualifierTransformer = {
 
 export default defineConfig({
   // TODO: update to your production domain before deploying
-  site: 'https://patrickrall.com',
+  site: 'https://patrickwrall.com',
 
   integrations: [
     mdx({

@@ -9,7 +9,7 @@ export async function GET(context: APIContext) {
     .sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
 
   return rss({
-    title: 'Patrick Rall',
+    title: 'Patrick W. Rall',
     description: 'Articles on high-performance computing, GPU programming, and machine learning.',
     site: context.site!,
     items: published.map((post) => ({
