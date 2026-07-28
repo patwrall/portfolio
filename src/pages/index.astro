@@ -9,9 +9,26 @@ const blogPosts = await getCollection('blog');
 const sortedPosts = blogPosts
   .filter((p) => !p.data.draft)
   .sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+
+const personSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: 'Patrick W. Rall',
+  url: 'https://patrickwrall.com',
+  sameAs: [
+    'https://github.com/patwrall',
+    'https://www.linkedin.com/in/patrickwrall/',
+    'https://x.com/patwrall',
+  ],
+  alumniOf: {
+    '@type': 'CollegeOrUniversity',
+    name: 'Purdue University',
+  },
+};
 ---
 
 <Layout title="Patrick W. Rall">
+  <script type="application/ld+json" set:html={JSON.stringify(personSchema)} />
   <main class="main-container">
     <div class="content-wrapper">
 
