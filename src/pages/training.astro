@@ -2,9 +2,9 @@
 import Layout from '../layouts/Layout.astro';
 import plan from '../data/training-plan.json';
 
-// Served only from the private subdomain. On the apex domain this renders the
-// 404 so the page never exists at patrickwrall.com/training, where the Access
-// policy would not cover it.
+// Served only from the private subdomain. On the apex domain this returns the
+// built 404 so the page never exists at patrickwrall.com/training, where the
+// Access policy would not cover it.
 export const prerender = false;
 
 const PRIVATE_HOST = 'private.patrickwrall.com';
@@ -28,74 +28,158 @@ if (host !== PRIVATE_HOST && !isLocal) {
 
 const { meta, targets, weightPlan, weeks } = plan;
 
-const totalMiles = weeks.reduce((n, w) => n + w.summary.totalMiles, 0);
 const totalSessions = weeks.reduce(
   (n, w) => n + w.days.reduce((m, d) => m + d.workouts.length, 0),
   0,
 );
 
-const fmt = (iso: string) =>
-  new Date(iso + 'T12:00:00').toLocaleDateString('en-US', {
-    month: 'short',
-    day: 'numeric',
-  });
+// Target weight trajectory for the chart: 190 at block start, 175 by the end
+// of base. Drawn as a reference line, not a prescription.
+const weightStart = weightPlan.start;
+const weightBaseEnd = weightPlan.phases[0].endWeight;
 ---
 
 <Layout title="Training" description="Private training log." noindex={true}>
   <main class="main-container">
     <div class="content-wrapper">
 
-      <div class="header-section animate-appear" style="animation-delay: 0.1s;">
+      <div class="header-section animate-appear" style="animation-delay: 0.05s;">
         <h1 class="title-english">Training</h1>
-        <p class="header-index">[ 1 ]</p>
+        <p class="header-index" id="blockPos">[ 1 ]</p>
       </div>
 
-      <div class="bio-section animate-appear" style="animation-delay: 0.15s;">
-        <p class="bio-text">
-          Carmel Marathon base block — {meta.totalWeeks} weeks, {fmt(meta.planStartDate)} to {
-            fmt(meta.planEndDate)
-          }, {totalMiles} miles. Race {fmt(meta.eventDate)} 2027.
-        </p>
+      <!-- [ 1 ] TODAY -->
+      <div class="section animate-appear" style="animation-delay: 0.1s;">
+        <div class="column-header">
+          <h2 class="column-title">TODAY</h2>
+          <p class="column-index" id="todayDate">—</p>
+        </div>
+
+        <div id="todayEmpty" class="today-empty" hidden>
+          <p class="hero-name" id="emptyTitle">Block starts Monday, Aug 17</p>
+          <p class="note-text" id="emptyNote"></p>
+        </div>
+
+        <div id="todayCard" hidden>
+          <div class="hero">
+            <p class="hero-name" id="heroName">—</p>
+            <p class="hero-dist" id="heroDist">—</p>
+          </div>
+          <p class="detail-text" id="heroDetail"></p>
+
+          <form class="logform" id="logForm">
+            <div class="field">
+              <label for="fMiles">Actual</label>
+              <input id="fMiles" type="number" step="0.1" min="0" inputmode="decimal" placeholder="mi" />
+            </div>
+            <div class="field">
+              <label for="fMins">Time</label>
+              <input id="fMins" type="number" step="1" min="0" inputmode="numeric" placeholder="min" />
+            </div>
+            <div class="field rpe">
+              <label>Effort</label>
+              {/* Rendered server-side, not built in JS: Astro scopes this
+                  component's CSS with a data-astro-cid attribute, and nodes
+                  created by document.createElement never carry it, so they
+                  render unstyled. */}
+              <div class="rpe-row" id="rpeRow">
+                {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((n) => (
+                  <button type="button" class="rpe-btn" data-v={n}>{n}</button>
+                ))}
+              </div>
+            </div>
+            <div class="field wide">
+              <label for="fNote">Note</label>
+              <input id="fNote" type="text" placeholder="how it went" maxlength="200" />
+            </div>
+            <div class="actions">
+              <button type="submit" class="btn primary" id="btnDone">Mark done</button>
+              <span class="savehint" id="saveHint"></span>
+            </div>
+          </form>
+        </div>
       </div>
 
+      <!-- [ 2 ] THIS WEEK -->
+      <div class="section animate-appear" style="animation-delay: 0.15s;">
+        <div class="column-header">
+          <h2 class="column-title">THIS WEEK</h2>
+          <p class="column-index" id="weekIndex">—</p>
+        </div>
+        <p class="week-focus" id="weekFocus"></p>
+        <div class="days" id="weekDays"></div>
+      </div>
+
+      <!-- [ 3 ] WEIGHT -->
       <div class="section animate-appear" style="animation-delay: 0.2s;">
         <div class="column-header">
-          <h2 class="column-title">TARGETS</h2>
-          <p class="column-index">[ 2 ]</p>
+          <h2 class="column-title">WEIGHT</h2>
+          <p class="column-index" id="weightNow">—</p>
         </div>
-        <div class="rows">
-          <div class="row"><span>Floor</span><span class="row-val">{targets.floor}</span></div>
-          <div class="row"><span>Realistic</span><span class="row-val">{targets.realistic}</span></div>
-          <div class="row"><span>Stretch</span><span class="row-val">{targets.stretch}</span></div>
+
+        <form class="weighin" id="weighForm">
+          <div class="field">
+            <label for="fWeight">Today</label>
+            <input id="fWeight" type="number" step="0.1" min="80" max="400" inputmode="decimal" placeholder="lb" />
+          </div>
+          <button type="submit" class="btn">Log weigh-in</button>
+        </form>
+
+        <div class="chartwrap"><svg id="weightChart" class="chart" viewBox="0 0 640 160" preserveAspectRatio="none" role="img" aria-label="Bodyweight trend"></svg></div>
+        <div class="legend">
+          <span><i class="sw sw-line"></i>7-day average</span>
+          <span><i class="sw sw-dot"></i>daily</span>
+          <span><i class="sw sw-dash"></i>target</span>
         </div>
-        <p class="note-text">{targets.note}</p>
+        <p class="note-text" id="weightNote"></p>
       </div>
 
+      <!-- [ 4 ] PST -->
       <div class="section animate-appear" style="animation-delay: 0.25s;">
         <div class="column-header">
-          <h2 class="column-title">WEIGHT</h2>
-          <p class="column-index">[ 3 ]</p>
+          <h2 class="column-title">PST</h2>
+          <p class="column-index" id="pstLatest">—</p>
         </div>
-        <div class="rows">
-          {weightPlan.phases.map((p) => (
-            <div class="row">
-              <span>{p.window}</span>
-              <span class="row-val">{p.rate} &middot; {p.endWeight} lb</span>
-            </div>
-          ))}
+
+        <form class="pstform" id="pstForm">
+          <div class="field">
+            <label for="fPull">Pull-ups</label>
+            <input id="fPull" type="number" step="1" min="0" max="200" inputmode="numeric" placeholder="max" />
+          </div>
+          <div class="field">
+            <label for="fPush">Push-ups</label>
+            <input id="fPush" type="number" step="1" min="0" max="400" inputmode="numeric" placeholder="2 min" />
+          </div>
+          <div class="field">
+            <label for="fSit">Sit-ups</label>
+            <input id="fSit" type="number" step="1" min="0" max="400" inputmode="numeric" placeholder="2 min" />
+          </div>
+          <button type="submit" class="btn">Log PST</button>
+        </form>
+
+        <div class="chartwrap"><svg id="pstChart" class="chart" viewBox="0 0 640 160" preserveAspectRatio="none" role="img" aria-label="PST rep trend"></svg></div>
+        <div class="legend">
+          <span><i class="sw sw-pull"></i>pull</span>
+          <span><i class="sw sw-push"></i>push</span>
+          <span><i class="sw sw-sit"></i>sit</span>
         </div>
-        <p class="note-text">{weightPlan.protein}</p>
+        <p class="note-text">Scored SOAS events. Log them whenever you test — no need to do it every session.</p>
       </div>
 
-      <div class="section animate-appear" style="animation-delay: 0.3s;">
+      <!-- [ 5 ] FULL BLOCK -->
+      <div class="section last animate-appear" style="animation-delay: 0.3s;">
         <div class="column-header">
           <h2 class="column-title">BLOCK</h2>
-          <p class="column-index">[ 4 ]</p>
+          <button class="column-index linkish" id="blockToggle" type="button" aria-expanded="false">[ show ]</button>
         </div>
 
-        <div class="weeks">
+        <div class="targets-mini">
+          <span>{targets.realistic}</span><span class="sep">·</span><span>stretch {targets.stretch}</span>
+        </div>
+
+        <div class="weeks" id="allWeeks" hidden>
           {weeks.map((w) => (
-            <section class="week">
+            <section class="week" data-week={w.weekNumber} data-focus={w.focus}>
               <div class="week-header">
                 <span>
                   Week {w.weekNumber}
@@ -103,12 +187,20 @@ const fmt = (iso: string) =>
                 </span>
                 <span class="week-stat">{w.summary.totalMiles} mi</span>
               </div>
-              <p class="week-focus">{w.focus}</p>
-
               <div class="days">
                 {w.days.map((d) =>
                   d.workouts.map((wo) => (
-                    <div class={`day day-${wo.sport}`} data-id={wo.id} data-date={d.date}>
+                    <div
+                      class={`day day-${wo.sport}`}
+                      data-id={wo.id}
+                      data-date={d.date}
+                      data-week={w.weekNumber}
+                      data-dow={d.dayOfWeek}
+                      data-name={wo.name}
+                      data-sport={wo.sport}
+                      data-miles={wo.distanceMiles ?? ''}
+                      data-mins={wo.durationMinutes ?? ''}
+                    >
                       <button class="day-row" type="button" aria-expanded="false">
                         <span class="day-dow">{d.dayOfWeek.slice(0, 3)}</span>
                         <span class="day-name">{wo.name}</span>
@@ -122,7 +214,6 @@ const fmt = (iso: string) =>
                       </button>
                       <div class="day-detail" hidden>
                         <p class="detail-text">{wo.humanReadable}</p>
-                        <button class="mark" type="button">Mark complete</button>
                       </div>
                     </div>
                   )),
@@ -133,69 +224,419 @@ const fmt = (iso: string) =>
         </div>
       </div>
 
-      <div class="section last animate-appear" style="animation-delay: 0.35s;">
-        <p class="note-text">{meta.note}</p>
-      </div>
-
     </div>
   </main>
 
   <div class="progress-bar">
     <span class="progress-text" id="pText">0 / {totalSessions}</span>
     <span class="progress-track"><span class="progress-fill" id="pFill"></span></span>
+    <span class="sync" id="syncDot" title="synced"></span>
   </div>
 </Layout>
 
-<script>
-  const KEY = 'carmel-2027-base';
-  const stored = localStorage.getItem(KEY);
-  const done = new Set<string>(stored ? JSON.parse(stored) : []);
-  const days = Array.from(document.querySelectorAll<HTMLElement>('.day'));
-  const pText = document.getElementById('pText')!;
-  const pFill = document.getElementById('pFill')!;
+{/* type="module" is load-bearing: define:vars forces the script inline, and the
+    body uses top-level await, which is a SyntaxError in a classic script. */}
+<script type="module" define:vars={{ weightStart, weightBaseEnd, planStart: meta.planStartDate, planEnd: meta.planEndDate }}>
+  // ---------------------------------------------------------------------------
+  // State. KV is the source of truth; localStorage is a write-through cache so a
+  // log taken on bad signal after a run is not lost.
+  // ---------------------------------------------------------------------------
+  const CACHE = 'training-log-cache';
+  const API = '/api/training-log';
+  let log = { sessions: {}, weights: {}, pst: {} };
+  let dirty = false;
 
-  function refresh() {
-    let n = 0;
-    for (const d of days) {
-      const isDone = done.has(d.dataset.id!);
-      d.classList.toggle('is-done', isDone);
-      if (isDone) n++;
-    }
-    pText.textContent = `${n} / ${days.length}`;
-    pFill.style.width = `${(n / days.length) * 100}%`;
+  const $ = (id) => document.getElementById(id);
+  const syncDot = $('syncDot');
+
+  const todayISO = () => new Date().toLocaleDateString('en-CA');
+
+  function setSync(state) {
+    syncDot.dataset.state = state;
+    syncDot.title = { ok: 'synced', pending: 'saving…', off: 'offline — saved on this device' }[state];
   }
+
+  async function load() {
+    const cached = localStorage.getItem(CACHE);
+    if (cached) {
+      try {
+        log = JSON.parse(cached);
+      } catch {}
+    }
+    try {
+      const res = await fetch(API, { headers: { accept: 'application/json' } });
+      if (!res.ok) throw new Error(String(res.status));
+      const remote = await res.json();
+      // Remote wins on load unless we have an unflushed local write.
+      if (!dirty) {
+        log = { sessions: {}, weights: {}, pst: {}, ...remote };
+        localStorage.setItem(CACHE, JSON.stringify(log));
+      }
+      setSync('ok');
+    } catch {
+      setSync('off');
+    }
+  }
+
+  async function save(patch) {
+    // Optimistic local merge first.
+    for (const k of ['sessions', 'weights', 'pst']) {
+      if (patch[k]) log[k] = { ...log[k], ...patch[k] };
+    }
+    localStorage.setItem(CACHE, JSON.stringify(log));
+    render();
+
+    setSync('pending');
+    try {
+      const res = await fetch(API, {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify(patch),
+      });
+      if (!res.ok) throw new Error(String(res.status));
+      dirty = false;
+      setSync('ok');
+    } catch {
+      dirty = true;
+      setSync('off');
+    }
+  }
+
+  // Retry a stranded write when the tab regains focus.
+  window.addEventListener('focus', () => {
+    if (dirty) save({ sessions: log.sessions, weights: log.weights, pst: log.pst });
+  });
+
+  // ---------------------------------------------------------------------------
+  // Plan data, read back out of the server-rendered block.
+  // ---------------------------------------------------------------------------
+  const dayEls = Array.from(document.querySelectorAll('#allWeeks .day'));
+  const days = dayEls.map((el) => ({
+    el,
+    id: el.dataset.id,
+    date: el.dataset.date,
+    week: Number(el.dataset.week),
+    dow: el.dataset.dow,
+    name: el.dataset.name,
+    sport: el.dataset.sport,
+    miles: el.dataset.miles ? Number(el.dataset.miles) : null,
+    mins: el.dataset.mins ? Number(el.dataset.mins) : null,
+    detail: el.querySelector('.detail-text')?.textContent ?? '',
+  }));
+  const weekFocus = new Map(
+    Array.from(document.querySelectorAll('#allWeeks .week')).map((w) => [
+      Number(w.dataset.week),
+      w.dataset.focus,
+    ]),
+  );
+
+  const today = todayISO();
+  let current = days.find((d) => d.date === today) ?? null;
+  // Before the block opens, treat week 1 as the working week.
+  const activeWeek = current ? current.week : 1;
+
+  // ---------------------------------------------------------------------------
+  // Today card
+  // ---------------------------------------------------------------------------
+  let selected = current;
+  const rpeRow = $('rpeRow');
+  for (const b of rpeRow.querySelectorAll('.rpe-btn')) {
+    b.addEventListener('click', () => {
+      const wasOn = b.classList.contains('on');
+      rpeRow.querySelectorAll('.rpe-btn').forEach((x) => x.classList.remove('on'));
+      if (!wasOn) b.classList.add('on'); // tapping the active value clears it
+    });
+  }
+
+  function fmtDate(iso) {
+    return new Date(iso + 'T12:00:00').toLocaleDateString('en-US', {
+      weekday: 'long',
+      month: 'short',
+      day: 'numeric',
+    });
+  }
+
+  function openSession(d) {
+    selected = d;
+    $('todayEmpty').hidden = true;
+    $('todayCard').hidden = false;
+    $('todayDate').textContent = fmtDate(d.date);
+    $('heroName').textContent = d.name;
+    $('heroDist').textContent = d.miles ? `${d.miles} mi` : d.mins ? `${d.mins} min` : '—';
+    $('heroDetail').textContent = d.detail;
+
+    const e = log.sessions[d.id] ?? {};
+    $('fMiles').value = e.miles ?? '';
+    $('fMins').value = e.minutes ?? '';
+    $('fNote').value = e.note ?? '';
+    rpeRow.querySelectorAll('.rpe-btn').forEach((x) =>
+      x.classList.toggle('on', Number(x.dataset.v) === e.rpe),
+    );
+    $('btnDone').textContent = e.done ? 'Logged ✓ — update' : 'Mark done';
+    $('fMiles').placeholder = d.miles ? String(d.miles) : 'mi';
+    $('fMins').placeholder = d.mins ? String(d.mins) : 'min';
+  }
+
+  if (current) {
+    openSession(current);
+  } else {
+    const start = planStart;
+    const diff = Math.round((new Date(start + 'T12:00:00') - new Date(today + 'T12:00:00')) / 86400000);
+    $('todayEmpty').hidden = false;
+    $('todayDate').textContent = fmtDate(today);
+    if (diff > 0) {
+      $('emptyTitle').textContent = `Block starts ${fmtDate(start)}`;
+      $('emptyNote').textContent =
+        diff === 1 ? 'Tomorrow. Week 1 is below.' : `${diff} days out. Week 1 is below.`;
+    } else {
+      $('emptyTitle').textContent = 'Rest day — nothing scheduled';
+      $('emptyNote').textContent = 'Outside the base block. Pick any session from BLOCK to log it.';
+    }
+  }
+
+  $('blockPos').textContent = `[ wk ${activeWeek} / 16 ]`;
+
+  $('logForm').addEventListener('submit', (ev) => {
+    ev.preventDefault();
+    if (!selected) return;
+    const rpe = rpeRow.querySelector('.on');
+    save({
+      sessions: {
+        [selected.id]: {
+          done: true,
+          miles: $('fMiles').value ? Number($('fMiles').value) : null,
+          minutes: $('fMins').value ? Number($('fMins').value) : null,
+          rpe: rpe ? Number(rpe.dataset.v) : null,
+          note: $('fNote').value.trim(),
+        },
+      },
+    });
+    $('saveHint').textContent = 'saved';
+    setTimeout(() => ($('saveHint').textContent = ''), 1600);
+    $('btnDone').textContent = 'Logged ✓ — update';
+  });
+
+  // ---------------------------------------------------------------------------
+  // This week
+  // ---------------------------------------------------------------------------
+  const weekDays = days.filter((d) => d.week === activeWeek);
+  $('weekIndex').textContent = `[ ${activeWeek} ]`;
+  $('weekFocus').textContent = weekFocus.get(activeWeek) ?? '';
+
+  // Clone the server-rendered row rather than building one: the clone keeps the
+  // data-astro-cid attribute that this component's scoped CSS selects on. A
+  // freshly created element has no such attribute and renders in the browser's
+  // default button styling.
+  const weekWrap = $('weekDays');
+  for (const d of weekDays) {
+    const row = d.el.querySelector('.day-row').cloneNode(true);
+    row.classList.add('wk-row');
+    if (d.date === today) row.classList.add('is-today');
+    row.dataset.id = d.id;
+    row.addEventListener('click', () => {
+      openSession(d);
+      $('todayCard').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+    weekWrap.appendChild(row);
+  }
+
+  // ---------------------------------------------------------------------------
+  // Charts
+  // ---------------------------------------------------------------------------
+  const NS = 'http://www.w3.org/2000/svg';
+  const W = 640, H = 160, PAD = { l: 34, r: 8, t: 10, b: 18 };
+
+  function el(name, attrs) {
+    const n = document.createElementNS(NS, name);
+    for (const [k, v] of Object.entries(attrs)) n.setAttribute(k, String(v));
+    return n;
+  }
+
+  function axes(svg, min, max, ticks = 3) {
+    for (let i = 0; i < ticks; i++) {
+      const t = i / (ticks - 1);
+      const y = PAD.t + (H - PAD.t - PAD.b) * t;
+      svg.appendChild(el('line', { x1: PAD.l, y1: y, x2: W - PAD.r, y2: y, class: 'grid' }));
+      const lab = el('text', { x: 2, y: y + 3, class: 'tick' });
+      lab.textContent = Math.round(max - (max - min) * t);
+      svg.appendChild(lab);
+    }
+  }
+
+  /** Centred-trailing 7-day mean — the only number worth reading off a scale. */
+  function rolling(points, windowDays = 7) {
+    return points.map((p, i) => {
+      const from = new Date(p.t - (windowDays - 1) * 86400000);
+      const slice = points.filter((q, j) => j <= i && q.t >= from.getTime());
+      return { t: p.t, v: slice.reduce((s, q) => s + q.v, 0) / slice.length };
+    });
+  }
+
+  function drawWeight() {
+    const svg = $('weightChart');
+    svg.textContent = '';
+    const entries = Object.entries(log.weights)
+      .map(([d, v]) => ({ t: new Date(d + 'T12:00:00').getTime(), v: Number(v) }))
+      .sort((a, b) => a.t - b.t);
+
+    const t0 = new Date(planStart + 'T12:00:00').getTime();
+    const t1 = new Date(planEnd + 'T12:00:00').getTime();
+
+    const vals = entries.map((e) => e.v).concat([weightStart, weightBaseEnd]);
+    let min = Math.min(...vals) - 2, max = Math.max(...vals) + 2;
+    if (max - min < 8) { const m = (max + min) / 2; min = m - 4; max = m + 4; }
+
+    const x = (t) => PAD.l + ((t - t0) / (t1 - t0)) * (W - PAD.l - PAD.r);
+    const y = (v) => PAD.t + (1 - (v - min) / (max - min)) * (H - PAD.t - PAD.b);
+
+    axes(svg, min, max);
+
+    // Target trajectory.
+    svg.appendChild(
+      el('line', { x1: x(t0), y1: y(weightStart), x2: x(t1), y2: y(weightBaseEnd), class: 'target' }),
+    );
+
+    if (!entries.length) {
+      const t = el('text', { x: W / 2, y: H / 2, class: 'empty', 'text-anchor': 'middle' });
+      t.textContent = 'no weigh-ins yet';
+      svg.appendChild(t);
+      return;
+    }
+
+    for (const e of entries) {
+      svg.appendChild(el('circle', { cx: x(e.t), cy: y(e.v), r: 1.8, class: 'dot' }));
+    }
+
+    const avg = rolling(entries);
+    if (avg.length > 1) {
+      const d = avg.map((p, i) => `${i ? 'L' : 'M'}${x(p.t).toFixed(1)},${y(p.v).toFixed(1)}`).join(' ');
+      svg.appendChild(el('path', { d, class: 'line' }));
+    }
+  }
+
+  function drawPst() {
+    const svg = $('pstChart');
+    svg.textContent = '';
+    const rows = Object.entries(log.pst)
+      .map(([d, v]) => ({ t: new Date(d + 'T12:00:00').getTime(), ...v }))
+      .sort((a, b) => a.t - b.t);
+
+    if (!rows.length) {
+      const t = el('text', { x: W / 2, y: H / 2, class: 'empty', 'text-anchor': 'middle' });
+      t.textContent = 'no PST entries yet';
+      svg.appendChild(t);
+      return;
+    }
+
+    const all = rows.flatMap((r) => [r.pullups, r.pushups, r.situps]).filter((n) => typeof n === 'number');
+    const max = Math.max(10, ...all) * 1.15;
+    const t0 = Math.min(...rows.map((r) => r.t));
+    const t1 = Math.max(...rows.map((r) => r.t), t0 + 86400000);
+
+    const x = (t) => PAD.l + ((t - t0) / (t1 - t0)) * (W - PAD.l - PAD.r);
+    const y = (v) => PAD.t + (1 - v / max) * (H - PAD.t - PAD.b);
+
+    axes(svg, 0, max);
+
+    for (const [key, cls] of [['pullups', 'pull'], ['pushups', 'push'], ['situps', 'sit']]) {
+      const pts = rows.filter((r) => typeof r[key] === 'number');
+      if (!pts.length) continue;
+      if (pts.length > 1) {
+        const d = pts.map((p, i) => `${i ? 'L' : 'M'}${x(p.t).toFixed(1)},${y(p[key]).toFixed(1)}`).join(' ');
+        svg.appendChild(el('path', { d, class: `line ${cls}` }));
+      }
+      for (const p of pts) svg.appendChild(el('circle', { cx: x(p.t), cy: y(p[key]), r: 2.2, class: `dot ${cls}` }));
+    }
+  }
+
+  // ---------------------------------------------------------------------------
+  // Forms
+  // ---------------------------------------------------------------------------
+  $('weighForm').addEventListener('submit', (ev) => {
+    ev.preventDefault();
+    const v = Number($('fWeight').value);
+    if (!v) return;
+    save({ weights: { [todayISO()]: v } });
+    $('fWeight').value = '';
+  });
+
+  $('pstForm').addEventListener('submit', (ev) => {
+    ev.preventDefault();
+    const entry = {};
+    if ($('fPull').value) entry.pullups = Number($('fPull').value);
+    if ($('fPush').value) entry.pushups = Number($('fPush').value);
+    if ($('fSit').value) entry.situps = Number($('fSit').value);
+    if (!Object.keys(entry).length) return;
+    save({ pst: { [todayISO()]: entry } });
+    $('fPull').value = $('fPush').value = $('fSit').value = '';
+  });
+
+  // ---------------------------------------------------------------------------
+  // Block toggle
+  // ---------------------------------------------------------------------------
+  $('blockToggle').addEventListener('click', () => {
+    const wrap = $('allWeeks');
+    wrap.hidden = !wrap.hidden;
+    $('blockToggle').textContent = wrap.hidden ? '[ show ]' : '[ hide ]';
+    $('blockToggle').setAttribute('aria-expanded', String(!wrap.hidden));
+  });
 
   for (const d of days) {
-    const row = d.querySelector<HTMLButtonElement>('.day-row')!;
-    const detail = d.querySelector<HTMLElement>('.day-detail')!;
-    const mark = d.querySelector<HTMLButtonElement>('.mark')!;
-
-    row.addEventListener('click', () => {
-      const open = !detail.hidden;
-      detail.hidden = open;
-      row.setAttribute('aria-expanded', String(!open));
-      mark.textContent = done.has(d.dataset.id!) ? 'Mark incomplete' : 'Mark complete';
-    });
-
-    mark.addEventListener('click', () => {
-      const id = d.dataset.id!;
-      if (done.has(id)) done.delete(id);
-      else done.add(id);
-      localStorage.setItem(KEY, JSON.stringify([...done]));
-      mark.textContent = done.has(id) ? 'Mark incomplete' : 'Mark complete';
-      refresh();
+    d.el.querySelector('.day-row').addEventListener('click', () => {
+      const det = d.el.querySelector('.day-detail');
+      det.hidden = !det.hidden;
     });
   }
 
-  // Highlight today and open the page at the current week.
-  const today = new Date().toLocaleDateString('en-CA');
-  const todayEl = days.find((d) => d.dataset.date === today);
-  if (todayEl) {
-    todayEl.classList.add('is-today');
-    todayEl.scrollIntoView({ block: 'center' });
+  // ---------------------------------------------------------------------------
+  // Render
+  // ---------------------------------------------------------------------------
+  function render() {
+    let n = 0;
+    for (const d of days) {
+      const done = !!log.sessions[d.id]?.done;
+      d.el.classList.toggle('is-done', done);
+      if (done) n++;
+    }
+    document.querySelectorAll('.wk-row').forEach((r) => {
+      r.classList.toggle('is-done', !!log.sessions[r.dataset.id]?.done);
+    });
+    $('pText').textContent = `${n} / ${days.length}`;
+    $('pFill').style.width = `${(n / days.length) * 100}%`;
+
+    // Weight readouts.
+    const ws = Object.entries(log.weights)
+      .map(([d, v]) => ({ t: new Date(d + 'T12:00:00').getTime(), v: Number(v) }))
+      .sort((a, b) => a.t - b.t);
+    if (ws.length) {
+      const avg = rolling(ws);
+      const now = avg[avg.length - 1].v;
+      $('weightNow').textContent = `[ ${now.toFixed(1)} lb ]`;
+      const wk = avg.find((p) => p.t >= avg[avg.length - 1].t - 7 * 86400000);
+      const delta = wk ? now - wk.v : 0;
+      const toGo = now - 165;
+      $('weightNote').textContent =
+        `7-day average ${now.toFixed(1)} lb` +
+        (Math.abs(delta) > 0.05 ? `, ${delta > 0 ? '+' : ''}${delta.toFixed(1)} over the last week` : '') +
+        `. ${toGo.toFixed(1)} lb to 165.`;
+    } else {
+      $('weightNow').textContent = '[ — ]';
+      $('weightNote').textContent = 'Weigh in daily, same time, after waking. The single-day number is noise; the 7-day average is the signal.';
+    }
+
+    const pstDates = Object.keys(log.pst).sort();
+    if (pstDates.length) {
+      const last = log.pst[pstDates[pstDates.length - 1]];
+      $('pstLatest').textContent = `[ ${last.pullups ?? '—'} / ${last.pushups ?? '—'} / ${last.situps ?? '—'} ]`;
+    }
+
+    drawWeight();
+    drawPst();
   }
 
-  refresh();
+  await load();
+  if (selected) openSession(selected);
+  render();
 </script>
 
 <style>
@@ -237,25 +678,11 @@ const fmt = (iso: string) =>
     line-height: 14px;
   }
 
-  .bio-section {
-    padding-bottom: 32px;
-    border-bottom: 0.5px solid var(--border-color);
-  }
-
-  .bio-text {
-    font-family: 'ABC Marist Unlicensed Trial Book', sans-serif;
-    font-size: 15px;
-    letter-spacing: -0.01em;
-    line-height: 17px;
-    font-weight: 300;
-    color: rgb(59, 61, 65);
-  }
-
   .section {
     display: flex;
     flex-direction: column;
     gap: 6px;
-    padding: 32px 0;
+    padding: 28px 0;
     border-bottom: 0.5px solid var(--border-color);
   }
 
@@ -266,6 +693,7 @@ const fmt = (iso: string) =>
   .column-header {
     display: flex;
     justify-content: space-between;
+    align-items: baseline;
     width: 100%;
   }
 
@@ -278,26 +706,57 @@ const fmt = (iso: string) =>
     line-height: 14px;
   }
 
-  .rows {
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-  }
-
-  .row {
-    display: flex;
-    justify-content: space-between;
-    gap: 16px;
-    font-family: 'ABC Marist Unlicensed Trial Book', sans-serif;
-    font-size: 15px;
-    letter-spacing: -0.01em;
-    line-height: 17px;
+  .linkish {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
     color: rgb(59, 61, 65);
   }
 
-  .row-val {
-    text-align: right;
+  .linkish:hover {
+    color: #888;
+  }
+
+  /* Today hero */
+  .hero {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 12px;
+    padding: 6px 0 2px;
+  }
+
+  .hero-name {
+    font-family: 'ABC Marist Unlicensed Trial Book', sans-serif;
+    font-size: 23px;
+    letter-spacing: -0.03em;
+    line-height: 28px;
+    font-weight: 500;
+  }
+
+  .hero-dist {
+    font-family: 'ABC Marist Unlicensed Trial Book', sans-serif;
+    font-size: 23px;
+    letter-spacing: -0.03em;
+    line-height: 28px;
     font-variant-numeric: tabular-nums;
+    color: rgb(115, 118, 122);
+    flex-shrink: 0;
+  }
+
+  .today-empty {
+    padding: 6px 0;
+  }
+
+  .detail-text {
+    font-family: 'ABC Marist Unlicensed Trial Book', sans-serif;
+    font-size: 13px;
+    letter-spacing: -0.01em;
+    line-height: 17px;
+    color: rgb(59, 61, 65);
+    white-space: pre-line;
+    padding-bottom: 4px;
   }
 
   .note-text {
@@ -306,49 +765,129 @@ const fmt = (iso: string) =>
     letter-spacing: -0.01em;
     line-height: 16px;
     color: rgb(115, 118, 122);
-    margin-top: 6px;
   }
 
-  .weeks {
+  /* Forms */
+  .logform,
+  .weighin,
+  .pstform {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 14px;
+    align-items: flex-end;
+    padding-top: 12px;
+  }
+
+  .field {
     display: flex;
     flex-direction: column;
-    gap: 24px;
-    margin-top: 6px;
+    gap: 3px;
   }
 
-  .week-header {
+  .field.wide {
+    flex: 1 1 100%;
+  }
+
+  label {
+    font-family: 'ABC Marist Unlicensed Trial Book', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.015em;
+    text-transform: uppercase;
+    color: rgb(115, 118, 122);
+  }
+
+  input[type='number'],
+  input[type='text'] {
+    font-family: 'ABC Marist Unlicensed Trial Book', sans-serif;
+    font-size: 15px;
+    letter-spacing: -0.01em;
+    color: rgb(0, 0, 0);
+    background: none;
+    border: none;
+    border-bottom: 0.5px solid var(--border-color);
+    padding: 4px 0;
+    width: 72px;
+    border-radius: 0;
+  }
+
+  input[type='text'] {
+    width: 100%;
+  }
+
+  input:focus {
+    outline: none;
+    border-bottom-color: rgb(59, 61, 65);
+  }
+
+  .rpe-row {
     display: flex;
-    justify-content: space-between;
-    align-items: baseline;
+    gap: 3px;
+  }
+
+  .rpe-btn {
     font-family: 'ABC Marist Unlicensed Trial Book', sans-serif;
     font-size: 12px;
-    letter-spacing: 0.015em;
-    line-height: 14px;
-  }
-
-  .down-badge {
-    color: rgb(196, 74, 42);
-    font-weight: bold;
-    margin-left: 6px;
-  }
-
-  .week-stat {
+    width: 24px;
+    height: 26px;
+    background: none;
+    border: 0.5px solid var(--border-color);
+    color: rgb(115, 118, 122);
+    cursor: pointer;
+    border-radius: 0;
     font-variant-numeric: tabular-nums;
   }
 
-  .week-focus {
-    font-family: 'ABC Marist Unlicensed Trial Book', sans-serif;
-    font-size: 13px;
-    letter-spacing: -0.01em;
-    line-height: 16px;
-    color: rgb(115, 118, 122);
-    padding: 4px 0 6px;
+  .rpe-btn:hover {
+    border-color: rgb(59, 61, 65);
   }
 
+  .rpe-btn.on {
+    background: rgb(59, 61, 65);
+    border-color: rgb(59, 61, 65);
+    color: rgb(255, 255, 255);
+  }
+
+  .actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .btn {
+    font-family: 'ABC Marist Unlicensed Trial Book', sans-serif;
+    font-size: 12px;
+    letter-spacing: 0.015em;
+    padding: 7px 12px;
+    background: none;
+    border: 0.5px solid var(--border-color);
+    color: rgb(59, 61, 65);
+    cursor: pointer;
+    border-radius: 0;
+  }
+
+  .btn:hover {
+    border-color: rgb(59, 61, 65);
+    color: rgb(0, 0, 0);
+  }
+
+  .btn.primary {
+    background: rgb(59, 61, 65);
+    border-color: rgb(59, 61, 65);
+    color: rgb(255, 255, 255);
+  }
+
+  .savehint {
+    font-family: 'ABC Marist Unlicensed Trial Book', sans-serif;
+    font-size: 12px;
+    color: rgb(115, 118, 122);
+  }
+
+  /* Day rows */
   .days {
     display: flex;
     flex-direction: column;
     border-top: 0.5px solid var(--border-color);
+    margin-top: 4px;
   }
 
   .day {
@@ -371,6 +910,10 @@ const fmt = (iso: string) =>
     letter-spacing: -0.01em;
     line-height: 17px;
     color: rgb(59, 61, 65);
+  }
+
+  .wk-row {
+    border-bottom: 0.5px solid var(--border-color);
   }
 
   .day-row:hover .day-name {
@@ -408,13 +951,16 @@ const fmt = (iso: string) =>
     color: rgb(115, 118, 122);
   }
 
+  .wk-row.is-today .day-dow,
   .day.is-today .day-dow {
     color: rgb(196, 74, 42);
     font-weight: bold;
   }
 
   .day.is-done .day-name,
-  .day.is-done .day-dist {
+  .day.is-done .day-dist,
+  .wk-row.is-done .day-name,
+  .wk-row.is-done .day-dist {
     text-decoration: line-through;
     color: rgb(160, 163, 167);
   }
@@ -423,32 +969,160 @@ const fmt = (iso: string) =>
     padding: 2px 0 12px 44px;
   }
 
-  .detail-text {
-    font-family: 'ABC Marist Unlicensed Trial Book', sans-serif;
-    font-size: 13px;
-    letter-spacing: -0.01em;
-    line-height: 17px;
-    color: rgb(59, 61, 65);
-    white-space: pre-line;
+  /* Weeks */
+  .weeks {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+    margin-top: 10px;
   }
 
-  .mark {
-    margin-top: 10px;
-    padding: 5px 10px;
-    background: none;
-    border: 0.5px solid var(--border-color);
-    cursor: pointer;
+  .week-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
     font-family: 'ABC Marist Unlicensed Trial Book', sans-serif;
     font-size: 12px;
     letter-spacing: 0.015em;
-    color: rgb(59, 61, 65);
   }
 
-  .mark:hover {
-    color: rgb(0, 0, 0);
-    border-color: rgb(59, 61, 65);
+  .down-badge {
+    color: rgb(196, 74, 42);
+    font-weight: bold;
+    margin-left: 6px;
   }
 
+  .week-stat {
+    font-variant-numeric: tabular-nums;
+  }
+
+  .week-focus {
+    font-family: 'ABC Marist Unlicensed Trial Book', sans-serif;
+    font-size: 13px;
+    letter-spacing: -0.01em;
+    line-height: 16px;
+    color: rgb(115, 118, 122);
+  }
+
+  .targets-mini {
+    display: flex;
+    gap: 8px;
+    font-family: 'ABC Marist Unlicensed Trial Book', sans-serif;
+    font-size: 13px;
+    color: rgb(115, 118, 122);
+  }
+
+  .sep {
+    color: var(--border-color);
+  }
+
+  /* Charts */
+  .chartwrap {
+    width: 100%;
+    overflow-x: auto;
+    margin-top: 10px;
+  }
+
+  .chart {
+    width: 100%;
+    height: 160px;
+    display: block;
+  }
+
+  .chart :global(.grid) {
+    stroke: var(--border-color);
+    stroke-width: 0.5;
+  }
+
+  .chart :global(.tick) {
+    font-family: 'ABC Marist Unlicensed Trial Book', sans-serif;
+    font-size: 9px;
+    fill: rgb(160, 163, 167);
+  }
+
+  .chart :global(.empty) {
+    font-family: 'ABC Marist Unlicensed Trial Book', sans-serif;
+    font-size: 11px;
+    fill: rgb(160, 163, 167);
+  }
+
+  .chart :global(.line) {
+    fill: none;
+    stroke: rgb(59, 61, 65);
+    stroke-width: 1.25;
+    vector-effect: non-scaling-stroke;
+  }
+
+  .chart :global(.dot) {
+    fill: rgb(180, 183, 187);
+  }
+
+  .chart :global(.target) {
+    stroke: rgb(196, 74, 42);
+    stroke-width: 1;
+    stroke-dasharray: 3 3;
+    opacity: 0.65;
+    vector-effect: non-scaling-stroke;
+  }
+
+  .chart :global(.pull) {
+    stroke: rgb(59, 61, 65);
+    fill: rgb(59, 61, 65);
+  }
+
+  .chart :global(.push) {
+    stroke: rgb(196, 74, 42);
+    fill: rgb(196, 74, 42);
+  }
+
+  .chart :global(.sit) {
+    stroke: rgb(150, 153, 157);
+    fill: rgb(150, 153, 157);
+  }
+
+  .legend {
+    display: flex;
+    gap: 14px;
+    font-family: 'ABC Marist Unlicensed Trial Book', sans-serif;
+    font-size: 11px;
+    color: rgb(115, 118, 122);
+    padding-top: 2px;
+  }
+
+  .legend span {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  .sw {
+    width: 12px;
+    height: 0;
+    border-top: 1.25px solid rgb(59, 61, 65);
+    display: inline-block;
+  }
+
+  .sw-dot {
+    border: none;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: rgb(180, 183, 187);
+  }
+
+  .sw-dash {
+    border-top: 1px dashed rgb(196, 74, 42);
+  }
+
+  .sw-push {
+    border-top-color: rgb(196, 74, 42);
+  }
+
+  .sw-sit {
+    border-top-color: rgb(150, 153, 157);
+  }
+
+  /* Progress */
   .progress-bar {
     position: fixed;
     left: 0;
@@ -472,7 +1146,7 @@ const fmt = (iso: string) =>
   }
 
   .progress-track {
-    width: min(240px, 45vw);
+    width: min(200px, 38vw);
     height: 2px;
     background-color: var(--border-color);
   }
@@ -485,12 +1159,50 @@ const fmt = (iso: string) =>
     transition: width 0.2s;
   }
 
+  .sync {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: rgb(180, 183, 187);
+  }
+
+  .sync[data-state='ok'] {
+    background: rgb(120, 160, 120);
+  }
+
+  .sync[data-state='pending'] {
+    background: rgb(200, 170, 90);
+  }
+
+  .sync[data-state='off'] {
+    background: rgb(196, 74, 42);
+  }
+
   @media (max-width: 809px) {
     .main-container {
       padding: 24px 16px 70px;
     }
     .content-wrapper {
       max-width: 100%;
+    }
+    .hero-name,
+    .hero-dist {
+      font-size: 21px;
+    }
+    input[type='number'] {
+      width: 64px;
+      font-size: 16px; /* keeps iOS from zooming the viewport on focus */
+    }
+    input[type='text'] {
+      font-size: 16px;
+    }
+    /* 10 buttons + gaps must clear 358px of usable width on a 390px phone. */
+    .rpe-btn {
+      width: 30px;
+      height: 38px;
+    }
+    .btn {
+      padding: 11px 16px;
     }
   }
 </style>

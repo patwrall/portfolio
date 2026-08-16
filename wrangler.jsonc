@@ -13,5 +13,13 @@
   "assets": {
     "binding": "ASSETS",
     "directory": "dist"
-  }
+  },
+  // Training log entries, keyed by Access identity. Only reachable from
+  // private.patrickwrall.com — see src/pages/api/training-log.ts.
+  "kv_namespaces": [
+    {
+      "binding": "TRAINING_LOG",
+      "id": "f6c827b5df71490a9e6e29eaf6f280aa"
+    }
+  ]
 }
