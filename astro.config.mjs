@@ -59,7 +59,9 @@ export default defineConfig({
         [rehypeExternalLinks, { target: "_blank", rel: ["noopener", "noreferrer"] }],
       ],
     }),
-    sitemap(),
+    // /training lives on the private subdomain behind Access. It is SSR so it
+    // would not be picked up anyway, but keep it out explicitly.
+    sitemap({ filter: (page) => !page.includes("/training") }),
   ],
 
   adapter: cloudflare()

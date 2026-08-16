@@ -1,0 +1,2221 @@
+{
+  "version": "1.0",
+  "meta": {
+    "id": "carmel-marathon-2027-base",
+    "athlete": "Patrick",
+    "event": "Carmel Marathon (base-building block)",
+    "eventDate": "2027-04-17",
+    "planStartDate": "2026-08-17",
+    "planEndDate": "2026-12-06",
+    "totalWeeks": 16,
+    "generatedBy": "Claude Coach",
+    "note": "Base phase only. The formal 19-week marathon block starts 2026-12-07 and gets built from the week-16 test results."
+  },
+  "preferences": {
+    "run": "miles",
+    "firstDayOfWeek": "monday"
+  },
+  "assessment": {
+    "foundation": {
+      "raceHistory": [
+        "Sub-6:00 mile, high school"
+      ],
+      "foundationLevel": "returning athlete",
+      "notes": "Real running background (sub-6 HS mile) but zero current run volume. Muscular build at 5'5\"/190lb. Engine is well ahead of connective-tissue readiness \u2014 that gap is the whole risk."
+    },
+    "currentForm": {
+      "weeklyMiles": 0,
+      "benchmark": "1.5 mi in ~13:00 (~8:40/mi) untrained, Aug 2026",
+      "estimatedVDOT": "31-33"
+    },
+    "strengths": [
+      {
+        "area": "raw speed",
+        "evidence": "sub-6 HS mile; 8:40/mi off zero training"
+      },
+      {
+        "area": "trainability",
+        "evidence": "returning athlete, large weight-loss headroom"
+      }
+    ],
+    "limiters": [
+      {
+        "area": "durability",
+        "evidence": "no current run volume; tendon/bone adapts 12-24wk"
+      },
+      {
+        "area": "bodyweight",
+        "evidence": "190lb -> 165lb target; ~13% economy gain available"
+      }
+    ],
+    "constraints": [
+      "Work + school schedule",
+      "4 run days + 2 strength days",
+      "No GPS watch yet"
+    ]
+  },
+  "targets": {
+    "floor": "Finish healthy",
+    "realistic": "Sub-4:00 (9:09/mi)",
+    "stretch": "3:40-3:50",
+    "note": "Locked in Feb/Mar 2027 off actual long-run and tempo data, per handoff."
+  },
+  "weightPlan": {
+    "start": 190,
+    "target": 165,
+    "phases": [
+      {
+        "window": "Base (Aug-Dec)",
+        "rate": "0.75-1 lb/wk",
+        "deficit": "~500 kcal/day",
+        "endWeight": 175
+      },
+      {
+        "window": "Build (Dec-Mar)",
+        "rate": "~0.25 lb/wk",
+        "deficit": "~200 kcal/day",
+        "endWeight": 170
+      },
+      {
+        "window": "Taper + race",
+        "rate": "0",
+        "deficit": "maintenance",
+        "endWeight": 170
+      },
+      {
+        "window": "Post-race -> SEAL prep",
+        "rate": "resume",
+        "deficit": "~500 kcal/day",
+        "endWeight": 165
+      }
+    ],
+    "protein": "170-190 g/day throughout \u2014 protects muscle through the deficit"
+  },
+  "phases": [
+    {
+      "name": "Base",
+      "startWeek": 1,
+      "endWeek": 16,
+      "focus": "Aerobic base + connective-tissue durability",
+      "weeklyMilesRange": {
+        "low": 8,
+        "high": 23
+      },
+      "keyWorkouts": [
+        "Saturday long run",
+        "2x weekly strength with PST carryover"
+      ],
+      "physiologicalGoals": [
+        "Mitochondrial density and capillarization (the 4-12 week adaptations)",
+        "Tendon and bone loading tolerance (the 12-24 week adaptation \u2014 the real constraint)",
+        "Running economy via weight loss"
+      ]
+    }
+  ],
+  "weeks": [
+    {
+      "weekNumber": 1,
+      "startDate": "2026-08-17",
+      "endDate": "2026-08-23",
+      "phase": "Base",
+      "focus": "Establish the habit. Run/walk only \u2014 no continuous running yet.",
+      "targetMiles": 8.0,
+      "isRecoveryWeek": false,
+      "days": [
+        {
+          "date": "2026-08-17",
+          "dayOfWeek": "Monday",
+          "workouts": [
+            {
+              "id": "w1-mon-str",
+              "sport": "strength",
+              "type": "strength",
+              "name": "Strength \u2014 Foundation",
+              "durationMinutes": 35,
+              "humanReadable": "Bodyweight squat 3x12\nPush-up 3x max (scale to incline)\nGlute bridge 3x15\nPlank 3x40s\nDead bug 3x10/side\nCalf raise 3x20  \u2014 tibialis + calf work is your injury insurance",
+              "description": "Lift before the week's running load accumulates.",
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-08-18",
+          "dayOfWeek": "Tuesday",
+          "workouts": [
+            {
+              "id": "w1-tue-run",
+              "sport": "run",
+              "type": "easy",
+              "name": "Easy run",
+              "distanceMiles": 2.5,
+              "durationMinutes": 28,
+              "humanReadable": "Run/walk: 2 min run / 2 min walk, repeat for the full distance.\nThe walk breaks are not optional and not a failure \u2014 they are what lets your tendons catch up to your engine.\nEffort: you should be able to speak full sentences the entire time.",
+              "description": "Aerobic base.",
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-08-19",
+          "dayOfWeek": "Wednesday",
+          "workouts": [
+            {
+              "id": "w1-wed-rest",
+              "sport": "rest",
+              "type": "rest",
+              "name": "Rest",
+              "humanReadable": "Full rest, or a 20-30 min walk if you're restless.\nAdaptation happens today, not on the run days.",
+              "description": "Recovery.",
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-08-20",
+          "dayOfWeek": "Thursday",
+          "workouts": [
+            {
+              "id": "w1-thu-run",
+              "sport": "run",
+              "type": "easy",
+              "name": "Easy run",
+              "distanceMiles": 2.5,
+              "durationMinutes": 28,
+              "humanReadable": "Run/walk: 2 min run / 2 min walk, repeat for the full distance.\nThe walk breaks are not optional and not a failure \u2014 they are what lets your tendons catch up to your engine.\nEffort: you should be able to speak full sentences the entire time.",
+              "description": "Aerobic base.",
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-08-21",
+          "dayOfWeek": "Friday",
+          "workouts": [
+            {
+              "id": "w1-fri-str",
+              "sport": "strength",
+              "type": "strength",
+              "name": "Strength \u2014 Foundation",
+              "durationMinutes": 35,
+              "humanReadable": "Bodyweight squat 3x12\nPush-up 3x max (scale to incline)\nGlute bridge 3x15\nPlank 3x40s\nDead bug 3x10/side\nCalf raise 3x20  \u2014 tibialis + calf work is your injury insurance",
+              "description": "Second lift. Keep it 24h clear of the long run.",
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-08-22",
+          "dayOfWeek": "Saturday",
+          "workouts": [
+            {
+              "id": "w1-sat-run",
+              "sport": "run",
+              "type": "long",
+              "name": "Long run",
+              "distanceMiles": 3.0,
+              "durationMinutes": 36,
+              "humanReadable": "Run/walk: 2 min run / 2 min walk, repeat for the full distance.\nThe walk breaks are not optional and not a failure \u2014 they are what lets your tendons catch up to your engine.\nEffort: you should be able to speak full sentences the entire time.",
+              "description": "The week's key session.",
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-08-23",
+          "dayOfWeek": "Sunday",
+          "workouts": [
+            {
+              "id": "w1-sun-rest",
+              "sport": "rest",
+              "type": "rest",
+              "name": "Rest",
+              "humanReadable": "Full rest. A fourth run gets added in week 5 \u2014 not before.",
+              "description": "Recovery.",
+              "completed": false
+            }
+          ]
+        }
+      ],
+      "summary": {
+        "totalMiles": 8.0,
+        "longRun": 3.0,
+        "runs": 3,
+        "strengthSessions": 2
+      }
+    },
+    {
+      "weekNumber": 2,
+      "startDate": "2026-08-24",
+      "endDate": "2026-08-30",
+      "phase": "Base",
+      "focus": "Same shape, slightly longer. Walk breaks still mandatory.",
+      "targetMiles": 9.0,
+      "isRecoveryWeek": false,
+      "days": [
+        {
+          "date": "2026-08-24",
+          "dayOfWeek": "Monday",
+          "workouts": [
+            {
+              "id": "w2-mon-str",
+              "sport": "strength",
+              "type": "strength",
+              "name": "Strength \u2014 Foundation",
+              "durationMinutes": 35,
+              "humanReadable": "Bodyweight squat 3x12\nPush-up 3x max (scale to incline)\nGlute bridge 3x15\nPlank 3x40s\nDead bug 3x10/side\nCalf raise 3x20  \u2014 tibialis + calf work is your injury insurance",
+              "description": "Lift before the week's running load accumulates.",
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-08-25",
+          "dayOfWeek": "Tuesday",
+          "workouts": [
+            {
+              "id": "w2-tue-run",
+              "sport": "run",
+              "type": "easy",
+              "name": "Easy run",
+              "distanceMiles": 2.5,
+              "durationMinutes": 28,
+              "humanReadable": "Run/walk: 3 min run / 2 min walk, repeat for the full distance.\nThe walk breaks are not optional and not a failure \u2014 they are what lets your tendons catch up to your engine.\nEffort: you should be able to speak full sentences the entire time.",
+              "description": "Aerobic base.",
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-08-26",
+          "dayOfWeek": "Wednesday",
+          "workouts": [
+            {
+              "id": "w2-wed-rest",
+              "sport": "rest",
+              "type": "rest",
+              "name": "Rest",
+              "humanReadable": "Full rest, or a 20-30 min walk if you're restless.\nAdaptation happens today, not on the run days.",
+              "description": "Recovery.",
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-08-27",
+          "dayOfWeek": "Thursday",
+          "workouts": [
+            {
+              "id": "w2-thu-run",
+              "sport": "run",
+              "type": "easy",
+              "name": "Easy run",
+              "distanceMiles": 3.0,
+              "durationMinutes": 34,
+              "humanReadable": "Run/walk: 3 min run / 2 min walk, repeat for the full distance.\nThe walk breaks are not optional and not a failure \u2014 they are what lets your tendons catch up to your engine.\nEffort: you should be able to speak full sentences the entire time.",
+              "description": "Aerobic base.",
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-08-28",
+          "dayOfWeek": "Friday",
+          "workouts": [
+            {
+              "id": "w2-fri-str",
+              "sport": "strength",
+              "type": "strength",
+              "name": "Strength \u2014 Foundation",
+              "durationMinutes": 35,
+              "humanReadable": "Bodyweight squat 3x12\nPush-up 3x max (scale to incline)\nGlute bridge 3x15\nPlank 3x40s\nDead bug 3x10/side\nCalf raise 3x20  \u2014 tibialis + calf work is your injury insurance",
+              "description": "Second lift. Keep it 24h clear of the long run.",
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-08-29",
+          "dayOfWeek": "Saturday",
+          "workouts": [
+            {
+              "id": "w2-sat-run",
+              "sport": "run",
+              "type": "long",
+              "name": "Long run",
+              "distanceMiles": 3.5,
+              "durationMinutes": 42,
+              "humanReadable": "Run/walk: 3 min run / 2 min walk, repeat for the full distance.\nThe walk breaks are not optional and not a failure \u2014 they are what lets your tendons catch up to your engine.\nEffort: you should be able to speak full sentences the entire time.",
+              "description": "The week's key session.",
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-08-30",
+          "dayOfWeek": "Sunday",
+          "workouts": [
+            {
+              "id": "w2-sun-rest",
+              "sport": "rest",
+              "type": "rest",
+              "name": "Rest",
+              "humanReadable": "Full rest. A fourth run gets added in week 5 \u2014 not before.",
+              "description": "Recovery.",
+              "completed": false
+            }
+          ]
+        }
+      ],
+      "summary": {
+        "totalMiles": 9.0,
+        "longRun": 3.5,
+        "runs": 3,
+        "strengthSessions": 2
+      }
+    },
+    {
+      "weekNumber": 3,
+      "startDate": "2026-08-31",
+      "endDate": "2026-09-06",
+      "phase": "Base",
+      "focus": "Longest walk-break interval yet. Tissue is the limiter, not lungs.",
+      "targetMiles": 10.0,
+      "isRecoveryWeek": false,
+      "days": [
+        {
+          "date": "2026-08-31",
+          "dayOfWeek": "Monday",
+          "workouts": [
+            {
+              "id": "w3-mon-str",
+              "sport": "strength",
+              "type": "strength",
+              "name": "Strength \u2014 Foundation",
+              "durationMinutes": 35,
+              "humanReadable": "Bodyweight squat 3x12\nPush-up 3x max (scale to incline)\nGlute bridge 3x15\nPlank 3x40s\nDead bug 3x10/side\nCalf raise 3x20  \u2014 tibialis + calf work is your injury insurance",
+              "description": "Lift before the week's running load accumulates.",
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-09-01",
+          "dayOfWeek": "Tuesday",
+          "workouts": [
+            {
+              "id": "w3-tue-run",
+              "sport": "run",
+              "type": "easy",
+              "name": "Easy run",
+              "distanceMiles": 3.0,
+              "durationMinutes": 34,
+              "humanReadable": "Run/walk: 4 min run / 1.5 min walk, repeat for the full distance.\nThe walk breaks are not optional and not a failure \u2014 they are what lets your tendons catch up to your engine.\nEffort: you should be able to speak full sentences the entire time.",
+              "description": "Aerobic base.",
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-09-02",
+          "dayOfWeek": "Wednesday",
+          "workouts": [
+            {
+              "id": "w3-wed-rest",
+              "sport": "rest",
+              "type": "rest",
+              "name": "Rest",
+              "humanReadable": "Full rest, or a 20-30 min walk if you're restless.\nAdaptation happens today, not on the run days.",
+              "description": "Recovery.",
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-09-03",
+          "dayOfWeek": "Thursday",
+          "workouts": [
+            {
+              "id": "w3-thu-run",
+              "sport": "run",
+              "type": "easy",
+              "name": "Easy run",
+              "distanceMiles": 3.0,
+              "durationMinutes": 34,
+              "humanReadable": "Run/walk: 4 min run / 1.5 min walk, repeat for the full distance.\nThe walk breaks are not optional and not a failure \u2014 they are what lets your tendons catch up to your engine.\nEffort: you should be able to speak full sentences the entire time.",
+              "description": "Aerobic base.",
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-09-04",
+          "dayOfWeek": "Friday",
+          "workouts": [
+            {
+              "id": "w3-fri-str",
+              "sport": "strength",
+              "type": "strength",
+              "name": "Strength \u2014 Foundation",
+              "durationMinutes": 35,
+              "humanReadable": "Bodyweight squat 3x12\nPush-up 3x max (scale to incline)\nGlute bridge 3x15\nPlank 3x40s\nDead bug 3x10/side\nCalf raise 3x20  \u2014 tibialis + calf work is your injury insurance",
+              "description": "Second lift. Keep it 24h clear of the long run.",
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-09-05",
+          "dayOfWeek": "Saturday",
+          "workouts": [
+            {
+              "id": "w3-sat-run",
+              "sport": "run",
+              "type": "long",
+              "name": "Long run",
+              "distanceMiles": 4.0,
+              "durationMinutes": 48,
+              "humanReadable": "Run/walk: 4 min run / 1.5 min walk, repeat for the full distance.\nThe walk breaks are not optional and not a failure \u2014 they are what lets your tendons catch up to your engine.\nEffort: you should be able to speak full sentences the entire time.",
+              "description": "The week's key session.",
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-09-06",
+          "dayOfWeek": "Sunday",
+          "workouts": [
+            {
+              "id": "w3-sun-rest",
+              "sport": "rest",
+              "type": "rest",
+              "name": "Rest",
+              "humanReadable": "Full rest. A fourth run gets added in week 5 \u2014 not before.",
+              "description": "Recovery.",
+              "completed": false
+            }
+          ]
+        }
+      ],
+      "summary": {
+        "totalMiles": 10.0,
+        "longRun": 4.0,
+        "runs": 3,
+        "strengthSessions": 2
+      }
+    },
+    {
+      "weekNumber": 4,
+      "startDate": "2026-09-07",
+      "endDate": "2026-09-13",
+      "phase": "Base",
+      "focus": "Down week. Resist the urge to hold volume \u2014 this is where you adapt.",
+      "targetMiles": 7.0,
+      "isRecoveryWeek": true,
+      "days": [
+        {
+          "date": "2026-09-07",
+          "dayOfWeek": "Monday",
+          "workouts": [
+            {
+              "id": "w4-mon-str",
+              "sport": "strength",
+              "type": "strength",
+              "name": "Strength \u2014 Foundation",
+              "durationMinutes": 35,
+              "humanReadable": "Bodyweight squat 3x12\nPush-up 3x max (scale to incline)\nGlute bridge 3x15\nPlank 3x40s\nDead bug 3x10/side\nCalf raise 3x20  \u2014 tibialis + calf work is your injury insurance",
+              "description": "Lift before the week's running load accumulates.",
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-09-08",
+          "dayOfWeek": "Tuesday",
+          "workouts": [
+            {
+              "id": "w4-tue-run",
+              "sport": "run",
+              "type": "easy",
+              "name": "Easy run",
+              "distanceMiles": 2.5,
+              "durationMinutes": 28,
+              "humanReadable": "Run/walk: 3 min run / 2 min walk, repeat for the full distance.\nThe walk breaks are not optional and not a failure \u2014 they are what lets your tendons catch up to your engine.\nEffort: you should be able to speak full sentences the entire time.",
+              "description": "Aerobic base.",
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-09-09",
+          "dayOfWeek": "Wednesday",
+          "workouts": [
+            {
+              "id": "w4-wed-rest",
+              "sport": "rest",
+              "type": "rest",
+              "name": "Rest",
+              "humanReadable": "Full rest, or a 20-30 min walk if you're restless.\nAdaptation happens today, not on the run days.",
+              "description": "Recovery.",
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-09-10",
+          "dayOfWeek": "Thursday",
+          "workouts": [
+            {
+              "id": "w4-thu-run",
+              "sport": "run",
+              "type": "easy",
+              "name": "Easy run",
+              "distanceMiles": 2.0,
+              "durationMinutes": 23,
+              "humanReadable": "Run/walk: 3 min run / 2 min walk, repeat for the full distance.\nThe walk breaks are not optional and not a failure \u2014 they are what lets your tendons catch up to your engine.\nEffort: you should be able to speak full sentences the entire time.",
+              "description": "Aerobic base.",
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-09-11",
+          "dayOfWeek": "Friday",
+          "workouts": [
+            {
+              "id": "w4-fri-str",
+              "sport": "strength",
+              "type": "strength",
+              "name": "Strength \u2014 Foundation",
+              "durationMinutes": 35,
+              "humanReadable": "Bodyweight squat 3x12\nPush-up 3x max (scale to incline)\nGlute bridge 3x15\nPlank 3x40s\nDead bug 3x10/side\nCalf raise 3x20  \u2014 tibialis + calf work is your injury insurance",
+              "description": "Second lift. Keep it 24h clear of the long run.",
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-09-12",
+          "dayOfWeek": "Saturday",
+          "workouts": [
+            {
+              "id": "w4-sat-run",
+              "sport": "run",
+              "type": "long",
+              "name": "Long run",
+              "distanceMiles": 2.5,
+              "durationMinutes": 30,
+              "humanReadable": "Run/walk: 3 min run / 2 min walk, repeat for the full distance.\nThe walk breaks are not optional and not a failure \u2014 they are what lets your tendons catch up to your engine.\nEffort: you should be able to speak full sentences the entire time.",
+              "description": "The week's key session.",
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-09-13",
+          "dayOfWeek": "Sunday",
+          "workouts": [
+            {
+              "id": "w4-sun-rest",
+              "sport": "rest",
+              "type": "rest",
+              "name": "Rest",
+              "humanReadable": "Full rest. A fourth run gets added in week 5 \u2014 not before.",
+              "description": "Recovery.",
+              "completed": false
+            }
+          ]
+        }
+      ],
+      "summary": {
+        "totalMiles": 7.0,
+        "longRun": 2.5,
+        "runs": 3,
+        "strengthSessions": 2
+      }
+    },
+    {
+      "weekNumber": 5,
+      "startDate": "2026-09-14",
+      "endDate": "2026-09-20",
+      "phase": "Base",
+      "focus": "Fourth run added. First continuous (no-walk) efforts.",
+      "targetMiles": 11.0,
+      "isRecoveryWeek": false,
+      "days": [
+        {
+          "date": "2026-09-14",
+          "dayOfWeek": "Monday",
+          "workouts": [
+            {
+              "id": "w5-mon-str",
+              "sport": "strength",
+              "type": "strength",
+              "name": "Strength \u2014 Loading",
+              "durationMinutes": 35,
+              "humanReadable": "Goblet squat 3x10\nPull-up 4x max  \u2014 PST carryover, start here and never stop\nPush-up 4x max  \u2014 PST carryover\nRomanian deadlift 3x10\nSingle-leg calf raise 3x15\nSide plank 3x30s/side",
+              "description": "Lift before the week's running load accumulates.",
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-09-15",
+          "dayOfWeek": "Tuesday",
+          "workouts": [
+            {
+              "id": "w5-tue-run",
+              "sport": "run",
+              "type": "easy",
+              "name": "Easy run",
+              "distanceMiles": 2.5,
+              "durationMinutes": 28,
+              "humanReadable": "Continuous, conversational pace. If you can't talk in full sentences, you're going too fast \u2014 this is the single most common way beginners stall out.\nEstimated pace ~10:30-12:00/mi, but run by feel, not by number.",
+              "description": "Aerobic base.",
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-09-16",
+          "dayOfWeek": "Wednesday",
+          "workouts": [
+            {
+              "id": "w5-wed-rest",
+              "sport": "rest",
+              "type": "rest",
+              "name": "Rest",
+              "humanReadable": "Full rest, or a 20-30 min walk if you're restless.\nAdaptation happens today, not on the run days.",
+              "description": "Recovery.",
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-09-17",
+          "dayOfWeek": "Thursday",
+          "workouts": [
+            {
+              "id": "w5-thu-run",
+              "sport": "run",
+              "type": "easy",
+              "name": "Easy run",
+              "distanceMiles": 3.0,
+              "durationMinutes": 34,
+              "humanReadable": "Continuous, conversational pace. If you can't talk in full sentences, you're going too fast \u2014 this is the single most common way beginners stall out.\nEstimated pace ~10:30-12:00/mi, but run by feel, not by number.",
+              "description": "Aerobic base.",
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-09-18",
+          "dayOfWeek": "Friday",
+          "workouts": [
+            {
+              "id": "w5-fri-str",
+              "sport": "strength",
+              "type": "strength",
+              "name": "Strength \u2014 Loading",
+              "durationMinutes": 35,
+              "humanReadable": "Goblet squat 3x10\nPull-up 4x max  \u2014 PST carryover, start here and never stop\nPush-up 4x max  \u2014 PST carryover\nRomanian deadlift 3x10\nSingle-leg calf raise 3x15\nSide plank 3x30s/side",
+              "description": "Second lift. Keep it 24h clear of the long run.",
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-09-19",
+          "dayOfWeek": "Saturday",
+          "workouts": [
+            {
+              "id": "w5-sat-run",
+              "sport": "run",
+              "type": "long",
+              "name": "Long run",
+              "distanceMiles": 4.0,
+              "durationMinutes": 48,
+              "humanReadable": "Continuous, conversational pace. If you can't talk in full sentences, you're going too fast \u2014 this is the single most common way beginners stall out.\nEstimated pace ~10:30-12:00/mi, but run by feel, not by number.",
+              "description": "The week's key session.",
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-09-20",
+          "dayOfWeek": "Sunday",
+          "workouts": [
+            {
+              "id": "w5-sun-run",
+              "sport": "run",
+              "type": "recovery",
+              "name": "Recovery run",
+              "distanceMiles": 1.5,
+              "durationMinutes": 19,
+              "humanReadable": "Genuinely easy. Slower than your easy pace. This run exists to move blood through tired legs, not to build fitness.\nIf you feel worse at the end than the start, you ran it too hard.",
+              "description": "Easy shakeout on tired legs.",
+              "completed": false
+            }
+          ]
+        }
+      ],
+      "summary": {
+        "totalMiles": 11.0,
+        "longRun": 4.0,
+        "runs": 4,
+        "strengthSessions": 2
+      }
+    },
+    {
+      "weekNumber": 6,
+      "startDate": "2026-09-21",
+      "endDate": "2026-09-27",
+      "phase": "Base",
+      "focus": "Strides introduced Thursday \u2014 4x20s, relaxed and fast, full recovery.",
+      "targetMiles": 12.0,
+      "isRecoveryWeek": false,
+      "days": [
+        {
+          "date": "2026-09-21",
+          "dayOfWeek": "Monday",
+          "workouts": [
+            {
+              "id": "w6-mon-str",
+              "sport": "strength",
+              "type": "strength",
+              "name": "Strength \u2014 Loading",
+              "durationMinutes": 35,
+              "humanReadable": "Goblet squat 3x10\nPull-up 4x max  \u2014 PST carryover, start here and never stop\nPush-up 4x max  \u2014 PST carryover\nRomanian deadlift 3x10\nSingle-leg calf raise 3x15\nSide plank 3x30s/side",
+              "description": "Lift before the week's running load accumulates.",
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-09-22",
+          "dayOfWeek": "Tuesday",
+          "workouts": [
+            {
+              "id": "w6-tue-run",
+              "sport": "run",
+              "type": "easy",
+              "name": "Easy run",
+              "distanceMiles": 3.0,
+              "durationMinutes": 34,
+              "humanReadable": "Continuous, conversational pace. If you can't talk in full sentences, you're going too fast \u2014 this is the single most common way beginners stall out.\nEstimated pace ~10:30-12:00/mi, but run by feel, not by number.\nFinish with 4x20s strides: relaxed acceleration to about mile-race speed, then full walk recovery. Form work, not a workout.",
+              "description": "Aerobic base.",
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-09-23",
+          "dayOfWeek": "Wednesday",
+          "workouts": [
+            {
+              "id": "w6-wed-rest",
+              "sport": "rest",
+              "type": "rest",
+              "name": "Rest",
+              "humanReadable": "Full rest, or a 20-30 min walk if you're restless.\nAdaptation happens today, not on the run days.",
+              "description": "Recovery.",
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-09-24",
+          "dayOfWeek": "Thursday",
+          "workouts": [
+            {
+              "id": "w6-thu-run",
+              "sport": "run",
+              "type": "easy",
+              "name": "Easy run",
+              "distanceMiles": 3.0,
+              "durationMinutes": 34,
+              "humanReadable": "Continuous, conversational pace. If you can't talk in full sentences, you're going too fast \u2014 this is the single most common way beginners stall out.\nEstimated pace ~10:30-12:00/mi, but run by feel, not by number.\nFinish with 4x20s strides: relaxed acceleration to about mile-race speed, then full walk recovery. Form work, not a workout.",
+              "description": "Aerobic base.",
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-09-25",
+          "dayOfWeek": "Friday",
+          "workouts": [
+            {
+              "id": "w6-fri-str",
+              "sport": "strength",
+              "type": "strength",
+              "name": "Strength \u2014 Loading",
+              "durationMinutes": 35,
+              "humanReadable": "Goblet squat 3x10\nPull-up 4x max  \u2014 PST carryover, start here and never stop\nPush-up 4x max  \u2014 PST carryover\nRomanian deadlift 3x10\nSingle-leg calf raise 3x15\nSide plank 3x30s/side",
+              "description": "Second lift. Keep it 24h clear of the long run.",
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-09-26",
+          "dayOfWeek": "Saturday",
+          "workouts": [
+            {
+              "id": "w6-sat-run",
+              "sport": "run",
+              "type": "long",
+              "name": "Long run",
+              "distanceMiles": 4.5,
+              "durationMinutes": 54,
+              "humanReadable": "Continuous, conversational pace. If you can't talk in full sentences, you're going too fast \u2014 this is the single most common way beginners stall out.\nEstimated pace ~10:30-12:00/mi, but run by feel, not by number.",
+              "description": "The week's key session.",
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-09-27",
+          "dayOfWeek": "Sunday",
+          "workouts": [
+            {
+              "id": "w6-sun-run",
+              "sport": "run",
+              "type": "recovery",
+              "name": "Recovery run",
+              "distanceMiles": 1.5,
+              "durationMinutes": 19,
+              "humanReadable": "Genuinely easy. Slower than your easy pace. This run exists to move blood through tired legs, not to build fitness.\nIf you feel worse at the end than the start, you ran it too hard.",
+              "description": "Easy shakeout on tired legs.",
+              "completed": false
+            }
+          ]
+        }
+      ],
+      "summary": {
+        "totalMiles": 12.0,
+        "longRun": 4.5,
+        "runs": 4,
+        "strengthSessions": 2
+      }
+    },
+    {
+      "weekNumber": 7,
+      "startDate": "2026-09-28",
+      "endDate": "2026-10-04",
+      "phase": "Base",
+      "focus": "All runs continuous now. Long run crosses 5 miles.",
+      "targetMiles": 13.5,
+      "isRecoveryWeek": false,
+      "days": [
+        {
+          "date": "2026-09-28",
+          "dayOfWeek": "Monday",
+          "workouts": [
+            {
+              "id": "w7-mon-str",
+              "sport": "strength",
+              "type": "strength",
+              "name": "Strength \u2014 Loading",
+              "durationMinutes": 35,
+              "humanReadable": "Goblet squat 3x10\nPull-up 4x max  \u2014 PST carryover, start here and never stop\nPush-up 4x max  \u2014 PST carryover\nRomanian deadlift 3x10\nSingle-leg calf raise 3x15\nSide plank 3x30s/side",
+              "description": "Lift before the week's running load accumulates.",
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-09-29",
+          "dayOfWeek": "Tuesday",
+          "workouts": [
+            {
+              "id": "w7-tue-run",
+              "sport": "run",
+              "type": "easy",
+              "name": "Easy run",
+              "distanceMiles": 3.5,
+              "durationMinutes": 40,
+              "humanReadable": "Continuous, conversational pace. If you can't talk in full sentences, you're going too fast \u2014 this is the single most common way beginners stall out.\nEstimated pace ~10:30-12:00/mi, but run by feel, not by number.\nFinish with 4x20s strides: relaxed acceleration to about mile-race speed, then full walk recovery. Form work, not a workout.",
+              "description": "Aerobic base.",
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-09-30",
+          "dayOfWeek": "Wednesday",
+          "workouts": [
+            {
+              "id": "w7-wed-rest",
+              "sport": "rest",
+              "type": "rest",
+              "name": "Rest",
+              "humanReadable": "Full rest, or a 20-30 min walk if you're restless.\nAdaptation happens today, not on the run days.",
+              "description": "Recovery.",
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-10-01",
+          "dayOfWeek": "Thursday",
+          "workouts": [
+            {
+              "id": "w7-thu-run",
+              "sport": "run",
+              "type": "easy",
+              "name": "Easy run",
+              "distanceMiles": 3.5,
+              "durationMinutes": 40,
+              "humanReadable": "Continuous, conversational pace. If you can't talk in full sentences, you're going too fast \u2014 this is the single most common way beginners stall out.\nEstimated pace ~10:30-12:00/mi, but run by feel, not by number.\nFinish with 4x20s strides: relaxed acceleration to about mile-race speed, then full walk recovery. Form work, not a workout.",
+              "description": "Aerobic base.",
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-10-02",
+          "dayOfWeek": "Friday",
+          "workouts": [
+            {
+              "id": "w7-fri-str",
+              "sport": "strength",
+              "type": "strength",
+              "name": "Strength \u2014 Loading",
+              "durationMinutes": 35,
+              "humanReadable": "Goblet squat 3x10\nPull-up 4x max  \u2014 PST carryover, start here and never stop\nPush-up 4x max  \u2014 PST carryover\nRomanian deadlift 3x10\nSingle-leg calf raise 3x15\nSide plank 3x30s/side",
+              "description": "Second lift. Keep it 24h clear of the long run.",
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-10-03",
+          "dayOfWeek": "Saturday",
+          "workouts": [
+            {
+              "id": "w7-sat-run",
+              "sport": "run",
+              "type": "long",
+              "name": "Long run",
+              "distanceMiles": 5.0,
+              "durationMinutes": 60,
+              "humanReadable": "Continuous, conversational pace. If you can't talk in full sentences, you're going too fast \u2014 this is the single most common way beginners stall out.\nEstimated pace ~10:30-12:00/mi, but run by feel, not by number.",
+              "description": "The week's key session.",
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-10-04",
+          "dayOfWeek": "Sunday",
+          "workouts": [
+            {
+              "id": "w7-sun-run",
+              "sport": "run",
+              "type": "recovery",
+              "name": "Recovery run",
+              "distanceMiles": 1.5,
+              "durationMinutes": 19,
+              "humanReadable": "Genuinely easy. Slower than your easy pace. This run exists to move blood through tired legs, not to build fitness.\nIf you feel worse at the end than the start, you ran it too hard.",
+              "description": "Easy shakeout on tired legs.",
+              "completed": false
+            }
+          ]
+        }
+      ],
+      "summary": {
+        "totalMiles": 13.5,
+        "longRun": 5.0,
+        "runs": 4,
+        "strengthSessions": 2
+      }
+    },
+    {
+      "weekNumber": 8,
+      "startDate": "2026-10-05",
+      "endDate": "2026-10-11",
+      "phase": "Base",
+      "focus": "Down week #2. Optional: first field test Saturday (see notes).",
+      "targetMiles": 9.5,
+      "isRecoveryWeek": true,
+      "days": [
+        {
+          "date": "2026-10-05",
+          "dayOfWeek": "Monday",
+          "workouts": [
+            {
+              "id": "w8-mon-str",
+              "sport": "strength",
+              "type": "strength",
+              "name": "Strength \u2014 Loading",
+              "durationMinutes": 35,
+              "humanReadable": "Goblet squat 3x10\nPull-up 4x max  \u2014 PST carryover, start here and never stop\nPush-up 4x max  \u2014 PST carryover\nRomanian deadlift 3x10\nSingle-leg calf raise 3x15\nSide plank 3x30s/side",
+              "description": "Lift before the week's running load accumulates.",
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-10-06",
+          "dayOfWeek": "Tuesday",
+          "workouts": [
+            {
+              "id": "w8-tue-run",
+              "sport": "run",
+              "type": "easy",
+              "name": "Easy run",
+              "distanceMiles": 2.5,
+              "durationMinutes": 28,
+              "humanReadable": "Continuous, conversational pace. If you can't talk in full sentences, you're going too fast \u2014 this is the single most common way beginners stall out.\nEstimated pace ~10:30-12:00/mi, but run by feel, not by number.\nFinish with 4x20s strides: relaxed acceleration to about mile-race speed, then full walk recovery. Form work, not a workout.",
+              "description": "Aerobic base.",
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-10-07",
+          "dayOfWeek": "Wednesday",
+          "workouts": [
+            {
+              "id": "w8-wed-rest",
+              "sport": "rest",
+              "type": "rest",
+              "name": "Rest",
+              "humanReadable": "Full rest, or a 20-30 min walk if you're restless.\nAdaptation happens today, not on the run days.",
+              "description": "Recovery.",
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-10-08",
+          "dayOfWeek": "Thursday",
+          "workouts": [
+            {
+              "id": "w8-thu-run",
+              "sport": "run",
+              "type": "easy",
+              "name": "Easy run",
+              "distanceMiles": 2.5,
+              "durationMinutes": 28,
+              "humanReadable": "Continuous, conversational pace. If you can't talk in full sentences, you're going too fast \u2014 this is the single most common way beginners stall out.\nEstimated pace ~10:30-12:00/mi, but run by feel, not by number.\nFinish with 4x20s strides: relaxed acceleration to about mile-race speed, then full walk recovery. Form work, not a workout.",
+              "description": "Aerobic base.",
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-10-09",
+          "dayOfWeek": "Friday",
+          "workouts": [
+            {
+              "id": "w8-fri-str",
+              "sport": "strength",
+              "type": "strength",
+              "name": "Strength \u2014 Loading",
+              "durationMinutes": 35,
+              "humanReadable": "Goblet squat 3x10\nPull-up 4x max  \u2014 PST carryover, start here and never stop\nPush-up 4x max  \u2014 PST carryover\nRomanian deadlift 3x10\nSingle-leg calf raise 3x15\nSide plank 3x30s/side",
+              "description": "Second lift. Keep it 24h clear of the long run.",
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-10-10",
+          "dayOfWeek": "Saturday",
+          "workouts": [
+            {
+              "id": "w8-sat-run",
+              "sport": "run",
+              "type": "long",
+              "name": "Long run + optional 1-mile test",
+              "distanceMiles": 3.0,
+              "durationMinutes": 36,
+              "humanReadable": "Continuous, conversational pace. If you can't talk in full sentences, you're going too fast \u2014 this is the single most common way beginners stall out.\nEstimated pace ~10:30-12:00/mi, but run by feel, not by number.\n\nOPTIONAL FIELD TEST (only if you feel good and have no niggles):\nAfter a 10-min easy warm-up, run 1 mile as hard as you can sustain, then jog the rest easy.\nThis replaces the estimated zones with real ones. If anything hurts, skip it \u2014 there will be another chance.",
+              "description": "The week's key session.",
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-10-11",
+          "dayOfWeek": "Sunday",
+          "workouts": [
+            {
+              "id": "w8-sun-run",
+              "sport": "run",
+              "type": "recovery",
+              "name": "Recovery run",
+              "distanceMiles": 1.5,
+              "durationMinutes": 19,
+              "humanReadable": "Genuinely easy. Slower than your easy pace. This run exists to move blood through tired legs, not to build fitness.\nIf you feel worse at the end than the start, you ran it too hard.",
+              "description": "Easy shakeout on tired legs.",
+              "completed": false
+            }
+          ]
+        }
+      ],
+      "summary": {
+        "totalMiles": 9.5,
+        "longRun": 3.0,
+        "runs": 4,
+        "strengthSessions": 2
+      }
+    },
+    {
+      "weekNumber": 9,
+      "startDate": "2026-10-12",
+      "endDate": "2026-10-18",
+      "phase": "Base",
+      "focus": "Volume block begins. Everything still conversational.",
+      "targetMiles": 15.0,
+      "isRecoveryWeek": false,
+      "days": [
+        {
+          "date": "2026-10-12",
+          "dayOfWeek": "Monday",
+          "workouts": [
+            {
+              "id": "w9-mon-str",
+              "sport": "strength",
+              "type": "strength",
+              "name": "Strength \u2014 Strength",
+              "durationMinutes": 35,
+              "humanReadable": "Back squat or goblet squat 4x6-8\nPull-up 4x max  \u2014 track the number, it's a PST event\nPush-up 4x max  \u2014 track the number, it's a PST event\nRomanian deadlift 3x8\nSplit squat 3x8/side\nHanging knee raise 3x12\nSingle-leg calf raise 3x15",
+              "description": "Lift before the week's running load accumulates.",
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-10-13",
+          "dayOfWeek": "Tuesday",
+          "workouts": [
+            {
+              "id": "w9-tue-run",
+              "sport": "run",
+              "type": "easy",
+              "name": "Easy run",
+              "distanceMiles": 4.0,
+              "durationMinutes": 46,
+              "humanReadable": "Continuous, conversational pace. If you can't talk in full sentences, you're going too fast \u2014 this is the single most common way beginners stall out.\nEstimated pace ~10:30-12:00/mi, but run by feel, not by number.\nFinish with 4x20s strides: relaxed acceleration to about mile-race speed, then full walk recovery. Form work, not a workout.",
+              "description": "Aerobic base.",
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-10-14",
+          "dayOfWeek": "Wednesday",
+          "workouts": [
+            {
+              "id": "w9-wed-rest",
+              "sport": "rest",
+              "type": "rest",
+              "name": "Rest",
+              "humanReadable": "Full rest, or a 20-30 min walk if you're restless.\nAdaptation happens today, not on the run days.",
+              "description": "Recovery.",
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-10-15",
+          "dayOfWeek": "Thursday",
+          "workouts": [
+            {
+              "id": "w9-thu-run",
+              "sport": "run",
+              "type": "easy",
+              "name": "Easy run",
+              "distanceMiles": 4.0,
+              "durationMinutes": 46,
+              "humanReadable": "Continuous, conversational pace. If you can't talk in full sentences, you're going too fast \u2014 this is the single most common way beginners stall out.\nEstimated pace ~10:30-12:00/mi, but run by feel, not by number.\nFinish with 4x20s strides: relaxed acceleration to about mile-race speed, then full walk recovery. Form work, not a workout.",
+              "description": "Aerobic base.",
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-10-16",
+          "dayOfWeek": "Friday",
+          "workouts": [
+            {
+              "id": "w9-fri-str",
+              "sport": "strength",
+              "type": "strength",
+              "name": "Strength \u2014 Strength",
+              "durationMinutes": 35,
+              "humanReadable": "Back squat or goblet squat 4x6-8\nPull-up 4x max  \u2014 track the number, it's a PST event\nPush-up 4x max  \u2014 track the number, it's a PST event\nRomanian deadlift 3x8\nSplit squat 3x8/side\nHanging knee raise 3x12\nSingle-leg calf raise 3x15",
+              "description": "Second lift. Keep it 24h clear of the long run.",
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-10-17",
+          "dayOfWeek": "Saturday",
+          "workouts": [
+            {
+              "id": "w9-sat-run",
+              "sport": "run",
+              "type": "long",
+              "name": "Long run",
+              "distanceMiles": 5.5,
+              "durationMinutes": 66,
+              "humanReadable": "Continuous, conversational pace. If you can't talk in full sentences, you're going too fast \u2014 this is the single most common way beginners stall out.\nEstimated pace ~10:30-12:00/mi, but run by feel, not by number.\nLast mile: pick it up slightly if you feel good. Never more than that.",
+              "description": "The week's key session.",
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-10-18",
+          "dayOfWeek": "Sunday",
+          "workouts": [
+            {
+              "id": "w9-sun-run",
+              "sport": "run",
+              "type": "recovery",
+              "name": "Recovery run",
+              "distanceMiles": 1.5,
+              "durationMinutes": 19,
+              "humanReadable": "Genuinely easy. Slower than your easy pace. This run exists to move blood through tired legs, not to build fitness.\nIf you feel worse at the end than the start, you ran it too hard.",
+              "description": "Easy shakeout on tired legs.",
+              "completed": false
+            }
+          ]
+        }
+      ],
+      "summary": {
+        "totalMiles": 15.0,
+        "longRun": 5.5,
+        "runs": 4,
+        "strengthSessions": 2
+      }
+    },
+    {
+      "weekNumber": 10,
+      "startDate": "2026-10-19",
+      "endDate": "2026-10-25",
+      "phase": "Base",
+      "focus": "Strides now twice weekly. Long run at 6 miles.",
+      "targetMiles": 16.5,
+      "isRecoveryWeek": false,
+      "days": [
+        {
+          "date": "2026-10-19",
+          "dayOfWeek": "Monday",
+          "workouts": [
+            {
+              "id": "w10-mon-str",
+              "sport": "strength",
+              "type": "strength",
+              "name": "Strength \u2014 Strength",
+              "durationMinutes": 35,
+              "humanReadable": "Back squat or goblet squat 4x6-8\nPull-up 4x max  \u2014 track the number, it's a PST event\nPush-up 4x max  \u2014 track the number, it's a PST event\nRomanian deadlift 3x8\nSplit squat 3x8/side\nHanging knee raise 3x12\nSingle-leg calf raise 3x15",
+              "description": "Lift before the week's running load accumulates.",
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-10-20",
+          "dayOfWeek": "Tuesday",
+          "workouts": [
+            {
+              "id": "w10-tue-run",
+              "sport": "run",
+              "type": "easy",
+              "name": "Easy run",
+              "distanceMiles": 4.0,
+              "durationMinutes": 46,
+              "humanReadable": "Continuous, conversational pace. If you can't talk in full sentences, you're going too fast \u2014 this is the single most common way beginners stall out.\nEstimated pace ~10:30-12:00/mi, but run by feel, not by number.\nFinish with 4x20s strides: relaxed acceleration to about mile-race speed, then full walk recovery. Form work, not a workout.",
+              "description": "Aerobic base.",
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-10-21",
+          "dayOfWeek": "Wednesday",
+          "workouts": [
+            {
+              "id": "w10-wed-rest",
+              "sport": "rest",
+              "type": "rest",
+              "name": "Rest",
+              "humanReadable": "Full rest, or a 20-30 min walk if you're restless.\nAdaptation happens today, not on the run days.",
+              "description": "Recovery.",
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-10-22",
+          "dayOfWeek": "Thursday",
+          "workouts": [
+            {
+              "id": "w10-thu-run",
+              "sport": "run",
+              "type": "easy",
+              "name": "Easy run",
+              "distanceMiles": 4.5,
+              "durationMinutes": 51,
+              "humanReadable": "Continuous, conversational pace. If you can't talk in full sentences, you're going too fast \u2014 this is the single most common way beginners stall out.\nEstimated pace ~10:30-12:00/mi, but run by feel, not by number.\nFinish with 4x20s strides: relaxed acceleration to about mile-race speed, then full walk recovery. Form work, not a workout.",
+              "description": "Aerobic base.",
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-10-23",
+          "dayOfWeek": "Friday",
+          "workouts": [
+            {
+              "id": "w10-fri-str",
+              "sport": "strength",
+              "type": "strength",
+              "name": "Strength \u2014 Strength",
+              "durationMinutes": 35,
+              "humanReadable": "Back squat or goblet squat 4x6-8\nPull-up 4x max  \u2014 track the number, it's a PST event\nPush-up 4x max  \u2014 track the number, it's a PST event\nRomanian deadlift 3x8\nSplit squat 3x8/side\nHanging knee raise 3x12\nSingle-leg calf raise 3x15",
+              "description": "Second lift. Keep it 24h clear of the long run.",
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-10-24",
+          "dayOfWeek": "Saturday",
+          "workouts": [
+            {
+              "id": "w10-sat-run",
+              "sport": "run",
+              "type": "long",
+              "name": "Long run",
+              "distanceMiles": 6.0,
+              "durationMinutes": 72,
+              "humanReadable": "Continuous, conversational pace. If you can't talk in full sentences, you're going too fast \u2014 this is the single most common way beginners stall out.\nEstimated pace ~10:30-12:00/mi, but run by feel, not by number.\nLast mile: pick it up slightly if you feel good. Never more than that.",
+              "description": "The week's key session.",
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-10-25",
+          "dayOfWeek": "Sunday",
+          "workouts": [
+            {
+              "id": "w10-sun-run",
+              "sport": "run",
+              "type": "recovery",
+              "name": "Recovery run",
+              "distanceMiles": 2.0,
+              "durationMinutes": 26,
+              "humanReadable": "Genuinely easy. Slower than your easy pace. This run exists to move blood through tired legs, not to build fitness.\nIf you feel worse at the end than the start, you ran it too hard.",
+              "description": "Easy shakeout on tired legs.",
+              "completed": false
+            }
+          ]
+        }
+      ],
+      "summary": {
+        "totalMiles": 16.5,
+        "longRun": 6.0,
+        "runs": 4,
+        "strengthSessions": 2
+      }
+    },
+    {
+      "weekNumber": 11,
+      "startDate": "2026-10-26",
+      "endDate": "2026-11-01",
+      "phase": "Base",
+      "focus": "Biggest week so far. Watch for shin/knee niggles \u2014 report them.",
+      "targetMiles": 18.0,
+      "isRecoveryWeek": false,
+      "days": [
+        {
+          "date": "2026-10-26",
+          "dayOfWeek": "Monday",
+          "workouts": [
+            {
+              "id": "w11-mon-str",
+              "sport": "strength",
+              "type": "strength",
+              "name": "Strength \u2014 Strength",
+              "durationMinutes": 35,
+              "humanReadable": "Back squat or goblet squat 4x6-8\nPull-up 4x max  \u2014 track the number, it's a PST event\nPush-up 4x max  \u2014 track the number, it's a PST event\nRomanian deadlift 3x8\nSplit squat 3x8/side\nHanging knee raise 3x12\nSingle-leg calf raise 3x15",
+              "description": "Lift before the week's running load accumulates.",
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-10-27",
+          "dayOfWeek": "Tuesday",
+          "workouts": [
+            {
+              "id": "w11-tue-run",
+              "sport": "run",
+              "type": "easy",
+              "name": "Easy run",
+              "distanceMiles": 4.5,
+              "durationMinutes": 51,
+              "humanReadable": "Continuous, conversational pace. If you can't talk in full sentences, you're going too fast \u2014 this is the single most common way beginners stall out.\nEstimated pace ~10:30-12:00/mi, but run by feel, not by number.\nFinish with 4x20s strides: relaxed acceleration to about mile-race speed, then full walk recovery. Form work, not a workout.",
+              "description": "Aerobic base.",
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-10-28",
+          "dayOfWeek": "Wednesday",
+          "workouts": [
+            {
+              "id": "w11-wed-rest",
+              "sport": "rest",
+              "type": "rest",
+              "name": "Rest",
+              "humanReadable": "Full rest, or a 20-30 min walk if you're restless.\nAdaptation happens today, not on the run days.",
+              "description": "Recovery.",
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-10-29",
+          "dayOfWeek": "Thursday",
+          "workouts": [
+            {
+              "id": "w11-thu-run",
+              "sport": "run",
+              "type": "easy",
+              "name": "Easy run",
+              "distanceMiles": 5.0,
+              "durationMinutes": 57,
+              "humanReadable": "Continuous, conversational pace. If you can't talk in full sentences, you're going too fast \u2014 this is the single most common way beginners stall out.\nEstimated pace ~10:30-12:00/mi, but run by feel, not by number.\nFinish with 4x20s strides: relaxed acceleration to about mile-race speed, then full walk recovery. Form work, not a workout.",
+              "description": "Aerobic base.",
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-10-30",
+          "dayOfWeek": "Friday",
+          "workouts": [
+            {
+              "id": "w11-fri-str",
+              "sport": "strength",
+              "type": "strength",
+              "name": "Strength \u2014 Strength",
+              "durationMinutes": 35,
+              "humanReadable": "Back squat or goblet squat 4x6-8\nPull-up 4x max  \u2014 track the number, it's a PST event\nPush-up 4x max  \u2014 track the number, it's a PST event\nRomanian deadlift 3x8\nSplit squat 3x8/side\nHanging knee raise 3x12\nSingle-leg calf raise 3x15",
+              "description": "Second lift. Keep it 24h clear of the long run.",
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-10-31",
+          "dayOfWeek": "Saturday",
+          "workouts": [
+            {
+              "id": "w11-sat-run",
+              "sport": "run",
+              "type": "long",
+              "name": "Long run",
+              "distanceMiles": 6.5,
+              "durationMinutes": 78,
+              "humanReadable": "Continuous, conversational pace. If you can't talk in full sentences, you're going too fast \u2014 this is the single most common way beginners stall out.\nEstimated pace ~10:30-12:00/mi, but run by feel, not by number.\nLast mile: pick it up slightly if you feel good. Never more than that.",
+              "description": "The week's key session.",
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-11-01",
+          "dayOfWeek": "Sunday",
+          "workouts": [
+            {
+              "id": "w11-sun-run",
+              "sport": "run",
+              "type": "recovery",
+              "name": "Recovery run",
+              "distanceMiles": 2.0,
+              "durationMinutes": 26,
+              "humanReadable": "Genuinely easy. Slower than your easy pace. This run exists to move blood through tired legs, not to build fitness.\nIf you feel worse at the end than the start, you ran it too hard.",
+              "description": "Easy shakeout on tired legs.",
+              "completed": false
+            }
+          ]
+        }
+      ],
+      "summary": {
+        "totalMiles": 18.0,
+        "longRun": 6.5,
+        "runs": 4,
+        "strengthSessions": 2
+      }
+    },
+    {
+      "weekNumber": 12,
+      "startDate": "2026-11-02",
+      "endDate": "2026-11-08",
+      "phase": "Base",
+      "focus": "Down week #3. Deload hard; the next block is the real one.",
+      "targetMiles": 12.5,
+      "isRecoveryWeek": true,
+      "days": [
+        {
+          "date": "2026-11-02",
+          "dayOfWeek": "Monday",
+          "workouts": [
+            {
+              "id": "w12-mon-str",
+              "sport": "strength",
+              "type": "strength",
+              "name": "Strength \u2014 Strength",
+              "durationMinutes": 35,
+              "humanReadable": "Back squat or goblet squat 4x6-8\nPull-up 4x max  \u2014 track the number, it's a PST event\nPush-up 4x max  \u2014 track the number, it's a PST event\nRomanian deadlift 3x8\nSplit squat 3x8/side\nHanging knee raise 3x12\nSingle-leg calf raise 3x15",
+              "description": "Lift before the week's running load accumulates.",
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-11-03",
+          "dayOfWeek": "Tuesday",
+          "workouts": [
+            {
+              "id": "w12-tue-run",
+              "sport": "run",
+              "type": "easy",
+              "name": "Easy run",
+              "distanceMiles": 3.5,
+              "durationMinutes": 40,
+              "humanReadable": "Continuous, conversational pace. If you can't talk in full sentences, you're going too fast \u2014 this is the single most common way beginners stall out.\nEstimated pace ~10:30-12:00/mi, but run by feel, not by number.\nFinish with 4x20s strides: relaxed acceleration to about mile-race speed, then full walk recovery. Form work, not a workout.",
+              "description": "Aerobic base.",
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-11-04",
+          "dayOfWeek": "Wednesday",
+          "workouts": [
+            {
+              "id": "w12-wed-rest",
+              "sport": "rest",
+              "type": "rest",
+              "name": "Rest",
+              "humanReadable": "Full rest, or a 20-30 min walk if you're restless.\nAdaptation happens today, not on the run days.",
+              "description": "Recovery.",
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-11-05",
+          "dayOfWeek": "Thursday",
+          "workouts": [
+            {
+              "id": "w12-thu-run",
+              "sport": "run",
+              "type": "easy",
+              "name": "Easy run",
+              "distanceMiles": 3.5,
+              "durationMinutes": 40,
+              "humanReadable": "Continuous, conversational pace. If you can't talk in full sentences, you're going too fast \u2014 this is the single most common way beginners stall out.\nEstimated pace ~10:30-12:00/mi, but run by feel, not by number.\nFinish with 4x20s strides: relaxed acceleration to about mile-race speed, then full walk recovery. Form work, not a workout.",
+              "description": "Aerobic base.",
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-11-06",
+          "dayOfWeek": "Friday",
+          "workouts": [
+            {
+              "id": "w12-fri-str",
+              "sport": "strength",
+              "type": "strength",
+              "name": "Strength \u2014 Strength",
+              "durationMinutes": 35,
+              "humanReadable": "Back squat or goblet squat 4x6-8\nPull-up 4x max  \u2014 track the number, it's a PST event\nPush-up 4x max  \u2014 track the number, it's a PST event\nRomanian deadlift 3x8\nSplit squat 3x8/side\nHanging knee raise 3x12\nSingle-leg calf raise 3x15",
+              "description": "Second lift. Keep it 24h clear of the long run.",
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-11-07",
+          "dayOfWeek": "Saturday",
+          "workouts": [
+            {
+              "id": "w12-sat-run",
+              "sport": "run",
+              "type": "long",
+              "name": "Long run",
+              "distanceMiles": 4.0,
+              "durationMinutes": 48,
+              "humanReadable": "Continuous, conversational pace. If you can't talk in full sentences, you're going too fast \u2014 this is the single most common way beginners stall out.\nEstimated pace ~10:30-12:00/mi, but run by feel, not by number.\nLast mile: pick it up slightly if you feel good. Never more than that.",
+              "description": "The week's key session.",
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-11-08",
+          "dayOfWeek": "Sunday",
+          "workouts": [
+            {
+              "id": "w12-sun-run",
+              "sport": "run",
+              "type": "recovery",
+              "name": "Recovery run",
+              "distanceMiles": 1.5,
+              "durationMinutes": 19,
+              "humanReadable": "Genuinely easy. Slower than your easy pace. This run exists to move blood through tired legs, not to build fitness.\nIf you feel worse at the end than the start, you ran it too hard.",
+              "description": "Easy shakeout on tired legs.",
+              "completed": false
+            }
+          ]
+        }
+      ],
+      "summary": {
+        "totalMiles": 12.5,
+        "longRun": 4.0,
+        "runs": 4,
+        "strengthSessions": 2
+      }
+    },
+    {
+      "weekNumber": 13,
+      "startDate": "2026-11-09",
+      "endDate": "2026-11-15",
+      "phase": "Base",
+      "focus": "First steady-state work Tuesday \u2014 comfortably hard, not racing.",
+      "targetMiles": 19.5,
+      "isRecoveryWeek": false,
+      "days": [
+        {
+          "date": "2026-11-09",
+          "dayOfWeek": "Monday",
+          "workouts": [
+            {
+              "id": "w13-mon-str",
+              "sport": "strength",
+              "type": "strength",
+              "name": "Strength \u2014 Maintain + Power",
+              "durationMinutes": 35,
+              "humanReadable": "Squat 3x5 (heavier, low volume)\nPull-up 4x max\nPush-up 4x max\nSit-up 3x2min  \u2014 full PST event, time it\nBox step-up 3x8/side\nPogo hops 3x20  \u2014 tendon stiffness for running economy",
+              "description": "Lift before the week's running load accumulates.",
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-11-10",
+          "dayOfWeek": "Tuesday",
+          "workouts": [
+            {
+              "id": "w13-tue-run",
+              "sport": "run",
+              "type": "easy",
+              "name": "Easy run",
+              "distanceMiles": 5.0,
+              "durationMinutes": 57,
+              "humanReadable": "Continuous, conversational pace. If you can't talk in full sentences, you're going too fast \u2014 this is the single most common way beginners stall out.\nEstimated pace ~10:30-12:00/mi, but run by feel, not by number.\nMiddle portion: 10-15 min at steady effort \u2014 comfortably hard, still controlled. Not a race.",
+              "description": "Aerobic base.",
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-11-11",
+          "dayOfWeek": "Wednesday",
+          "workouts": [
+            {
+              "id": "w13-wed-rest",
+              "sport": "rest",
+              "type": "rest",
+              "name": "Rest",
+              "humanReadable": "Full rest, or a 20-30 min walk if you're restless.\nAdaptation happens today, not on the run days.",
+              "description": "Recovery.",
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-11-12",
+          "dayOfWeek": "Thursday",
+          "workouts": [
+            {
+              "id": "w13-thu-run",
+              "sport": "run",
+              "type": "easy",
+              "name": "Easy run",
+              "distanceMiles": 5.0,
+              "durationMinutes": 57,
+              "humanReadable": "Continuous, conversational pace. If you can't talk in full sentences, you're going too fast \u2014 this is the single most common way beginners stall out.\nEstimated pace ~10:30-12:00/mi, but run by feel, not by number.\nMiddle portion: 10-15 min at steady effort \u2014 comfortably hard, still controlled. Not a race.",
+              "description": "Aerobic base.",
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-11-13",
+          "dayOfWeek": "Friday",
+          "workouts": [
+            {
+              "id": "w13-fri-str",
+              "sport": "strength",
+              "type": "strength",
+              "name": "Strength \u2014 Maintain + Power",
+              "durationMinutes": 35,
+              "humanReadable": "Squat 3x5 (heavier, low volume)\nPull-up 4x max\nPush-up 4x max\nSit-up 3x2min  \u2014 full PST event, time it\nBox step-up 3x8/side\nPogo hops 3x20  \u2014 tendon stiffness for running economy",
+              "description": "Second lift. Keep it 24h clear of the long run.",
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-11-14",
+          "dayOfWeek": "Saturday",
+          "workouts": [
+            {
+              "id": "w13-sat-run",
+              "sport": "run",
+              "type": "long",
+              "name": "Long run",
+              "distanceMiles": 7.0,
+              "durationMinutes": 84,
+              "humanReadable": "Continuous, conversational pace. If you can't talk in full sentences, you're going too fast \u2014 this is the single most common way beginners stall out.\nEstimated pace ~10:30-12:00/mi, but run by feel, not by number.\nLast mile: pick it up slightly if you feel good. Never more than that.",
+              "description": "The week's key session.",
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-11-15",
+          "dayOfWeek": "Sunday",
+          "workouts": [
+            {
+              "id": "w13-sun-run",
+              "sport": "run",
+              "type": "recovery",
+              "name": "Recovery run",
+              "distanceMiles": 2.5,
+              "durationMinutes": 32,
+              "humanReadable": "Genuinely easy. Slower than your easy pace. This run exists to move blood through tired legs, not to build fitness.\nIf you feel worse at the end than the start, you ran it too hard.",
+              "description": "Easy shakeout on tired legs.",
+              "completed": false
+            }
+          ]
+        }
+      ],
+      "summary": {
+        "totalMiles": 19.5,
+        "longRun": 7.0,
+        "runs": 4,
+        "strengthSessions": 2
+      }
+    },
+    {
+      "weekNumber": 14,
+      "startDate": "2026-11-16",
+      "endDate": "2026-11-22",
+      "phase": "Base",
+      "focus": "Long run at 8. Practice mid-run fueling from here on.",
+      "targetMiles": 21.0,
+      "isRecoveryWeek": false,
+      "days": [
+        {
+          "date": "2026-11-16",
+          "dayOfWeek": "Monday",
+          "workouts": [
+            {
+              "id": "w14-mon-str",
+              "sport": "strength",
+              "type": "strength",
+              "name": "Strength \u2014 Maintain + Power",
+              "durationMinutes": 35,
+              "humanReadable": "Squat 3x5 (heavier, low volume)\nPull-up 4x max\nPush-up 4x max\nSit-up 3x2min  \u2014 full PST event, time it\nBox step-up 3x8/side\nPogo hops 3x20  \u2014 tendon stiffness for running economy",
+              "description": "Lift before the week's running load accumulates.",
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-11-17",
+          "dayOfWeek": "Tuesday",
+          "workouts": [
+            {
+              "id": "w14-tue-run",
+              "sport": "run",
+              "type": "easy",
+              "name": "Easy run",
+              "distanceMiles": 5.0,
+              "durationMinutes": 57,
+              "humanReadable": "Continuous, conversational pace. If you can't talk in full sentences, you're going too fast \u2014 this is the single most common way beginners stall out.\nEstimated pace ~10:30-12:00/mi, but run by feel, not by number.\nMiddle portion: 10-15 min at steady effort \u2014 comfortably hard, still controlled. Not a race.",
+              "description": "Aerobic base.",
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-11-18",
+          "dayOfWeek": "Wednesday",
+          "workouts": [
+            {
+              "id": "w14-wed-rest",
+              "sport": "rest",
+              "type": "rest",
+              "name": "Rest",
+              "humanReadable": "Full rest, or a 20-30 min walk if you're restless.\nAdaptation happens today, not on the run days.",
+              "description": "Recovery.",
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-11-19",
+          "dayOfWeek": "Thursday",
+          "workouts": [
+            {
+              "id": "w14-thu-run",
+              "sport": "run",
+              "type": "easy",
+              "name": "Easy run",
+              "distanceMiles": 5.5,
+              "durationMinutes": 63,
+              "humanReadable": "Continuous, conversational pace. If you can't talk in full sentences, you're going too fast \u2014 this is the single most common way beginners stall out.\nEstimated pace ~10:30-12:00/mi, but run by feel, not by number.\nMiddle portion: 10-15 min at steady effort \u2014 comfortably hard, still controlled. Not a race.",
+              "description": "Aerobic base.",
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-11-20",
+          "dayOfWeek": "Friday",
+          "workouts": [
+            {
+              "id": "w14-fri-str",
+              "sport": "strength",
+              "type": "strength",
+              "name": "Strength \u2014 Maintain + Power",
+              "durationMinutes": 35,
+              "humanReadable": "Squat 3x5 (heavier, low volume)\nPull-up 4x max\nPush-up 4x max\nSit-up 3x2min  \u2014 full PST event, time it\nBox step-up 3x8/side\nPogo hops 3x20  \u2014 tendon stiffness for running economy",
+              "description": "Second lift. Keep it 24h clear of the long run.",
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-11-21",
+          "dayOfWeek": "Saturday",
+          "workouts": [
+            {
+              "id": "w14-sat-run",
+              "sport": "run",
+              "type": "long",
+              "name": "Long run",
+              "distanceMiles": 8.0,
+              "durationMinutes": 96,
+              "humanReadable": "Continuous, conversational pace. If you can't talk in full sentences, you're going too fast \u2014 this is the single most common way beginners stall out.\nEstimated pace ~10:30-12:00/mi, but run by feel, not by number.\nFueling practice: take 20-25g carbs at the 45-minute mark (gel, chews, whatever you'll use on race day). Start training your gut now \u2014 it adapts slower than your legs.\nLast mile: pick it up slightly if you feel good. Never more than that.",
+              "description": "The week's key session.",
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-11-22",
+          "dayOfWeek": "Sunday",
+          "workouts": [
+            {
+              "id": "w14-sun-run",
+              "sport": "run",
+              "type": "recovery",
+              "name": "Recovery run",
+              "distanceMiles": 2.5,
+              "durationMinutes": 32,
+              "humanReadable": "Genuinely easy. Slower than your easy pace. This run exists to move blood through tired legs, not to build fitness.\nIf you feel worse at the end than the start, you ran it too hard.",
+              "description": "Easy shakeout on tired legs.",
+              "completed": false
+            }
+          ]
+        }
+      ],
+      "summary": {
+        "totalMiles": 21.0,
+        "longRun": 8.0,
+        "runs": 4,
+        "strengthSessions": 2
+      }
+    },
+    {
+      "weekNumber": 15,
+      "startDate": "2026-11-23",
+      "endDate": "2026-11-29",
+      "phase": "Base",
+      "focus": "Base peak. 9-mile long run \u2014 the handoff into the formal block.",
+      "targetMiles": 23.0,
+      "isRecoveryWeek": false,
+      "days": [
+        {
+          "date": "2026-11-23",
+          "dayOfWeek": "Monday",
+          "workouts": [
+            {
+              "id": "w15-mon-str",
+              "sport": "strength",
+              "type": "strength",
+              "name": "Strength \u2014 Maintain + Power",
+              "durationMinutes": 35,
+              "humanReadable": "Squat 3x5 (heavier, low volume)\nPull-up 4x max\nPush-up 4x max\nSit-up 3x2min  \u2014 full PST event, time it\nBox step-up 3x8/side\nPogo hops 3x20  \u2014 tendon stiffness for running economy",
+              "description": "Lift before the week's running load accumulates.",
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-11-24",
+          "dayOfWeek": "Tuesday",
+          "workouts": [
+            {
+              "id": "w15-tue-run",
+              "sport": "run",
+              "type": "easy",
+              "name": "Easy run",
+              "distanceMiles": 5.5,
+              "durationMinutes": 63,
+              "humanReadable": "Continuous, conversational pace. If you can't talk in full sentences, you're going too fast \u2014 this is the single most common way beginners stall out.\nEstimated pace ~10:30-12:00/mi, but run by feel, not by number.\nMiddle portion: 10-15 min at steady effort \u2014 comfortably hard, still controlled. Not a race.",
+              "description": "Aerobic base.",
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-11-25",
+          "dayOfWeek": "Wednesday",
+          "workouts": [
+            {
+              "id": "w15-wed-rest",
+              "sport": "rest",
+              "type": "rest",
+              "name": "Rest",
+              "humanReadable": "Full rest, or a 20-30 min walk if you're restless.\nAdaptation happens today, not on the run days.",
+              "description": "Recovery.",
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-11-26",
+          "dayOfWeek": "Thursday",
+          "workouts": [
+            {
+              "id": "w15-thu-run",
+              "sport": "run",
+              "type": "easy",
+              "name": "Easy run",
+              "distanceMiles": 6.0,
+              "durationMinutes": 69,
+              "humanReadable": "Continuous, conversational pace. If you can't talk in full sentences, you're going too fast \u2014 this is the single most common way beginners stall out.\nEstimated pace ~10:30-12:00/mi, but run by feel, not by number.\nMiddle portion: 10-15 min at steady effort \u2014 comfortably hard, still controlled. Not a race.",
+              "description": "Aerobic base.",
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-11-27",
+          "dayOfWeek": "Friday",
+          "workouts": [
+            {
+              "id": "w15-fri-str",
+              "sport": "strength",
+              "type": "strength",
+              "name": "Strength \u2014 Maintain + Power",
+              "durationMinutes": 35,
+              "humanReadable": "Squat 3x5 (heavier, low volume)\nPull-up 4x max\nPush-up 4x max\nSit-up 3x2min  \u2014 full PST event, time it\nBox step-up 3x8/side\nPogo hops 3x20  \u2014 tendon stiffness for running economy",
+              "description": "Second lift. Keep it 24h clear of the long run.",
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-11-28",
+          "dayOfWeek": "Saturday",
+          "workouts": [
+            {
+              "id": "w15-sat-run",
+              "sport": "run",
+              "type": "long",
+              "name": "Long run",
+              "distanceMiles": 9.0,
+              "durationMinutes": 108,
+              "humanReadable": "Continuous, conversational pace. If you can't talk in full sentences, you're going too fast \u2014 this is the single most common way beginners stall out.\nEstimated pace ~10:30-12:00/mi, but run by feel, not by number.\nFueling practice: take 20-25g carbs at the 45-minute mark (gel, chews, whatever you'll use on race day). Start training your gut now \u2014 it adapts slower than your legs.\nLast mile: pick it up slightly if you feel good. Never more than that.",
+              "description": "The week's key session.",
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-11-29",
+          "dayOfWeek": "Sunday",
+          "workouts": [
+            {
+              "id": "w15-sun-run",
+              "sport": "run",
+              "type": "recovery",
+              "name": "Recovery run",
+              "distanceMiles": 2.5,
+              "durationMinutes": 32,
+              "humanReadable": "Genuinely easy. Slower than your easy pace. This run exists to move blood through tired legs, not to build fitness.\nIf you feel worse at the end than the start, you ran it too hard.",
+              "description": "Easy shakeout on tired legs.",
+              "completed": false
+            }
+          ]
+        }
+      ],
+      "summary": {
+        "totalMiles": 23.0,
+        "longRun": 9.0,
+        "runs": 4,
+        "strengthSessions": 2
+      }
+    },
+    {
+      "weekNumber": 16,
+      "startDate": "2026-11-30",
+      "endDate": "2026-12-06",
+      "phase": "Base",
+      "focus": "Transition week. Reassess, re-test, and lock the block targets.",
+      "targetMiles": 16.0,
+      "isRecoveryWeek": true,
+      "days": [
+        {
+          "date": "2026-11-30",
+          "dayOfWeek": "Monday",
+          "workouts": [
+            {
+              "id": "w16-mon-str",
+              "sport": "strength",
+              "type": "strength",
+              "name": "Strength \u2014 Maintain + Power",
+              "durationMinutes": 35,
+              "humanReadable": "Squat 3x5 (heavier, low volume)\nPull-up 4x max\nPush-up 4x max\nSit-up 3x2min  \u2014 full PST event, time it\nBox step-up 3x8/side\nPogo hops 3x20  \u2014 tendon stiffness for running economy",
+              "description": "Lift before the week's running load accumulates.",
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-12-01",
+          "dayOfWeek": "Tuesday",
+          "workouts": [
+            {
+              "id": "w16-tue-run",
+              "sport": "run",
+              "type": "easy",
+              "name": "Easy run",
+              "distanceMiles": 4.0,
+              "durationMinutes": 46,
+              "humanReadable": "Continuous, conversational pace. If you can't talk in full sentences, you're going too fast \u2014 this is the single most common way beginners stall out.\nEstimated pace ~10:30-12:00/mi, but run by feel, not by number.\nMiddle portion: 10-15 min at steady effort \u2014 comfortably hard, still controlled. Not a race.",
+              "description": "Aerobic base.",
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-12-02",
+          "dayOfWeek": "Wednesday",
+          "workouts": [
+            {
+              "id": "w16-wed-rest",
+              "sport": "rest",
+              "type": "rest",
+              "name": "Rest",
+              "humanReadable": "Full rest, or a 20-30 min walk if you're restless.\nAdaptation happens today, not on the run days.",
+              "description": "Recovery.",
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-12-03",
+          "dayOfWeek": "Thursday",
+          "workouts": [
+            {
+              "id": "w16-thu-run",
+              "sport": "run",
+              "type": "easy",
+              "name": "Easy run",
+              "distanceMiles": 4.0,
+              "durationMinutes": 46,
+              "humanReadable": "Continuous, conversational pace. If you can't talk in full sentences, you're going too fast \u2014 this is the single most common way beginners stall out.\nEstimated pace ~10:30-12:00/mi, but run by feel, not by number.\nMiddle portion: 10-15 min at steady effort \u2014 comfortably hard, still controlled. Not a race.",
+              "description": "Aerobic base.",
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-12-04",
+          "dayOfWeek": "Friday",
+          "workouts": [
+            {
+              "id": "w16-fri-str",
+              "sport": "strength",
+              "type": "strength",
+              "name": "Strength \u2014 Maintain + Power",
+              "durationMinutes": 35,
+              "humanReadable": "Squat 3x5 (heavier, low volume)\nPull-up 4x max\nPush-up 4x max\nSit-up 3x2min  \u2014 full PST event, time it\nBox step-up 3x8/side\nPogo hops 3x20  \u2014 tendon stiffness for running economy",
+              "description": "Second lift. Keep it 24h clear of the long run.",
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-12-05",
+          "dayOfWeek": "Saturday",
+          "workouts": [
+            {
+              "id": "w16-sat-run",
+              "sport": "run",
+              "type": "long",
+              "name": "Long run + 2-mile threshold test",
+              "distanceMiles": 6.0,
+              "durationMinutes": 72,
+              "humanReadable": "Continuous, conversational pace. If you can't talk in full sentences, you're going too fast \u2014 this is the single most common way beginners stall out.\nEstimated pace ~10:30-12:00/mi, but run by feel, not by number.\nFueling practice: take 20-25g carbs at the 45-minute mark (gel, chews, whatever you'll use on race day). Start training your gut now \u2014 it adapts slower than your legs.\nLast mile: pick it up slightly if you feel good. Never more than that.\n\nBLOCK-TRANSITION TEST: after a 15-min warm-up, run a hard 2 miles at the fastest pace you could hold for an hour.\nThis sets the paces for the entire formal block. Do not skip it.",
+              "description": "The week's key session.",
+              "completed": false
+            }
+          ]
+        },
+        {
+          "date": "2026-12-06",
+          "dayOfWeek": "Sunday",
+          "workouts": [
+            {
+              "id": "w16-sun-run",
+              "sport": "run",
+              "type": "recovery",
+              "name": "Recovery run",
+              "distanceMiles": 2.0,
+              "durationMinutes": 26,
+              "humanReadable": "Genuinely easy. Slower than your easy pace. This run exists to move blood through tired legs, not to build fitness.\nIf you feel worse at the end than the start, you ran it too hard.",
+              "description": "Easy shakeout on tired legs.",
+              "completed": false
+            }
+          ]
+        }
+      ],
+      "summary": {
+        "totalMiles": 16.0,
+        "longRun": 6.0,
+        "runs": 4,
+        "strengthSessions": 2
+      }
+    }
+  ]
+}

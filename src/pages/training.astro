@@ -1,0 +1,496 @@
+---
+import Layout from '../layouts/Layout.astro';
+import plan from '../data/training-plan.json';
+
+// Served only from the private subdomain. On the apex domain this renders the
+// 404 so the page never exists at patrickwrall.com/training, where the Access
+// policy would not cover it.
+export const prerender = false;
+
+const PRIVATE_HOST = 'private.patrickwrall.com';
+const host = Astro.request.headers.get('host')?.split(':')[0] ?? '';
+const isLocal = host === 'localhost' || host === '127.0.0.1';
+
+if (host !== PRIVATE_HOST && !isLocal) {
+  // Astro.rewrite() cannot target /404 — it is prerendered, and the SSR
+  // pipeline throws "module.page is not a function" reaching for it. Serve the
+  // built 404 document straight off the assets binding instead.
+  const assets = Astro.locals.runtime?.env?.ASSETS;
+  if (assets) {
+    const notFound = await assets.fetch(new URL('/404.html', Astro.url));
+    return new Response(notFound.body, {
+      status: 404,
+      headers: { 'content-type': 'text/html; charset=utf-8' },
+    });
+  }
+  return new Response('Not found', { status: 404 });
+}
+
+const { meta, targets, weightPlan, weeks } = plan;
+
+const totalMiles = weeks.reduce((n, w) => n + w.summary.totalMiles, 0);
+const totalSessions = weeks.reduce(
+  (n, w) => n + w.days.reduce((m, d) => m + d.workouts.length, 0),
+  0,
+);
+
+const fmt = (iso: string) =>
+  new Date(iso + 'T12:00:00').toLocaleDateString('en-US', {
+    month: 'short',
+    day: 'numeric',
+  });
+---
+
+<Layout title="Training" description="Private training log." noindex={true}>
+  <main class="main-container">
+    <div class="content-wrapper">
+
+      <div class="header-section animate-appear" style="animation-delay: 0.1s;">
+        <h1 class="title-english">Training</h1>
+        <p class="header-index">[ 1 ]</p>
+      </div>
+
+      <div class="bio-section animate-appear" style="animation-delay: 0.15s;">
+        <p class="bio-text">
+          Carmel Marathon base block — {meta.totalWeeks} weeks, {fmt(meta.planStartDate)} to {
+            fmt(meta.planEndDate)
+          }, {totalMiles} miles. Race {fmt(meta.eventDate)} 2027.
+        </p>
+      </div>
+
+      <div class="section animate-appear" style="animation-delay: 0.2s;">
+        <div class="column-header">
+          <h2 class="column-title">TARGETS</h2>
+          <p class="column-index">[ 2 ]</p>
+        </div>
+        <div class="rows">
+          <div class="row"><span>Floor</span><span class="row-val">{targets.floor}</span></div>
+          <div class="row"><span>Realistic</span><span class="row-val">{targets.realistic}</span></div>
+          <div class="row"><span>Stretch</span><span class="row-val">{targets.stretch}</span></div>
+        </div>
+        <p class="note-text">{targets.note}</p>
+      </div>
+
+      <div class="section animate-appear" style="animation-delay: 0.25s;">
+        <div class="column-header">
+          <h2 class="column-title">WEIGHT</h2>
+          <p class="column-index">[ 3 ]</p>
+        </div>
+        <div class="rows">
+          {weightPlan.phases.map((p) => (
+            <div class="row">
+              <span>{p.window}</span>
+              <span class="row-val">{p.rate} &middot; {p.endWeight} lb</span>
+            </div>
+          ))}
+        </div>
+        <p class="note-text">{weightPlan.protein}</p>
+      </div>
+
+      <div class="section animate-appear" style="animation-delay: 0.3s;">
+        <div class="column-header">
+          <h2 class="column-title">BLOCK</h2>
+          <p class="column-index">[ 4 ]</p>
+        </div>
+
+        <div class="weeks">
+          {weeks.map((w) => (
+            <section class="week">
+              <div class="week-header">
+                <span>
+                  Week {w.weekNumber}
+                  {w.isRecoveryWeek && <span class="down-badge">[ down ]</span>}
+                </span>
+                <span class="week-stat">{w.summary.totalMiles} mi</span>
+              </div>
+              <p class="week-focus">{w.focus}</p>
+
+              <div class="days">
+                {w.days.map((d) =>
+                  d.workouts.map((wo) => (
+                    <div class={`day day-${wo.sport}`} data-id={wo.id} data-date={d.date}>
+                      <button class="day-row" type="button" aria-expanded="false">
+                        <span class="day-dow">{d.dayOfWeek.slice(0, 3)}</span>
+                        <span class="day-name">{wo.name}</span>
+                        <span class="day-dist">
+                          {wo.distanceMiles
+                            ? `${wo.distanceMiles} mi`
+                            : wo.durationMinutes
+                              ? `${wo.durationMinutes} min`
+                              : '—'}
+                        </span>
+                      </button>
+                      <div class="day-detail" hidden>
+                        <p class="detail-text">{wo.humanReadable}</p>
+                        <button class="mark" type="button">Mark complete</button>
+                      </div>
+                    </div>
+                  )),
+                )}
+              </div>
+            </section>
+          ))}
+        </div>
+      </div>
+
+      <div class="section last animate-appear" style="animation-delay: 0.35s;">
+        <p class="note-text">{meta.note}</p>
+      </div>
+
+    </div>
+  </main>
+
+  <div class="progress-bar">
+    <span class="progress-text" id="pText">0 / {totalSessions}</span>
+    <span class="progress-track"><span class="progress-fill" id="pFill"></span></span>
+  </div>
+</Layout>
+
+<script>
+  const KEY = 'carmel-2027-base';
+  const stored = localStorage.getItem(KEY);
+  const done = new Set<string>(stored ? JSON.parse(stored) : []);
+  const days = Array.from(document.querySelectorAll<HTMLElement>('.day'));
+  const pText = document.getElementById('pText')!;
+  const pFill = document.getElementById('pFill')!;
+
+  function refresh() {
+    let n = 0;
+    for (const d of days) {
+      const isDone = done.has(d.dataset.id!);
+      d.classList.toggle('is-done', isDone);
+      if (isDone) n++;
+    }
+    pText.textContent = `${n} / ${days.length}`;
+    pFill.style.width = `${(n / days.length) * 100}%`;
+  }
+
+  for (const d of days) {
+    const row = d.querySelector<HTMLButtonElement>('.day-row')!;
+    const detail = d.querySelector<HTMLElement>('.day-detail')!;
+    const mark = d.querySelector<HTMLButtonElement>('.mark')!;
+
+    row.addEventListener('click', () => {
+      const open = !detail.hidden;
+      detail.hidden = open;
+      row.setAttribute('aria-expanded', String(!open));
+      mark.textContent = done.has(d.dataset.id!) ? 'Mark incomplete' : 'Mark complete';
+    });
+
+    mark.addEventListener('click', () => {
+      const id = d.dataset.id!;
+      if (done.has(id)) done.delete(id);
+      else done.add(id);
+      localStorage.setItem(KEY, JSON.stringify([...done]));
+      mark.textContent = done.has(id) ? 'Mark incomplete' : 'Mark complete';
+      refresh();
+    });
+  }
+
+  // Highlight today and open the page at the current week.
+  const today = new Date().toLocaleDateString('en-CA');
+  const todayEl = days.find((d) => d.dataset.date === today);
+  if (todayEl) {
+    todayEl.classList.add('is-today');
+    todayEl.scrollIntoView({ block: 'center' });
+  }
+
+  refresh();
+</script>
+
+<style>
+  .main-container {
+    display: flex;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 40px 1rem 80px;
+  }
+
+  .content-wrapper {
+    width: 100%;
+    max-width: 640px;
+  }
+
+  .header-section {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    gap: 10px;
+    padding-bottom: 16px;
+  }
+
+  .title-english {
+    font-family: 'ABC Marist Unlicensed Trial Book', sans-serif;
+    font-size: 20px;
+    font-weight: normal;
+    letter-spacing: -0.03em;
+    line-height: 24px;
+  }
+
+  .header-index {
+    flex: 1;
+    text-align: right;
+    font-family: 'ABC Marist Unlicensed Trial Book', sans-serif;
+    font-size: 12px;
+    letter-spacing: 0.015em;
+    line-height: 14px;
+  }
+
+  .bio-section {
+    padding-bottom: 32px;
+    border-bottom: 0.5px solid var(--border-color);
+  }
+
+  .bio-text {
+    font-family: 'ABC Marist Unlicensed Trial Book', sans-serif;
+    font-size: 15px;
+    letter-spacing: -0.01em;
+    line-height: 17px;
+    font-weight: 300;
+    color: rgb(59, 61, 65);
+  }
+
+  .section {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: 32px 0;
+    border-bottom: 0.5px solid var(--border-color);
+  }
+
+  .section.last {
+    border-bottom: none;
+  }
+
+  .column-header {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .column-title,
+  .column-index {
+    font-family: 'ABC Marist Unlicensed Trial Book', sans-serif;
+    font-size: 12px;
+    font-weight: normal;
+    letter-spacing: 0.015em;
+    line-height: 14px;
+  }
+
+  .rows {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .row {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    font-family: 'ABC Marist Unlicensed Trial Book', sans-serif;
+    font-size: 15px;
+    letter-spacing: -0.01em;
+    line-height: 17px;
+    color: rgb(59, 61, 65);
+  }
+
+  .row-val {
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .note-text {
+    font-family: 'ABC Marist Unlicensed Trial Book', sans-serif;
+    font-size: 13px;
+    letter-spacing: -0.01em;
+    line-height: 16px;
+    color: rgb(115, 118, 122);
+    margin-top: 6px;
+  }
+
+  .weeks {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    margin-top: 6px;
+  }
+
+  .week-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    font-family: 'ABC Marist Unlicensed Trial Book', sans-serif;
+    font-size: 12px;
+    letter-spacing: 0.015em;
+    line-height: 14px;
+  }
+
+  .down-badge {
+    color: rgb(196, 74, 42);
+    font-weight: bold;
+    margin-left: 6px;
+  }
+
+  .week-stat {
+    font-variant-numeric: tabular-nums;
+  }
+
+  .week-focus {
+    font-family: 'ABC Marist Unlicensed Trial Book', sans-serif;
+    font-size: 13px;
+    letter-spacing: -0.01em;
+    line-height: 16px;
+    color: rgb(115, 118, 122);
+    padding: 4px 0 6px;
+  }
+
+  .days {
+    display: flex;
+    flex-direction: column;
+    border-top: 0.5px solid var(--border-color);
+  }
+
+  .day {
+    border-bottom: 0.5px solid var(--border-color);
+  }
+
+  .day-row {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    width: 100%;
+    padding: 9px 0;
+    margin: 0;
+    background: none;
+    border: none;
+    cursor: pointer;
+    text-align: left;
+    font-family: 'ABC Marist Unlicensed Trial Book', sans-serif;
+    font-size: 15px;
+    letter-spacing: -0.01em;
+    line-height: 17px;
+    color: rgb(59, 61, 65);
+  }
+
+  .day-row:hover .day-name {
+    color: #888;
+  }
+
+  .day-row:focus-visible {
+    outline: 1px solid rgb(59, 61, 65);
+    outline-offset: 2px;
+  }
+
+  .day-dow {
+    width: 34px;
+    flex-shrink: 0;
+    font-size: 12px;
+    letter-spacing: 0.015em;
+    color: rgb(115, 118, 122);
+  }
+
+  .day-name {
+    flex: 1;
+  }
+
+  .day-run .day-name {
+    font-weight: bold;
+  }
+
+  .day-rest .day-name {
+    color: rgb(115, 118, 122);
+  }
+
+  .day-dist {
+    flex-shrink: 0;
+    font-variant-numeric: tabular-nums;
+    color: rgb(115, 118, 122);
+  }
+
+  .day.is-today .day-dow {
+    color: rgb(196, 74, 42);
+    font-weight: bold;
+  }
+
+  .day.is-done .day-name,
+  .day.is-done .day-dist {
+    text-decoration: line-through;
+    color: rgb(160, 163, 167);
+  }
+
+  .day-detail {
+    padding: 2px 0 12px 44px;
+  }
+
+  .detail-text {
+    font-family: 'ABC Marist Unlicensed Trial Book', sans-serif;
+    font-size: 13px;
+    letter-spacing: -0.01em;
+    line-height: 17px;
+    color: rgb(59, 61, 65);
+    white-space: pre-line;
+  }
+
+  .mark {
+    margin-top: 10px;
+    padding: 5px 10px;
+    background: none;
+    border: 0.5px solid var(--border-color);
+    cursor: pointer;
+    font-family: 'ABC Marist Unlicensed Trial Book', sans-serif;
+    font-size: 12px;
+    letter-spacing: 0.015em;
+    color: rgb(59, 61, 65);
+  }
+
+  .mark:hover {
+    color: rgb(0, 0, 0);
+    border-color: rgb(59, 61, 65);
+  }
+
+  .progress-bar {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 10px 16px;
+    background-color: var(--white-color);
+    border-top: 0.5px solid var(--border-color);
+    font-family: 'ABC Marist Unlicensed Trial Book', sans-serif;
+    font-size: 12px;
+    letter-spacing: 0.015em;
+    color: rgb(59, 61, 65);
+  }
+
+  .progress-text {
+    font-variant-numeric: tabular-nums;
+  }
+
+  .progress-track {
+    width: min(240px, 45vw);
+    height: 2px;
+    background-color: var(--border-color);
+  }
+
+  .progress-fill {
+    display: block;
+    height: 100%;
+    width: 0;
+    background-color: rgb(59, 61, 65);
+    transition: width 0.2s;
+  }
+
+  @media (max-width: 809px) {
+    .main-container {
+      padding: 24px 16px 70px;
+    }
+    .content-wrapper {
+      max-width: 100%;
+    }
+  }
+</style>

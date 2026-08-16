@@ -3,12 +3,14 @@ interface Props {
   title: string;
   description?: string;
   type?: string;
+  noindex?: boolean;
 }
 
 const {
   title,
   description = 'Patrick W. Rall is a Computer Science student at Purdue University specializing in high-performance computing and its applications in machine learning.',
   type = 'website',
+  noindex = false,
 } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site).href;
@@ -21,6 +23,7 @@ const ogImageURL = new URL('/og-image.png', Astro.site).href;
     <meta name="description" content={description} />
 		<meta name="viewport" content="width=device-width" />
     <meta name="theme-color" content="#ffffff" />
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
     <link rel="canonical" href={canonicalURL} />
     <link rel="alternate" type="application/rss+xml" title="Patrick W. Rall" href="/rss.xml" />
