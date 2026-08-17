@@ -48,6 +48,12 @@ const weightBaseEnd = weightPlan.phases[0].endWeight;
         <p class="header-index" id="blockPos">[ 1 ]</p>
       </div>
 
+      {/* The reason, where it is visible at 5am after a shift. */}
+      <p class="why animate-appear" style="animation-delay: 0.08s;">
+        Work &rarr; surgeries &rarr; MEPS &rarr; SOAS packet, Dec 2027.
+        <span class="why-dim">The marathon is the forcing function for the aerobic base, not the point.</span>
+      </p>
+
       <!-- [ 1 ] TODAY -->
       <div class="section animate-appear" style="animation-delay: 0.1s;">
         <div class="column-header">
@@ -749,6 +755,21 @@ const weightBaseEnd = weightPlan.phases[0].endWeight;
     font-size: 12px;
     letter-spacing: 0.015em;
     line-height: 14px;
+  }
+
+  .why {
+    font-family: 'ABC Marist Unlicensed Trial Book', sans-serif;
+    font-size: 13px;
+    letter-spacing: -0.01em;
+    line-height: 17px;
+    color: rgb(59, 61, 65);
+    padding-bottom: 20px;
+    border-bottom: 0.5px solid var(--border-color);
+  }
+
+  .why-dim {
+    display: block;
+    color: rgb(115, 118, 122);
   }
 
   .section {
