@@ -1,0 +1,23 @@
+# Rules that both match a path have their values appended for the same header,
+# not overridden — a broad /* plus a /_astro/* override yields the contradictory
+# "no-cache, immutable". So these paths are kept deliberately non-overlapping.
+
+# HTML must revalidate: it is what points at the content-hashed filenames below.
+# A stale document referencing a stylesheet from a previous deploy 404s, and the
+# page renders as unstyled markup.
+/
+  Cache-Control: no-cache
+
+/index.html
+  Cache-Control: no-cache
+
+/404.html
+  Cache-Control: no-cache
+
+/blog/*
+  Cache-Control: no-cache
+
+# Astro fingerprints these by content hash, so a change always produces a new
+# filename. Safe to cache indefinitely.
+/_astro/*
+  Cache-Control: public, max-age=31536000, immutable
