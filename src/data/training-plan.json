@@ -62,36 +62,37 @@
     "note": "Locked in Feb/Mar 2027 off actual long-run and tempo data, per handoff."
   },
   "weightPlan": {
-    "start": 202,
+    "start": 202.2,
     "target": 165,
     "measuredAt": "2026-08-16",
     "phases": [
       {
         "window": "Base (Aug-Dec)",
-        "rate": "1-1.25 lb/wk",
-        "deficit": "~600 kcal/day",
-        "endWeight": 185
+        "rate": "1.25-1.5 lb/wk",
+        "deficit": "~700 kcal/day",
+        "endWeight": 179
       },
       {
         "window": "Build (Dec-Mar)",
-        "rate": "~0.35 lb/wk",
-        "deficit": "~200 kcal/day",
-        "endWeight": 178
+        "rate": "0.6-0.75 lb/wk",
+        "deficit": "~350 kcal/day",
+        "endWeight": 168
       },
       {
-        "window": "Taper + race",
-        "rate": "0",
+        "window": "Taper (3 wk)",
+        "rate": "0 \u2014 hold",
         "deficit": "maintenance",
-        "endWeight": 178
+        "endWeight": 168
       },
       {
-        "window": "Post-race -> SEAL prep",
-        "rate": "resume",
-        "deficit": "~600 kcal/day",
-        "endWeight": 165
+        "window": "Race day",
+        "rate": "\u2014",
+        "deficit": "carb load",
+        "endWeight": 168
       }
     ],
-    "protein": "180-200 g/day throughout \u2014 protects muscle through a deficit this long"
+    "protein": "180-200 g/day throughout \u2014 the deficit is long, protein is what keeps it muscle-sparing",
+    "note": "165-168 by race day is realistic if the cut is front-loaded into the base phase while mileage is low. Do not run a deficit in the taper: racing glycogen-depleted costs more minutes than the pounds save."
   },
   "phases": [
     {
