@@ -60,44 +60,14 @@ const weightBaseEnd = weightPlan.phases[0].endWeight;
           <p class="note-text" id="emptyNote"></p>
         </div>
 
-        <div id="todayCard" hidden>
-          <div class="hero">
-            <p class="hero-name" id="heroName">—</p>
-            <p class="hero-dist" id="heroDist">—</p>
-          </div>
-          <p class="detail-text" id="heroDetail"></p>
-
-          <form class="logform" id="logForm">
-            <div class="field">
-              <label for="fMiles">Actual</label>
-              <input id="fMiles" type="number" step="0.1" min="0" inputmode="decimal" placeholder="mi" />
-            </div>
-            <div class="field">
-              <label for="fMins">Time</label>
-              <input id="fMins" type="number" step="1" min="0" inputmode="numeric" placeholder="min" />
-            </div>
-            <div class="field rpe">
-              <label>Effort</label>
-              {/* Rendered server-side, not built in JS: Astro scopes this
-                  component's CSS with a data-astro-cid attribute, and nodes
-                  created by document.createElement never carry it, so they
-                  render unstyled. */}
-              <div class="rpe-row" id="rpeRow">
-                {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((n) => (
-                  <button type="button" class="rpe-btn" data-v={n}>{n}</button>
-                ))}
-              </div>
-            </div>
-            <div class="field wide">
-              <label for="fNote">Note</label>
-              <input id="fNote" type="text" placeholder="how it went" maxlength="200" />
-            </div>
-            <div class="actions">
-              <button type="submit" class="btn primary" id="btnDone">Mark done</button>
-              <span class="savehint" id="saveHint"></span>
-            </div>
-          </form>
-        </div>
+        <button id="todayCard" class="hero-card" type="button" hidden>
+          <span class="hero">
+            <span class="hero-name" id="heroName">—</span>
+            <span class="hero-dist" id="heroDist">—</span>
+          </span>
+          <span class="detail-text clamp" id="heroDetail"></span>
+          <span class="hero-cta" id="heroCta">Tap to log →</span>
+        </button>
       </div>
 
       <!-- [ 2 ] THIS WEEK -->
@@ -117,12 +87,15 @@ const weightBaseEnd = weightPlan.phases[0].endWeight;
           <p class="column-index" id="weightNow">—</p>
         </div>
 
+        {/* Stays inline on purpose: it is one number, and a sheet for one
+            number is more taps, not fewer. */}
         <form class="weighin" id="weighForm">
           <div class="field">
             <label for="fWeight">Today</label>
             <input id="fWeight" type="number" step="0.1" min="80" max="400" inputmode="decimal" placeholder="lb" />
           </div>
           <button type="submit" class="btn">Log weigh-in</button>
+          <span class="savehint" id="weighHint"></span>
         </form>
 
         <div class="chartwrap"><svg id="weightChart" class="chart" viewBox="0 0 640 160" preserveAspectRatio="none" role="img" aria-label="Bodyweight trend"></svg></div>
@@ -141,21 +114,7 @@ const weightBaseEnd = weightPlan.phases[0].endWeight;
           <p class="column-index" id="pstLatest">—</p>
         </div>
 
-        <form class="pstform" id="pstForm">
-          <div class="field">
-            <label for="fPull">Pull-ups</label>
-            <input id="fPull" type="number" step="1" min="0" max="200" inputmode="numeric" placeholder="max" />
-          </div>
-          <div class="field">
-            <label for="fPush">Push-ups</label>
-            <input id="fPush" type="number" step="1" min="0" max="400" inputmode="numeric" placeholder="2 min" />
-          </div>
-          <div class="field">
-            <label for="fSit">Sit-ups</label>
-            <input id="fSit" type="number" step="1" min="0" max="400" inputmode="numeric" placeholder="2 min" />
-          </div>
-          <button type="submit" class="btn">Log PST</button>
-        </form>
+        <button class="btn wide-btn" type="button" id="pstOpen">Log a PST test</button>
 
         <div class="chartwrap"><svg id="pstChart" class="chart" viewBox="0 0 640 160" preserveAspectRatio="none" role="img" aria-label="PST rep trend"></svg></div>
         <div class="legend">
@@ -201,7 +160,7 @@ const weightBaseEnd = weightPlan.phases[0].endWeight;
                       data-miles={wo.distanceMiles ?? ''}
                       data-mins={wo.durationMinutes ?? ''}
                     >
-                      <button class="day-row" type="button" aria-expanded="false">
+                      <button class="day-row" type="button">
                         <span class="day-dow">{d.dayOfWeek.slice(0, 3)}</span>
                         <span class="day-name">{wo.name}</span>
                         <span class="day-dist">
@@ -212,9 +171,9 @@ const weightBaseEnd = weightPlan.phases[0].endWeight;
                               : '—'}
                         </span>
                       </button>
-                      <div class="day-detail" hidden>
-                        <p class="detail-text">{wo.humanReadable}</p>
-                      </div>
+                      {/* Not rendered inline — this is the source the sheet
+                          reads its prescription from. */}
+                      <template class="day-detail">{wo.humanReadable}</template>
                     </div>
                   )),
                 )}
@@ -232,6 +191,81 @@ const weightBaseEnd = weightPlan.phases[0].endWeight;
     <span class="progress-track"><span class="progress-fill" id="pFill"></span></span>
     <span class="sync" id="syncDot" title="synced"></span>
   </div>
+
+  {/* Session sheet. Native <dialog> so focus trapping, Esc and background
+      inerting come from the platform instead of being reimplemented badly. */}
+  <dialog class="sheet" id="sessionSheet" aria-labelledby="sheetName">
+    <form method="dialog" class="sheet-dismiss"><button class="grabber" aria-label="Close"></button></form>
+
+    <div class="sheet-body">
+      <p class="sheet-eyebrow" id="sheetWhen">—</p>
+      <div class="sheet-head">
+        <h3 class="sheet-name" id="sheetName">—</h3>
+        <span class="sheet-dist" id="sheetDist">—</span>
+      </div>
+      <p class="detail-text" id="sheetDetail"></p>
+
+      <form class="logform" id="logForm">
+        <div class="field">
+          <label for="fMiles">Actual</label>
+          <input id="fMiles" type="number" step="0.1" min="0" inputmode="decimal" placeholder="mi" />
+        </div>
+        <div class="field">
+          <label for="fMins">Time</label>
+          <input id="fMins" type="number" step="1" min="0" inputmode="numeric" placeholder="min" />
+        </div>
+        <div class="field wide rpe">
+          <label>Effort <span class="hint">1 easy · 10 all-out</span></label>
+          {/* Server-rendered: Astro scopes this component's CSS with a
+              data-astro-cid attribute, and createElement nodes never carry it,
+              so JS-built buttons render unstyled. */}
+          <div class="rpe-row" id="rpeRow">
+            {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((n) => (
+              <button type="button" class="rpe-btn" data-v={n}>{n}</button>
+            ))}
+          </div>
+        </div>
+        <div class="field wide">
+          <label for="fNote">Note</label>
+          <input id="fNote" type="text" placeholder="how it went" maxlength="200" />
+        </div>
+        <div class="sheet-actions">
+          <button type="button" class="btn" id="btnCancel">Close</button>
+          <button type="submit" class="btn primary" id="btnDone">Mark done</button>
+        </div>
+      </form>
+    </div>
+  </dialog>
+
+  <dialog class="sheet" id="pstSheet" aria-labelledby="pstSheetTitle">
+    <form method="dialog" class="sheet-dismiss"><button class="grabber" aria-label="Close"></button></form>
+    <div class="sheet-body">
+      <p class="sheet-eyebrow">Scored SOAS events</p>
+      <div class="sheet-head">
+        <h3 class="sheet-name" id="pstSheetTitle">PST test</h3>
+      </div>
+      <form class="logform" id="pstForm">
+        <div class="field">
+          <label for="fPull">Pull-ups</label>
+          <input id="fPull" type="number" step="1" min="0" max="200" inputmode="numeric" placeholder="max" />
+        </div>
+        <div class="field">
+          <label for="fPush">Push-ups</label>
+          <input id="fPush" type="number" step="1" min="0" max="400" inputmode="numeric" placeholder="2 min" />
+        </div>
+        <div class="field">
+          <label for="fSit">Sit-ups</label>
+          <input id="fSit" type="number" step="1" min="0" max="400" inputmode="numeric" placeholder="2 min" />
+        </div>
+        <div class="sheet-actions">
+          <button type="button" class="btn" id="pstCancel">Close</button>
+          <button type="submit" class="btn primary">Save</button>
+        </div>
+      </form>
+    </div>
+  </dialog>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
 </Layout>
 
 {/* type="module" is load-bearing: define:vars forces the script inline, and the
@@ -321,7 +355,7 @@ const weightBaseEnd = weightPlan.phases[0].endWeight;
     sport: el.dataset.sport,
     miles: el.dataset.miles ? Number(el.dataset.miles) : null,
     mins: el.dataset.mins ? Number(el.dataset.mins) : null,
-    detail: el.querySelector('.detail-text')?.textContent ?? '',
+    detail: el.querySelector('template.day-detail')?.innerHTML.trim() ?? '',
   }));
   const weekFocus = new Map(
     Array.from(document.querySelectorAll('#allWeeks .week')).map((w) => [
@@ -336,10 +370,13 @@ const weightBaseEnd = weightPlan.phases[0].endWeight;
   const activeWeek = current ? current.week : 1;
 
   // ---------------------------------------------------------------------------
-  // Today card
+  // Sheets
   // ---------------------------------------------------------------------------
-  let selected = current;
+  let selected = null;
+  const sheet = $('sessionSheet');
+  const pstSheet = $('pstSheet');
   const rpeRow = $('rpeRow');
+
   for (const b of rpeRow.querySelectorAll('.rpe-btn')) {
     b.addEventListener('click', () => {
       const wasOn = b.classList.contains('on');
@@ -356,14 +393,29 @@ const weightBaseEnd = weightPlan.phases[0].endWeight;
     });
   }
 
-  function openSession(d) {
+  function toast(msg) {
+    const t = $('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    clearTimeout(t._t);
+    t._t = setTimeout(() => t.classList.remove('show'), 1900);
+  }
+
+  /** Close on backdrop tap — the dialog element itself is the backdrop area. */
+  function closeOnBackdrop(dlg) {
+    dlg.addEventListener('click', (ev) => {
+      if (ev.target === dlg) dlg.close();
+    });
+  }
+  closeOnBackdrop(sheet);
+  closeOnBackdrop(pstSheet);
+
+  function openSheet(d) {
     selected = d;
-    $('todayEmpty').hidden = true;
-    $('todayCard').hidden = false;
-    $('todayDate').textContent = fmtDate(d.date);
-    $('heroName').textContent = d.name;
-    $('heroDist').textContent = d.miles ? `${d.miles} mi` : d.mins ? `${d.mins} min` : '—';
-    $('heroDetail').textContent = d.detail;
+    $('sheetWhen').textContent = `${fmtDate(d.date)} · week ${d.week}`;
+    $('sheetName').textContent = d.name;
+    $('sheetDist').textContent = d.miles ? `${d.miles} mi` : d.mins ? `${d.mins} min` : '';
+    $('sheetDetail').textContent = d.detail;
 
     const e = log.sessions[d.id] ?? {};
     $('fMiles').value = e.miles ?? '';
@@ -372,13 +424,26 @@ const weightBaseEnd = weightPlan.phases[0].endWeight;
     rpeRow.querySelectorAll('.rpe-btn').forEach((x) =>
       x.classList.toggle('on', Number(x.dataset.v) === e.rpe),
     );
-    $('btnDone').textContent = e.done ? 'Logged ✓ — update' : 'Mark done';
+    $('btnDone').textContent = e.done ? 'Update' : 'Mark done';
     $('fMiles').placeholder = d.miles ? String(d.miles) : 'mi';
     $('fMins').placeholder = d.mins ? String(d.mins) : 'min';
+
+    sheet.showModal();
+  }
+
+  /** Fills the always-visible card at the top. Does not open anything. */
+  function showToday(d) {
+    $('todayEmpty').hidden = true;
+    $('todayCard').hidden = false;
+    $('todayDate').textContent = fmtDate(d.date);
+    $('heroName').textContent = d.name;
+    $('heroDist').textContent = d.miles ? `${d.miles} mi` : d.mins ? `${d.mins} min` : '—';
+    $('heroDetail').textContent = d.detail;
+    $('todayCard').onclick = () => openSheet(d);
   }
 
   if (current) {
-    openSession(current);
+    showToday(current);
   } else {
     const start = planStart;
     const diff = Math.round((new Date(start + 'T12:00:00') - new Date(today + 'T12:00:00')) / 86400000);
@@ -393,6 +458,9 @@ const weightBaseEnd = weightPlan.phases[0].endWeight;
       $('emptyNote').textContent = 'Outside the base block. Pick any session from BLOCK to log it.';
     }
   }
+
+  $('btnCancel').addEventListener('click', () => sheet.close());
+  $('pstCancel').addEventListener('click', () => pstSheet.close());
 
   $('blockPos').textContent = `[ wk ${activeWeek} / 16 ]`;
 
@@ -411,9 +479,8 @@ const weightBaseEnd = weightPlan.phases[0].endWeight;
         },
       },
     });
-    $('saveHint').textContent = 'saved';
-    setTimeout(() => ($('saveHint').textContent = ''), 1600);
-    $('btnDone').textContent = 'Logged ✓ — update';
+    sheet.close();
+    toast(`${selected.name} logged`);
   });
 
   // ---------------------------------------------------------------------------
@@ -433,10 +500,7 @@ const weightBaseEnd = weightPlan.phases[0].endWeight;
     row.classList.add('wk-row');
     if (d.date === today) row.classList.add('is-today');
     row.dataset.id = d.id;
-    row.addEventListener('click', () => {
-      openSession(d);
-      $('todayCard').scrollIntoView({ behavior: 'smooth', block: 'start' });
-    });
+    row.addEventListener('click', () => openSheet(d));
     weekWrap.appendChild(row);
   }
 
@@ -558,6 +622,16 @@ const weightBaseEnd = weightPlan.phases[0].endWeight;
     if (!v) return;
     save({ weights: { [todayISO()]: v } });
     $('fWeight').value = '';
+    $('fWeight').blur();
+    toast(`Logged ${v} lb`);
+  });
+
+  $('pstOpen').addEventListener('click', () => {
+    const existing = log.pst[todayISO()] ?? {};
+    $('fPull').value = existing.pullups ?? '';
+    $('fPush').value = existing.pushups ?? '';
+    $('fSit').value = existing.situps ?? '';
+    pstSheet.showModal();
   });
 
   $('pstForm').addEventListener('submit', (ev) => {
@@ -568,7 +642,8 @@ const weightBaseEnd = weightPlan.phases[0].endWeight;
     if ($('fSit').value) entry.situps = Number($('fSit').value);
     if (!Object.keys(entry).length) return;
     save({ pst: { [todayISO()]: entry } });
-    $('fPull').value = $('fPush').value = $('fSit').value = '';
+    pstSheet.close();
+    toast('PST logged');
   });
 
   // ---------------------------------------------------------------------------
@@ -581,11 +656,9 @@ const weightBaseEnd = weightPlan.phases[0].endWeight;
     $('blockToggle').setAttribute('aria-expanded', String(!wrap.hidden));
   });
 
+  // Every session everywhere opens the same sheet — one interaction to learn.
   for (const d of days) {
-    d.el.querySelector('.day-row').addEventListener('click', () => {
-      const det = d.el.querySelector('.day-detail');
-      det.hidden = !det.hidden;
-    });
+    d.el.querySelector('.day-row').addEventListener('click', () => openSheet(d));
   }
 
   // ---------------------------------------------------------------------------
@@ -718,7 +791,46 @@ const weightBaseEnd = weightPlan.phases[0].endWeight;
     color: #888;
   }
 
-  /* Today hero */
+  /* Today hero — a button, so the whole block is one tap target */
+  .hero-card {
+    display: block;
+    width: 100%;
+    text-align: left;
+    background: none;
+    border: none;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+    font: inherit;
+    color: inherit;
+  }
+
+  .hero-card:hover .hero-name,
+  .hero-card:hover .hero-cta {
+    color: #888;
+  }
+
+  .hero-card:focus-visible {
+    outline: 1px solid rgb(59, 61, 65);
+    outline-offset: 4px;
+  }
+
+  .hero-cta {
+    display: block;
+    font-family: 'ABC Marist Unlicensed Trial Book', sans-serif;
+    font-size: 12px;
+    letter-spacing: 0.015em;
+    color: rgb(115, 118, 122);
+    padding-top: 8px;
+  }
+
+  .clamp {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
   .hero {
     display: flex;
     justify-content: space-between;
@@ -728,6 +840,7 @@ const weightBaseEnd = weightPlan.phases[0].endWeight;
   }
 
   .hero-name {
+    display: block;
     font-family: 'ABC Marist Unlicensed Trial Book', sans-serif;
     font-size: 23px;
     letter-spacing: -0.03em;
@@ -1178,6 +1291,138 @@ const weightBaseEnd = weightPlan.phases[0].endWeight;
     background: rgb(196, 74, 42);
   }
 
+  /* ---------------------------------------------------------------- sheets */
+  .sheet {
+    padding: 0;
+    border: 0.5px solid var(--border-color);
+    background: var(--white-color);
+    color: var(--black-color);
+    max-width: 480px;
+    width: calc(100% - 32px);
+    max-height: 85vh;
+    overflow: hidden auto;
+    overscroll-behavior: contain;
+  }
+
+  .sheet::backdrop {
+    background: rgba(20, 20, 20, 0.28);
+  }
+
+  .sheet-dismiss {
+    display: flex;
+    justify-content: center;
+    padding: 10px 0 2px;
+    position: sticky;
+    top: 0;
+    background: var(--white-color);
+  }
+
+  .grabber {
+    width: 34px;
+    height: 4px;
+    padding: 0;
+    border: none;
+    border-radius: 99px;
+    background: var(--border-color);
+    cursor: pointer;
+  }
+
+  .grabber:hover {
+    background: rgb(180, 183, 187);
+  }
+
+  .sheet-body {
+    padding: 6px 22px 22px;
+  }
+
+  .sheet-eyebrow {
+    font-family: 'ABC Marist Unlicensed Trial Book', sans-serif;
+    font-size: 12px;
+    letter-spacing: 0.015em;
+    color: rgb(115, 118, 122);
+    padding-bottom: 2px;
+  }
+
+  .sheet-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 12px;
+    padding-bottom: 8px;
+    margin-bottom: 10px;
+    border-bottom: 0.5px solid var(--border-color);
+  }
+
+  .sheet-name {
+    font-family: 'ABC Marist Unlicensed Trial Book', sans-serif;
+    font-size: 21px;
+    letter-spacing: -0.03em;
+    line-height: 26px;
+    font-weight: 500;
+    margin: 0;
+  }
+
+  .sheet-dist {
+    font-family: 'ABC Marist Unlicensed Trial Book', sans-serif;
+    font-size: 17px;
+    color: rgb(115, 118, 122);
+    font-variant-numeric: tabular-nums;
+    flex-shrink: 0;
+  }
+
+  .sheet-actions {
+    display: flex;
+    gap: 8px;
+    width: 100%;
+    padding-top: 6px;
+  }
+
+  .sheet-actions .btn {
+    flex: 1;
+  }
+
+  .hint {
+    text-transform: none;
+    letter-spacing: 0;
+    color: rgb(180, 183, 187);
+  }
+
+  .wide-btn {
+    align-self: flex-start;
+    margin-top: 8px;
+  }
+
+  /* Toast */
+  .toast {
+    position: fixed;
+    left: 50%;
+    bottom: 56px;
+    transform: translate(-50%, 8px);
+    background: rgb(59, 61, 65);
+    color: rgb(255, 255, 255);
+    font-family: 'ABC Marist Unlicensed Trial Book', sans-serif;
+    font-size: 13px;
+    letter-spacing: -0.01em;
+    padding: 8px 14px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.18s, transform 0.18s;
+    z-index: 10;
+  }
+
+  .toast.show {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .toast,
+    .sheet {
+      transition: none;
+      animation: none;
+    }
+  }
+
   @media (max-width: 809px) {
     .main-container {
       padding: 24px 16px 70px;
@@ -1203,6 +1448,39 @@ const weightBaseEnd = weightPlan.phases[0].endWeight;
     }
     .btn {
       padding: 11px 16px;
+    }
+
+    /* Bottom sheet: pinned to the thumb end of the screen, full width. */
+    .sheet {
+      width: 100%;
+      max-width: none;
+      margin: 0 0 0 0;
+      top: auto;
+      bottom: 0;
+      max-height: 88vh;
+      border-width: 0.5px 0 0;
+      animation: sheet-up 0.22s ease-out;
+      /* clears the home indicator on iOS */
+      padding-bottom: env(safe-area-inset-bottom);
+    }
+
+    .sheet-body {
+      padding: 6px 18px 20px;
+    }
+
+    @keyframes sheet-up {
+      from {
+        transform: translateY(14px);
+        opacity: 0.6;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    .toast {
+      bottom: 62px;
     }
   }
 </style>
