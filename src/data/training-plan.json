@@ -9,7 +9,7 @@
     "planEndDate": "2026-12-06",
     "totalWeeks": 16,
     "generatedBy": "Claude Coach",
-    "note": "Base phase only. The formal 19-week marathon block starts 2026-12-07 and gets built from the week-16 test results."
+    "note": "Base phase, rebuilt 2026-08-17 around the Amazon night shift (Wed-Sat 6:30pm-5am, from Aug 26). Three runs a week on the free days, peak 18.5 mpw. The formal 19-week marathon block starts 2026-12-07, the week the job ends, and gets built from the week-16 test."
   },
   "preferences": {
     "run": "miles",
@@ -49,9 +49,10 @@
       }
     ],
     "constraints": [
-      "Work + school schedule",
-      "4 run days + 2 strength days",
-      "No GPS watch yet"
+      "Amazon warehouse nights Wed-Sat 6:30pm-5am, Aug 26 - Dec 2026",
+      "Junior CS course load",
+      "Free to train: Sun (post-shift), Mon, Tue",
+      "Slept under six hours -> walk, do not run"
     ]
   },
   "targets": {
@@ -61,35 +62,36 @@
     "note": "Locked in Feb/Mar 2027 off actual long-run and tempo data, per handoff."
   },
   "weightPlan": {
-    "start": 190,
+    "start": 202,
     "target": 165,
+    "measuredAt": "2026-08-16",
     "phases": [
       {
         "window": "Base (Aug-Dec)",
-        "rate": "0.75-1 lb/wk",
-        "deficit": "~500 kcal/day",
-        "endWeight": 175
+        "rate": "1-1.25 lb/wk",
+        "deficit": "~600 kcal/day",
+        "endWeight": 185
       },
       {
         "window": "Build (Dec-Mar)",
-        "rate": "~0.25 lb/wk",
+        "rate": "~0.35 lb/wk",
         "deficit": "~200 kcal/day",
-        "endWeight": 170
+        "endWeight": 178
       },
       {
         "window": "Taper + race",
         "rate": "0",
         "deficit": "maintenance",
-        "endWeight": 170
+        "endWeight": 178
       },
       {
         "window": "Post-race -> SEAL prep",
         "rate": "resume",
-        "deficit": "~500 kcal/day",
+        "deficit": "~600 kcal/day",
         "endWeight": 165
       }
     ],
-    "protein": "170-190 g/day throughout \u2014 protects muscle through the deficit"
+    "protein": "180-200 g/day throughout \u2014 protects muscle through a deficit this long"
   },
   "phases": [
     {
@@ -118,8 +120,8 @@
       "startDate": "2026-08-17",
       "endDate": "2026-08-23",
       "phase": "Base",
-      "focus": "Establish the habit. Run/walk only \u2014 no continuous running yet.",
-      "targetMiles": 8.0,
+      "focus": "Establish the shape. Run/walk only \u2014 the walk breaks are the point, not a concession.",
+      "targetMiles": 7.0,
       "isRecoveryWeek": false,
       "days": [
         {
@@ -127,13 +129,14 @@
           "dayOfWeek": "Monday",
           "workouts": [
             {
-              "id": "w1-mon-str",
-              "sport": "strength",
-              "type": "strength",
-              "name": "Strength \u2014 Foundation",
-              "durationMinutes": 35,
-              "humanReadable": "Bodyweight squat 3x12\nPush-up 3x max (scale to incline)\nGlute bridge 3x15\nPlank 3x40s\nDead bug 3x10/side\nCalf raise 3x20  \u2014 tibialis + calf work is your injury insurance",
-              "description": "Lift before the week's running load accumulates.",
+              "id": "w1-mon-long",
+              "sport": "run",
+              "type": "long",
+              "name": "Long run",
+              "distanceMiles": 3.0,
+              "durationMinutes": 36,
+              "humanReadable": "Run/walk: 2 min run / 2 min walk, repeated for the distance.\nThe walk breaks are what let your tendons catch up to your engine. They are in the plan on purpose.\nEffort: full sentences the whole way, or you're going too fast.",
+              "description": "The week's key session.",
               "completed": false
             }
           ]
@@ -147,10 +150,20 @@
               "sport": "run",
               "type": "easy",
               "name": "Easy run",
-              "distanceMiles": 2.5,
-              "durationMinutes": 28,
-              "humanReadable": "Run/walk: 2 min run / 2 min walk, repeat for the full distance.\nThe walk breaks are not optional and not a failure \u2014 they are what lets your tendons catch up to your engine.\nEffort: you should be able to speak full sentences the entire time.",
-              "description": "Aerobic base.",
+              "distanceMiles": 2.0,
+              "durationMinutes": 23,
+              "humanReadable": "Run/walk: 2 min run / 2 min walk, repeated for the distance.\nThe walk breaks are what let your tendons catch up to your engine. They are in the plan on purpose.\nEffort: full sentences the whole way, or you're going too fast.",
+              "description": "Aerobic base on your most recovered day.",
+              "completed": false
+            },
+            {
+              "id": "w1-tue-str",
+              "sport": "strength",
+              "type": "strength",
+              "name": "Strength \u2014 Foundation",
+              "durationMinutes": 35,
+              "humanReadable": "Bodyweight squat 3x12\nPush-up 3x max (incline is fine)\nGlute bridge 3x15\nPlank 3x40s\nDead bug 3x10/side\nCalf raise 3x20  \u2014 your cheapest injury insurance, do not skip",
+              "description": "Lift after the run, or split it to the evening.",
               "completed": false
             }
           ]
@@ -160,12 +173,14 @@
           "dayOfWeek": "Wednesday",
           "workouts": [
             {
-              "id": "w1-wed-rest",
-              "sport": "rest",
-              "type": "rest",
-              "name": "Rest",
-              "humanReadable": "Full rest, or a 20-30 min walk if you're restless.\nAdaptation happens today, not on the run days.",
-              "description": "Recovery.",
+              "id": "w1-wed-run",
+              "sport": "run",
+              "type": "easy",
+              "name": "Short easy run",
+              "distanceMiles": 2.0,
+              "durationMinutes": 23,
+              "humanReadable": "Run/walk: 2 min run / 2 min walk, repeated for the distance.\nThe walk breaks are what let your tendons catch up to your engine. They are in the plan on purpose.\nEffort: full sentences the whole way, or you're going too fast.",
+              "description": "Third and last run of the week.",
               "completed": false
             }
           ]
@@ -175,14 +190,12 @@
           "dayOfWeek": "Thursday",
           "workouts": [
             {
-              "id": "w1-thu-run",
-              "sport": "run",
-              "type": "easy",
-              "name": "Easy run",
-              "distanceMiles": 2.5,
-              "durationMinutes": 28,
-              "humanReadable": "Run/walk: 2 min run / 2 min walk, repeat for the full distance.\nThe walk breaks are not optional and not a failure \u2014 they are what lets your tendons catch up to your engine.\nEffort: you should be able to speak full sentences the entire time.",
-              "description": "Aerobic base.",
+              "id": "w1-thu-rest",
+              "sport": "rest",
+              "type": "rest",
+              "name": "Rest",
+              "humanReadable": "Full rest, or an easy walk if you're restless.\nAdaptation happens today, not on the run days.",
+              "description": "Recovery.",
               "completed": false
             }
           ]
@@ -192,13 +205,12 @@
           "dayOfWeek": "Friday",
           "workouts": [
             {
-              "id": "w1-fri-str",
-              "sport": "strength",
-              "type": "strength",
-              "name": "Strength \u2014 Foundation",
-              "durationMinutes": 35,
-              "humanReadable": "Bodyweight squat 3x12\nPush-up 3x max (scale to incline)\nGlute bridge 3x15\nPlank 3x40s\nDead bug 3x10/side\nCalf raise 3x20  \u2014 tibialis + calf work is your injury insurance",
-              "description": "Second lift. Keep it 24h clear of the long run.",
+              "id": "w1-fri-rest",
+              "sport": "rest",
+              "type": "rest",
+              "name": "Rest",
+              "humanReadable": "Full rest, or an easy walk if you're restless.\nAdaptation happens today, not on the run days.",
+              "description": "Recovery.",
               "completed": false
             }
           ]
@@ -208,14 +220,12 @@
           "dayOfWeek": "Saturday",
           "workouts": [
             {
-              "id": "w1-sat-run",
-              "sport": "run",
-              "type": "long",
-              "name": "Long run",
-              "distanceMiles": 3.0,
-              "durationMinutes": 36,
-              "humanReadable": "Run/walk: 2 min run / 2 min walk, repeat for the full distance.\nThe walk breaks are not optional and not a failure \u2014 they are what lets your tendons catch up to your engine.\nEffort: you should be able to speak full sentences the entire time.",
-              "description": "The week's key session.",
+              "id": "w1-sat-rest",
+              "sport": "rest",
+              "type": "rest",
+              "name": "Rest",
+              "humanReadable": "Full rest, or an easy walk if you're restless.\nAdaptation happens today, not on the run days.",
+              "description": "Recovery.",
               "completed": false
             }
           ]
@@ -228,19 +238,29 @@
               "id": "w1-sun-rest",
               "sport": "rest",
               "type": "rest",
-              "name": "Rest",
-              "humanReadable": "Full rest. A fourth run gets added in week 5 \u2014 not before.",
-              "description": "Recovery.",
+              "name": "Rest \u2014 sleep first",
+              "humanReadable": "You came off shift at 5am. Sleep is the session today.\n\nIf you're up and feel decent, an easy 20-30 min walk helps reset the day \u2014 but only after you've slept.",
+              "description": "Post-shift recovery.",
+              "completed": false
+            },
+            {
+              "id": "w1-sun-str",
+              "sport": "strength",
+              "type": "strength",
+              "name": "Optional strength",
+              "durationMinutes": 20,
+              "humanReadable": "OPTIONAL \u2014 only if you slept properly.\n\nBodyweight squat 3x12\nPush-up 3x max (incline is fine)\nGlute bridge 3x15\nPlank 3x40s\n\nSkip without guilt. This is the first thing that should go in a bad week.",
+              "description": "Optional second lift.",
               "completed": false
             }
           ]
         }
       ],
       "summary": {
-        "totalMiles": 8.0,
+        "totalMiles": 7.0,
         "longRun": 3.0,
         "runs": 3,
-        "strengthSessions": 2
+        "strengthSessions": 1
       }
     },
     {
@@ -248,8 +268,8 @@
       "startDate": "2026-08-24",
       "endDate": "2026-08-30",
       "phase": "Base",
-      "focus": "Same shape, slightly longer. Walk breaks still mandatory.",
-      "targetMiles": 9.0,
+      "focus": "Job starts Wednesday. Get the run in before the shift, even if it's short.",
+      "targetMiles": 8.0,
       "isRecoveryWeek": false,
       "days": [
         {
@@ -257,13 +277,14 @@
           "dayOfWeek": "Monday",
           "workouts": [
             {
-              "id": "w2-mon-str",
-              "sport": "strength",
-              "type": "strength",
-              "name": "Strength \u2014 Foundation",
-              "durationMinutes": 35,
-              "humanReadable": "Bodyweight squat 3x12\nPush-up 3x max (scale to incline)\nGlute bridge 3x15\nPlank 3x40s\nDead bug 3x10/side\nCalf raise 3x20  \u2014 tibialis + calf work is your injury insurance",
-              "description": "Lift before the week's running load accumulates.",
+              "id": "w2-mon-long",
+              "sport": "run",
+              "type": "long",
+              "name": "Long run",
+              "distanceMiles": 3.5,
+              "durationMinutes": 42,
+              "humanReadable": "Run/walk: 3 min run / 2 min walk, repeated for the distance.\nThe walk breaks are what let your tendons catch up to your engine. They are in the plan on purpose.\nEffort: full sentences the whole way, or you're going too fast.",
+              "description": "The week's key session.",
               "completed": false
             }
           ]
@@ -279,8 +300,18 @@
               "name": "Easy run",
               "distanceMiles": 2.5,
               "durationMinutes": 28,
-              "humanReadable": "Run/walk: 3 min run / 2 min walk, repeat for the full distance.\nThe walk breaks are not optional and not a failure \u2014 they are what lets your tendons catch up to your engine.\nEffort: you should be able to speak full sentences the entire time.",
-              "description": "Aerobic base.",
+              "humanReadable": "Run/walk: 3 min run / 2 min walk, repeated for the distance.\nThe walk breaks are what let your tendons catch up to your engine. They are in the plan on purpose.\nEffort: full sentences the whole way, or you're going too fast.",
+              "description": "Aerobic base on your most recovered day.",
+              "completed": false
+            },
+            {
+              "id": "w2-tue-str",
+              "sport": "strength",
+              "type": "strength",
+              "name": "Strength \u2014 Foundation",
+              "durationMinutes": 35,
+              "humanReadable": "Bodyweight squat 3x12\nPush-up 3x max (incline is fine)\nGlute bridge 3x15\nPlank 3x40s\nDead bug 3x10/side\nCalf raise 3x20  \u2014 your cheapest injury insurance, do not skip",
+              "description": "Lift after the run, or split it to the evening.",
               "completed": false
             }
           ]
@@ -290,12 +321,14 @@
           "dayOfWeek": "Wednesday",
           "workouts": [
             {
-              "id": "w2-wed-rest",
-              "sport": "rest",
-              "type": "rest",
-              "name": "Rest",
-              "humanReadable": "Full rest, or a 20-30 min walk if you're restless.\nAdaptation happens today, not on the run days.",
-              "description": "Recovery.",
+              "id": "w2-wed-run",
+              "sport": "run",
+              "type": "easy",
+              "name": "Short easy run",
+              "distanceMiles": 2.0,
+              "durationMinutes": 23,
+              "humanReadable": "Get this in during the day \u2014 you're on shift at 6:30pm.\n\nRun/walk: 3 min run / 2 min walk, repeated for the distance.\nThe walk breaks are what let your tendons catch up to your engine. They are in the plan on purpose.\nEffort: full sentences the whole way, or you're going too fast.",
+              "description": "Third and last run of the week.",
               "completed": false
             }
           ]
@@ -305,14 +338,13 @@
           "dayOfWeek": "Thursday",
           "workouts": [
             {
-              "id": "w2-thu-run",
-              "sport": "run",
-              "type": "easy",
-              "name": "Easy run",
-              "distanceMiles": 3.0,
-              "durationMinutes": 34,
-              "humanReadable": "Run/walk: 3 min run / 2 min walk, repeat for the full distance.\nThe walk breaks are not optional and not a failure \u2014 they are what lets your tendons catch up to your engine.\nEffort: you should be able to speak full sentences the entire time.",
-              "description": "Aerobic base.",
+              "id": "w2-thu-rest",
+              "sport": "rest",
+              "type": "rest",
+              "name": "Work \u2014 rest",
+              "durationMinutes": null,
+              "humanReadable": "Shift night. No training.\n10.5 hours on your feet is 15-25k steps \u2014 that is real aerobic work and real energy out the door. It counts toward the cut even though it isn't in the mileage.",
+              "description": "Night shift.",
               "completed": false
             }
           ]
@@ -322,13 +354,13 @@
           "dayOfWeek": "Friday",
           "workouts": [
             {
-              "id": "w2-fri-str",
-              "sport": "strength",
-              "type": "strength",
-              "name": "Strength \u2014 Foundation",
-              "durationMinutes": 35,
-              "humanReadable": "Bodyweight squat 3x12\nPush-up 3x max (scale to incline)\nGlute bridge 3x15\nPlank 3x40s\nDead bug 3x10/side\nCalf raise 3x20  \u2014 tibialis + calf work is your injury insurance",
-              "description": "Second lift. Keep it 24h clear of the long run.",
+              "id": "w2-fri-rest",
+              "sport": "rest",
+              "type": "rest",
+              "name": "Work \u2014 rest",
+              "durationMinutes": null,
+              "humanReadable": "Shift night. No training.\n10.5 hours on your feet is 15-25k steps \u2014 that is real aerobic work and real energy out the door. It counts toward the cut even though it isn't in the mileage.",
+              "description": "Night shift.",
               "completed": false
             }
           ]
@@ -338,14 +370,13 @@
           "dayOfWeek": "Saturday",
           "workouts": [
             {
-              "id": "w2-sat-run",
-              "sport": "run",
-              "type": "long",
-              "name": "Long run",
-              "distanceMiles": 3.5,
-              "durationMinutes": 42,
-              "humanReadable": "Run/walk: 3 min run / 2 min walk, repeat for the full distance.\nThe walk breaks are not optional and not a failure \u2014 they are what lets your tendons catch up to your engine.\nEffort: you should be able to speak full sentences the entire time.",
-              "description": "The week's key session.",
+              "id": "w2-sat-rest",
+              "sport": "rest",
+              "type": "rest",
+              "name": "Work \u2014 rest",
+              "durationMinutes": null,
+              "humanReadable": "Shift night. No training.\n10.5 hours on your feet is 15-25k steps \u2014 that is real aerobic work and real energy out the door. It counts toward the cut even though it isn't in the mileage.",
+              "description": "Night shift.",
               "completed": false
             }
           ]
@@ -358,19 +389,29 @@
               "id": "w2-sun-rest",
               "sport": "rest",
               "type": "rest",
-              "name": "Rest",
-              "humanReadable": "Full rest. A fourth run gets added in week 5 \u2014 not before.",
-              "description": "Recovery.",
+              "name": "Rest \u2014 sleep first",
+              "humanReadable": "You came off shift at 5am. Sleep is the session today.\n\nIf you're up and feel decent, an easy 20-30 min walk helps reset the day \u2014 but only after you've slept.",
+              "description": "Post-shift recovery.",
+              "completed": false
+            },
+            {
+              "id": "w2-sun-str",
+              "sport": "strength",
+              "type": "strength",
+              "name": "Optional strength",
+              "durationMinutes": 20,
+              "humanReadable": "OPTIONAL \u2014 only if you slept properly.\n\nBodyweight squat 3x12\nPush-up 3x max (incline is fine)\nGlute bridge 3x15\nPlank 3x40s\n\nSkip without guilt. This is the first thing that should go in a bad week.",
+              "description": "Optional second lift.",
               "completed": false
             }
           ]
         }
       ],
       "summary": {
-        "totalMiles": 9.0,
+        "totalMiles": 8.0,
         "longRun": 3.5,
         "runs": 3,
-        "strengthSessions": 2
+        "strengthSessions": 1
       }
     },
     {
@@ -378,8 +419,8 @@
       "startDate": "2026-08-31",
       "endDate": "2026-09-06",
       "phase": "Base",
-      "focus": "Longest walk-break interval yet. Tissue is the limiter, not lungs.",
-      "targetMiles": 10.0,
+      "focus": "First full week around nights. Expect it to feel harder than the mileage suggests.",
+      "targetMiles": 9.0,
       "isRecoveryWeek": false,
       "days": [
         {
@@ -387,13 +428,14 @@
           "dayOfWeek": "Monday",
           "workouts": [
             {
-              "id": "w3-mon-str",
-              "sport": "strength",
-              "type": "strength",
-              "name": "Strength \u2014 Foundation",
-              "durationMinutes": 35,
-              "humanReadable": "Bodyweight squat 3x12\nPush-up 3x max (scale to incline)\nGlute bridge 3x15\nPlank 3x40s\nDead bug 3x10/side\nCalf raise 3x20  \u2014 tibialis + calf work is your injury insurance",
-              "description": "Lift before the week's running load accumulates.",
+              "id": "w3-mon-long",
+              "sport": "run",
+              "type": "long",
+              "name": "Long run",
+              "distanceMiles": 4.0,
+              "durationMinutes": 48,
+              "humanReadable": "Run/walk: 4 min run / 90s walk, repeated for the distance.\nThe walk breaks are what let your tendons catch up to your engine. They are in the plan on purpose.\nEffort: full sentences the whole way, or you're going too fast.",
+              "description": "The week's key session.",
               "completed": false
             }
           ]
@@ -409,8 +451,18 @@
               "name": "Easy run",
               "distanceMiles": 3.0,
               "durationMinutes": 34,
-              "humanReadable": "Run/walk: 4 min run / 1.5 min walk, repeat for the full distance.\nThe walk breaks are not optional and not a failure \u2014 they are what lets your tendons catch up to your engine.\nEffort: you should be able to speak full sentences the entire time.",
-              "description": "Aerobic base.",
+              "humanReadable": "Run/walk: 4 min run / 90s walk, repeated for the distance.\nThe walk breaks are what let your tendons catch up to your engine. They are in the plan on purpose.\nEffort: full sentences the whole way, or you're going too fast.",
+              "description": "Aerobic base on your most recovered day.",
+              "completed": false
+            },
+            {
+              "id": "w3-tue-str",
+              "sport": "strength",
+              "type": "strength",
+              "name": "Strength \u2014 Foundation",
+              "durationMinutes": 35,
+              "humanReadable": "Bodyweight squat 3x12\nPush-up 3x max (incline is fine)\nGlute bridge 3x15\nPlank 3x40s\nDead bug 3x10/side\nCalf raise 3x20  \u2014 your cheapest injury insurance, do not skip",
+              "description": "Lift after the run, or split it to the evening.",
               "completed": false
             }
           ]
@@ -420,12 +472,14 @@
           "dayOfWeek": "Wednesday",
           "workouts": [
             {
-              "id": "w3-wed-rest",
-              "sport": "rest",
-              "type": "rest",
-              "name": "Rest",
-              "humanReadable": "Full rest, or a 20-30 min walk if you're restless.\nAdaptation happens today, not on the run days.",
-              "description": "Recovery.",
+              "id": "w3-wed-run",
+              "sport": "run",
+              "type": "easy",
+              "name": "Short easy run",
+              "distanceMiles": 2.0,
+              "durationMinutes": 23,
+              "humanReadable": "Get this in during the day \u2014 you're on shift at 6:30pm.\n\nRun/walk: 4 min run / 90s walk, repeated for the distance.\nThe walk breaks are what let your tendons catch up to your engine. They are in the plan on purpose.\nEffort: full sentences the whole way, or you're going too fast.",
+              "description": "Third and last run of the week.",
               "completed": false
             }
           ]
@@ -435,14 +489,13 @@
           "dayOfWeek": "Thursday",
           "workouts": [
             {
-              "id": "w3-thu-run",
-              "sport": "run",
-              "type": "easy",
-              "name": "Easy run",
-              "distanceMiles": 3.0,
-              "durationMinutes": 34,
-              "humanReadable": "Run/walk: 4 min run / 1.5 min walk, repeat for the full distance.\nThe walk breaks are not optional and not a failure \u2014 they are what lets your tendons catch up to your engine.\nEffort: you should be able to speak full sentences the entire time.",
-              "description": "Aerobic base.",
+              "id": "w3-thu-rest",
+              "sport": "rest",
+              "type": "rest",
+              "name": "Work \u2014 rest",
+              "durationMinutes": null,
+              "humanReadable": "Shift night. No training.\n10.5 hours on your feet is 15-25k steps \u2014 that is real aerobic work and real energy out the door. It counts toward the cut even though it isn't in the mileage.",
+              "description": "Night shift.",
               "completed": false
             }
           ]
@@ -452,13 +505,13 @@
           "dayOfWeek": "Friday",
           "workouts": [
             {
-              "id": "w3-fri-str",
-              "sport": "strength",
-              "type": "strength",
-              "name": "Strength \u2014 Foundation",
-              "durationMinutes": 35,
-              "humanReadable": "Bodyweight squat 3x12\nPush-up 3x max (scale to incline)\nGlute bridge 3x15\nPlank 3x40s\nDead bug 3x10/side\nCalf raise 3x20  \u2014 tibialis + calf work is your injury insurance",
-              "description": "Second lift. Keep it 24h clear of the long run.",
+              "id": "w3-fri-rest",
+              "sport": "rest",
+              "type": "rest",
+              "name": "Work \u2014 rest",
+              "durationMinutes": null,
+              "humanReadable": "Shift night. No training.\n10.5 hours on your feet is 15-25k steps \u2014 that is real aerobic work and real energy out the door. It counts toward the cut even though it isn't in the mileage.",
+              "description": "Night shift.",
               "completed": false
             }
           ]
@@ -468,14 +521,13 @@
           "dayOfWeek": "Saturday",
           "workouts": [
             {
-              "id": "w3-sat-run",
-              "sport": "run",
-              "type": "long",
-              "name": "Long run",
-              "distanceMiles": 4.0,
-              "durationMinutes": 48,
-              "humanReadable": "Run/walk: 4 min run / 1.5 min walk, repeat for the full distance.\nThe walk breaks are not optional and not a failure \u2014 they are what lets your tendons catch up to your engine.\nEffort: you should be able to speak full sentences the entire time.",
-              "description": "The week's key session.",
+              "id": "w3-sat-rest",
+              "sport": "rest",
+              "type": "rest",
+              "name": "Work \u2014 rest",
+              "durationMinutes": null,
+              "humanReadable": "Shift night. No training.\n10.5 hours on your feet is 15-25k steps \u2014 that is real aerobic work and real energy out the door. It counts toward the cut even though it isn't in the mileage.",
+              "description": "Night shift.",
               "completed": false
             }
           ]
@@ -488,19 +540,29 @@
               "id": "w3-sun-rest",
               "sport": "rest",
               "type": "rest",
-              "name": "Rest",
-              "humanReadable": "Full rest. A fourth run gets added in week 5 \u2014 not before.",
-              "description": "Recovery.",
+              "name": "Rest \u2014 sleep first",
+              "humanReadable": "You came off shift at 5am. Sleep is the session today.\n\nIf you're up and feel decent, an easy 20-30 min walk helps reset the day \u2014 but only after you've slept.",
+              "description": "Post-shift recovery.",
+              "completed": false
+            },
+            {
+              "id": "w3-sun-str",
+              "sport": "strength",
+              "type": "strength",
+              "name": "Optional strength",
+              "durationMinutes": 20,
+              "humanReadable": "OPTIONAL \u2014 only if you slept properly.\n\nBodyweight squat 3x12\nPush-up 3x max (incline is fine)\nGlute bridge 3x15\nPlank 3x40s\n\nSkip without guilt. This is the first thing that should go in a bad week.",
+              "description": "Optional second lift.",
               "completed": false
             }
           ]
         }
       ],
       "summary": {
-        "totalMiles": 10.0,
+        "totalMiles": 9.0,
         "longRun": 4.0,
         "runs": 3,
-        "strengthSessions": 2
+        "strengthSessions": 1
       }
     },
     {
@@ -508,8 +570,8 @@
       "startDate": "2026-09-07",
       "endDate": "2026-09-13",
       "phase": "Base",
-      "focus": "Down week. Resist the urge to hold volume \u2014 this is where you adapt.",
-      "targetMiles": 7.0,
+      "focus": "Down week. You are three weeks into a schedule flip \u2014 take it.",
+      "targetMiles": 6.5,
       "isRecoveryWeek": true,
       "days": [
         {
@@ -517,13 +579,14 @@
           "dayOfWeek": "Monday",
           "workouts": [
             {
-              "id": "w4-mon-str",
-              "sport": "strength",
-              "type": "strength",
-              "name": "Strength \u2014 Foundation",
-              "durationMinutes": 35,
-              "humanReadable": "Bodyweight squat 3x12\nPush-up 3x max (scale to incline)\nGlute bridge 3x15\nPlank 3x40s\nDead bug 3x10/side\nCalf raise 3x20  \u2014 tibialis + calf work is your injury insurance",
-              "description": "Lift before the week's running load accumulates.",
+              "id": "w4-mon-long",
+              "sport": "run",
+              "type": "long",
+              "name": "Long run",
+              "distanceMiles": 3.0,
+              "durationMinutes": 36,
+              "humanReadable": "Run/walk: 3 min run / 2 min walk, repeated for the distance.\nThe walk breaks are what let your tendons catch up to your engine. They are in the plan on purpose.\nEffort: full sentences the whole way, or you're going too fast.",
+              "description": "The week's key session.",
               "completed": false
             }
           ]
@@ -537,10 +600,20 @@
               "sport": "run",
               "type": "easy",
               "name": "Easy run",
-              "distanceMiles": 2.5,
-              "durationMinutes": 28,
-              "humanReadable": "Run/walk: 3 min run / 2 min walk, repeat for the full distance.\nThe walk breaks are not optional and not a failure \u2014 they are what lets your tendons catch up to your engine.\nEffort: you should be able to speak full sentences the entire time.",
-              "description": "Aerobic base.",
+              "distanceMiles": 2.0,
+              "durationMinutes": 23,
+              "humanReadable": "Run/walk: 3 min run / 2 min walk, repeated for the distance.\nThe walk breaks are what let your tendons catch up to your engine. They are in the plan on purpose.\nEffort: full sentences the whole way, or you're going too fast.",
+              "description": "Aerobic base on your most recovered day.",
+              "completed": false
+            },
+            {
+              "id": "w4-tue-str",
+              "sport": "strength",
+              "type": "strength",
+              "name": "Strength \u2014 Foundation",
+              "durationMinutes": 35,
+              "humanReadable": "Bodyweight squat 3x12\nPush-up 3x max (incline is fine)\nGlute bridge 3x15\nPlank 3x40s\nDead bug 3x10/side\nCalf raise 3x20  \u2014 your cheapest injury insurance, do not skip",
+              "description": "Lift after the run, or split it to the evening.",
               "completed": false
             }
           ]
@@ -550,12 +623,14 @@
           "dayOfWeek": "Wednesday",
           "workouts": [
             {
-              "id": "w4-wed-rest",
-              "sport": "rest",
-              "type": "rest",
-              "name": "Rest",
-              "humanReadable": "Full rest, or a 20-30 min walk if you're restless.\nAdaptation happens today, not on the run days.",
-              "description": "Recovery.",
+              "id": "w4-wed-run",
+              "sport": "run",
+              "type": "easy",
+              "name": "Short easy run",
+              "distanceMiles": 1.5,
+              "durationMinutes": 17,
+              "humanReadable": "Get this in during the day \u2014 you're on shift at 6:30pm.\n\nRun/walk: 3 min run / 2 min walk, repeated for the distance.\nThe walk breaks are what let your tendons catch up to your engine. They are in the plan on purpose.\nEffort: full sentences the whole way, or you're going too fast.",
+              "description": "Third and last run of the week.",
               "completed": false
             }
           ]
@@ -565,14 +640,13 @@
           "dayOfWeek": "Thursday",
           "workouts": [
             {
-              "id": "w4-thu-run",
-              "sport": "run",
-              "type": "easy",
-              "name": "Easy run",
-              "distanceMiles": 2.0,
-              "durationMinutes": 23,
-              "humanReadable": "Run/walk: 3 min run / 2 min walk, repeat for the full distance.\nThe walk breaks are not optional and not a failure \u2014 they are what lets your tendons catch up to your engine.\nEffort: you should be able to speak full sentences the entire time.",
-              "description": "Aerobic base.",
+              "id": "w4-thu-rest",
+              "sport": "rest",
+              "type": "rest",
+              "name": "Work \u2014 rest",
+              "durationMinutes": null,
+              "humanReadable": "Shift night. No training.\n10.5 hours on your feet is 15-25k steps \u2014 that is real aerobic work and real energy out the door. It counts toward the cut even though it isn't in the mileage.",
+              "description": "Night shift.",
               "completed": false
             }
           ]
@@ -582,13 +656,13 @@
           "dayOfWeek": "Friday",
           "workouts": [
             {
-              "id": "w4-fri-str",
-              "sport": "strength",
-              "type": "strength",
-              "name": "Strength \u2014 Foundation",
-              "durationMinutes": 35,
-              "humanReadable": "Bodyweight squat 3x12\nPush-up 3x max (scale to incline)\nGlute bridge 3x15\nPlank 3x40s\nDead bug 3x10/side\nCalf raise 3x20  \u2014 tibialis + calf work is your injury insurance",
-              "description": "Second lift. Keep it 24h clear of the long run.",
+              "id": "w4-fri-rest",
+              "sport": "rest",
+              "type": "rest",
+              "name": "Work \u2014 rest",
+              "durationMinutes": null,
+              "humanReadable": "Shift night. No training.\n10.5 hours on your feet is 15-25k steps \u2014 that is real aerobic work and real energy out the door. It counts toward the cut even though it isn't in the mileage.",
+              "description": "Night shift.",
               "completed": false
             }
           ]
@@ -598,14 +672,13 @@
           "dayOfWeek": "Saturday",
           "workouts": [
             {
-              "id": "w4-sat-run",
-              "sport": "run",
-              "type": "long",
-              "name": "Long run",
-              "distanceMiles": 2.5,
-              "durationMinutes": 30,
-              "humanReadable": "Run/walk: 3 min run / 2 min walk, repeat for the full distance.\nThe walk breaks are not optional and not a failure \u2014 they are what lets your tendons catch up to your engine.\nEffort: you should be able to speak full sentences the entire time.",
-              "description": "The week's key session.",
+              "id": "w4-sat-rest",
+              "sport": "rest",
+              "type": "rest",
+              "name": "Work \u2014 rest",
+              "durationMinutes": null,
+              "humanReadable": "Shift night. No training.\n10.5 hours on your feet is 15-25k steps \u2014 that is real aerobic work and real energy out the door. It counts toward the cut even though it isn't in the mileage.",
+              "description": "Night shift.",
               "completed": false
             }
           ]
@@ -618,19 +691,29 @@
               "id": "w4-sun-rest",
               "sport": "rest",
               "type": "rest",
-              "name": "Rest",
-              "humanReadable": "Full rest. A fourth run gets added in week 5 \u2014 not before.",
-              "description": "Recovery.",
+              "name": "Rest \u2014 sleep first",
+              "humanReadable": "You came off shift at 5am. Sleep is the session today.\n\nIf you're up and feel decent, an easy 20-30 min walk helps reset the day \u2014 but only after you've slept.",
+              "description": "Post-shift recovery.",
+              "completed": false
+            },
+            {
+              "id": "w4-sun-str",
+              "sport": "strength",
+              "type": "strength",
+              "name": "Optional strength",
+              "durationMinutes": 20,
+              "humanReadable": "OPTIONAL \u2014 only if you slept properly.\n\nBodyweight squat 3x12\nPush-up 3x max (incline is fine)\nGlute bridge 3x15\nPlank 3x40s\n\nSkip without guilt. This is the first thing that should go in a bad week.",
+              "description": "Optional second lift.",
               "completed": false
             }
           ]
         }
       ],
       "summary": {
-        "totalMiles": 7.0,
-        "longRun": 2.5,
+        "totalMiles": 6.5,
+        "longRun": 3.0,
         "runs": 3,
-        "strengthSessions": 2
+        "strengthSessions": 1
       }
     },
     {
@@ -638,8 +721,8 @@
       "startDate": "2026-09-14",
       "endDate": "2026-09-20",
       "phase": "Base",
-      "focus": "Fourth run added. First continuous (no-walk) efforts.",
-      "targetMiles": 11.0,
+      "focus": "Continuous running starts. Drop the walk breaks only if the talk test holds.",
+      "targetMiles": 10.0,
       "isRecoveryWeek": false,
       "days": [
         {
@@ -647,13 +730,14 @@
           "dayOfWeek": "Monday",
           "workouts": [
             {
-              "id": "w5-mon-str",
-              "sport": "strength",
-              "type": "strength",
-              "name": "Strength \u2014 Loading",
-              "durationMinutes": 35,
-              "humanReadable": "Goblet squat 3x10\nPull-up 4x max  \u2014 PST carryover, start here and never stop\nPush-up 4x max  \u2014 PST carryover\nRomanian deadlift 3x10\nSingle-leg calf raise 3x15\nSide plank 3x30s/side",
-              "description": "Lift before the week's running load accumulates.",
+              "id": "w5-mon-long",
+              "sport": "run",
+              "type": "long",
+              "name": "Long run",
+              "distanceMiles": 4.5,
+              "durationMinutes": 54,
+              "humanReadable": "Continuous, conversational. If you can't talk in full sentences you are running too hard \u2014 that is the single most common way a base block quietly turns into junk miles.\nLet Strava record it. Don't run to the pace on the screen.",
+              "description": "The week's key session.",
               "completed": false
             }
           ]
@@ -667,10 +751,20 @@
               "sport": "run",
               "type": "easy",
               "name": "Easy run",
-              "distanceMiles": 2.5,
-              "durationMinutes": 28,
-              "humanReadable": "Continuous, conversational pace. If you can't talk in full sentences, you're going too fast \u2014 this is the single most common way beginners stall out.\nEstimated pace ~10:30-12:00/mi, but run by feel, not by number.",
-              "description": "Aerobic base.",
+              "distanceMiles": 3.0,
+              "durationMinutes": 34,
+              "humanReadable": "Continuous, conversational. If you can't talk in full sentences you are running too hard \u2014 that is the single most common way a base block quietly turns into junk miles.\nLet Strava record it. Don't run to the pace on the screen.",
+              "description": "Aerobic base on your most recovered day.",
+              "completed": false
+            },
+            {
+              "id": "w5-tue-str",
+              "sport": "strength",
+              "type": "strength",
+              "name": "Strength \u2014 Loading",
+              "durationMinutes": 35,
+              "humanReadable": "Goblet squat 3x10\nPull-up 4x max  \u2014 PST event, log the number\nPush-up 4x max  \u2014 PST event, log the number\nRomanian deadlift 3x10\nSingle-leg calf raise 3x15\nSide plank 3x30s/side",
+              "description": "Lift after the run, or split it to the evening.",
               "completed": false
             }
           ]
@@ -680,12 +774,14 @@
           "dayOfWeek": "Wednesday",
           "workouts": [
             {
-              "id": "w5-wed-rest",
-              "sport": "rest",
-              "type": "rest",
-              "name": "Rest",
-              "humanReadable": "Full rest, or a 20-30 min walk if you're restless.\nAdaptation happens today, not on the run days.",
-              "description": "Recovery.",
+              "id": "w5-wed-run",
+              "sport": "run",
+              "type": "easy",
+              "name": "Short easy run",
+              "distanceMiles": 2.5,
+              "durationMinutes": 28,
+              "humanReadable": "Get this in during the day \u2014 you're on shift at 6:30pm.\n\nContinuous, conversational. If you can't talk in full sentences you are running too hard \u2014 that is the single most common way a base block quietly turns into junk miles.\nLet Strava record it. Don't run to the pace on the screen.\nKeep it genuinely short. You're on your feet for 10.5 hours tonight; this run is not the hard part of your day.",
+              "description": "Third and last run of the week.",
               "completed": false
             }
           ]
@@ -695,14 +791,13 @@
           "dayOfWeek": "Thursday",
           "workouts": [
             {
-              "id": "w5-thu-run",
-              "sport": "run",
-              "type": "easy",
-              "name": "Easy run",
-              "distanceMiles": 3.0,
-              "durationMinutes": 34,
-              "humanReadable": "Continuous, conversational pace. If you can't talk in full sentences, you're going too fast \u2014 this is the single most common way beginners stall out.\nEstimated pace ~10:30-12:00/mi, but run by feel, not by number.",
-              "description": "Aerobic base.",
+              "id": "w5-thu-rest",
+              "sport": "rest",
+              "type": "rest",
+              "name": "Work \u2014 rest",
+              "durationMinutes": null,
+              "humanReadable": "Shift night. No training.\n10.5 hours on your feet is 15-25k steps \u2014 that is real aerobic work and real energy out the door. It counts toward the cut even though it isn't in the mileage.",
+              "description": "Night shift.",
               "completed": false
             }
           ]
@@ -712,13 +807,13 @@
           "dayOfWeek": "Friday",
           "workouts": [
             {
-              "id": "w5-fri-str",
-              "sport": "strength",
-              "type": "strength",
-              "name": "Strength \u2014 Loading",
-              "durationMinutes": 35,
-              "humanReadable": "Goblet squat 3x10\nPull-up 4x max  \u2014 PST carryover, start here and never stop\nPush-up 4x max  \u2014 PST carryover\nRomanian deadlift 3x10\nSingle-leg calf raise 3x15\nSide plank 3x30s/side",
-              "description": "Second lift. Keep it 24h clear of the long run.",
+              "id": "w5-fri-rest",
+              "sport": "rest",
+              "type": "rest",
+              "name": "Work \u2014 rest",
+              "durationMinutes": null,
+              "humanReadable": "Shift night. No training.\n10.5 hours on your feet is 15-25k steps \u2014 that is real aerobic work and real energy out the door. It counts toward the cut even though it isn't in the mileage.",
+              "description": "Night shift.",
               "completed": false
             }
           ]
@@ -728,14 +823,13 @@
           "dayOfWeek": "Saturday",
           "workouts": [
             {
-              "id": "w5-sat-run",
-              "sport": "run",
-              "type": "long",
-              "name": "Long run",
-              "distanceMiles": 4.0,
-              "durationMinutes": 48,
-              "humanReadable": "Continuous, conversational pace. If you can't talk in full sentences, you're going too fast \u2014 this is the single most common way beginners stall out.\nEstimated pace ~10:30-12:00/mi, but run by feel, not by number.",
-              "description": "The week's key session.",
+              "id": "w5-sat-rest",
+              "sport": "rest",
+              "type": "rest",
+              "name": "Work \u2014 rest",
+              "durationMinutes": null,
+              "humanReadable": "Shift night. No training.\n10.5 hours on your feet is 15-25k steps \u2014 that is real aerobic work and real energy out the door. It counts toward the cut even though it isn't in the mileage.",
+              "description": "Night shift.",
               "completed": false
             }
           ]
@@ -745,24 +839,32 @@
           "dayOfWeek": "Sunday",
           "workouts": [
             {
-              "id": "w5-sun-run",
-              "sport": "run",
-              "type": "recovery",
-              "name": "Recovery run",
-              "distanceMiles": 1.5,
-              "durationMinutes": 19,
-              "humanReadable": "Genuinely easy. Slower than your easy pace. This run exists to move blood through tired legs, not to build fitness.\nIf you feel worse at the end than the start, you ran it too hard.",
-              "description": "Easy shakeout on tired legs.",
+              "id": "w5-sun-rest",
+              "sport": "rest",
+              "type": "rest",
+              "name": "Rest \u2014 sleep first",
+              "humanReadable": "You came off shift at 5am. Sleep is the session today.\n\nIf you're up and feel decent, an easy 20-30 min walk helps reset the day \u2014 but only after you've slept.",
+              "description": "Post-shift recovery.",
+              "completed": false
+            },
+            {
+              "id": "w5-sun-str",
+              "sport": "strength",
+              "type": "strength",
+              "name": "Optional strength",
+              "durationMinutes": 20,
+              "humanReadable": "OPTIONAL \u2014 only if you slept properly.\n\nGoblet squat 3x10\nPull-up 4x max  \u2014 PST event, log the number\nPush-up 4x max  \u2014 PST event, log the number\nRomanian deadlift 3x10\n\nSkip without guilt. This is the first thing that should go in a bad week.",
+              "description": "Optional second lift.",
               "completed": false
             }
           ]
         }
       ],
       "summary": {
-        "totalMiles": 11.0,
-        "longRun": 4.0,
-        "runs": 4,
-        "strengthSessions": 2
+        "totalMiles": 10.0,
+        "longRun": 4.5,
+        "runs": 3,
+        "strengthSessions": 1
       }
     },
     {
@@ -770,8 +872,8 @@
       "startDate": "2026-09-21",
       "endDate": "2026-09-27",
       "phase": "Base",
-      "focus": "Strides introduced Thursday \u2014 4x20s, relaxed and fast, full recovery.",
-      "targetMiles": 12.0,
+      "focus": "Strides on Tuesday: 4x20s relaxed and fast, full walk recovery.",
+      "targetMiles": 11.0,
       "isRecoveryWeek": false,
       "days": [
         {
@@ -779,13 +881,14 @@
           "dayOfWeek": "Monday",
           "workouts": [
             {
-              "id": "w6-mon-str",
-              "sport": "strength",
-              "type": "strength",
-              "name": "Strength \u2014 Loading",
-              "durationMinutes": 35,
-              "humanReadable": "Goblet squat 3x10\nPull-up 4x max  \u2014 PST carryover, start here and never stop\nPush-up 4x max  \u2014 PST carryover\nRomanian deadlift 3x10\nSingle-leg calf raise 3x15\nSide plank 3x30s/side",
-              "description": "Lift before the week's running load accumulates.",
+              "id": "w6-mon-long",
+              "sport": "run",
+              "type": "long",
+              "name": "Long run",
+              "distanceMiles": 5.0,
+              "durationMinutes": 60,
+              "humanReadable": "Continuous, conversational. If you can't talk in full sentences you are running too hard \u2014 that is the single most common way a base block quietly turns into junk miles.\nLet Strava record it. Don't run to the pace on the screen.",
+              "description": "The week's key session.",
               "completed": false
             }
           ]
@@ -799,10 +902,20 @@
               "sport": "run",
               "type": "easy",
               "name": "Easy run",
-              "distanceMiles": 3.0,
-              "durationMinutes": 34,
-              "humanReadable": "Continuous, conversational pace. If you can't talk in full sentences, you're going too fast \u2014 this is the single most common way beginners stall out.\nEstimated pace ~10:30-12:00/mi, but run by feel, not by number.\nFinish with 4x20s strides: relaxed acceleration to about mile-race speed, then full walk recovery. Form work, not a workout.",
-              "description": "Aerobic base.",
+              "distanceMiles": 3.5,
+              "durationMinutes": 40,
+              "humanReadable": "Continuous, conversational. If you can't talk in full sentences you are running too hard \u2014 that is the single most common way a base block quietly turns into junk miles.\nLet Strava record it. Don't run to the pace on the screen.\nFinish with 4x20s strides: relaxed acceleration, full walk recovery. Form, not a workout.",
+              "description": "Aerobic base on your most recovered day.",
+              "completed": false
+            },
+            {
+              "id": "w6-tue-str",
+              "sport": "strength",
+              "type": "strength",
+              "name": "Strength \u2014 Loading",
+              "durationMinutes": 35,
+              "humanReadable": "Goblet squat 3x10\nPull-up 4x max  \u2014 PST event, log the number\nPush-up 4x max  \u2014 PST event, log the number\nRomanian deadlift 3x10\nSingle-leg calf raise 3x15\nSide plank 3x30s/side",
+              "description": "Lift after the run, or split it to the evening.",
               "completed": false
             }
           ]
@@ -812,12 +925,14 @@
           "dayOfWeek": "Wednesday",
           "workouts": [
             {
-              "id": "w6-wed-rest",
-              "sport": "rest",
-              "type": "rest",
-              "name": "Rest",
-              "humanReadable": "Full rest, or a 20-30 min walk if you're restless.\nAdaptation happens today, not on the run days.",
-              "description": "Recovery.",
+              "id": "w6-wed-run",
+              "sport": "run",
+              "type": "easy",
+              "name": "Short easy run",
+              "distanceMiles": 2.5,
+              "durationMinutes": 28,
+              "humanReadable": "Get this in during the day \u2014 you're on shift at 6:30pm.\n\nContinuous, conversational. If you can't talk in full sentences you are running too hard \u2014 that is the single most common way a base block quietly turns into junk miles.\nLet Strava record it. Don't run to the pace on the screen.\nKeep it genuinely short. You're on your feet for 10.5 hours tonight; this run is not the hard part of your day.",
+              "description": "Third and last run of the week.",
               "completed": false
             }
           ]
@@ -827,14 +942,13 @@
           "dayOfWeek": "Thursday",
           "workouts": [
             {
-              "id": "w6-thu-run",
-              "sport": "run",
-              "type": "easy",
-              "name": "Easy run",
-              "distanceMiles": 3.0,
-              "durationMinutes": 34,
-              "humanReadable": "Continuous, conversational pace. If you can't talk in full sentences, you're going too fast \u2014 this is the single most common way beginners stall out.\nEstimated pace ~10:30-12:00/mi, but run by feel, not by number.\nFinish with 4x20s strides: relaxed acceleration to about mile-race speed, then full walk recovery. Form work, not a workout.",
-              "description": "Aerobic base.",
+              "id": "w6-thu-rest",
+              "sport": "rest",
+              "type": "rest",
+              "name": "Work \u2014 rest",
+              "durationMinutes": null,
+              "humanReadable": "Shift night. No training.\n10.5 hours on your feet is 15-25k steps \u2014 that is real aerobic work and real energy out the door. It counts toward the cut even though it isn't in the mileage.",
+              "description": "Night shift.",
               "completed": false
             }
           ]
@@ -844,13 +958,13 @@
           "dayOfWeek": "Friday",
           "workouts": [
             {
-              "id": "w6-fri-str",
-              "sport": "strength",
-              "type": "strength",
-              "name": "Strength \u2014 Loading",
-              "durationMinutes": 35,
-              "humanReadable": "Goblet squat 3x10\nPull-up 4x max  \u2014 PST carryover, start here and never stop\nPush-up 4x max  \u2014 PST carryover\nRomanian deadlift 3x10\nSingle-leg calf raise 3x15\nSide plank 3x30s/side",
-              "description": "Second lift. Keep it 24h clear of the long run.",
+              "id": "w6-fri-rest",
+              "sport": "rest",
+              "type": "rest",
+              "name": "Work \u2014 rest",
+              "durationMinutes": null,
+              "humanReadable": "Shift night. No training.\n10.5 hours on your feet is 15-25k steps \u2014 that is real aerobic work and real energy out the door. It counts toward the cut even though it isn't in the mileage.",
+              "description": "Night shift.",
               "completed": false
             }
           ]
@@ -860,14 +974,13 @@
           "dayOfWeek": "Saturday",
           "workouts": [
             {
-              "id": "w6-sat-run",
-              "sport": "run",
-              "type": "long",
-              "name": "Long run",
-              "distanceMiles": 4.5,
-              "durationMinutes": 54,
-              "humanReadable": "Continuous, conversational pace. If you can't talk in full sentences, you're going too fast \u2014 this is the single most common way beginners stall out.\nEstimated pace ~10:30-12:00/mi, but run by feel, not by number.",
-              "description": "The week's key session.",
+              "id": "w6-sat-rest",
+              "sport": "rest",
+              "type": "rest",
+              "name": "Work \u2014 rest",
+              "durationMinutes": null,
+              "humanReadable": "Shift night. No training.\n10.5 hours on your feet is 15-25k steps \u2014 that is real aerobic work and real energy out the door. It counts toward the cut even though it isn't in the mileage.",
+              "description": "Night shift.",
               "completed": false
             }
           ]
@@ -877,24 +990,32 @@
           "dayOfWeek": "Sunday",
           "workouts": [
             {
-              "id": "w6-sun-run",
-              "sport": "run",
-              "type": "recovery",
-              "name": "Recovery run",
-              "distanceMiles": 1.5,
-              "durationMinutes": 19,
-              "humanReadable": "Genuinely easy. Slower than your easy pace. This run exists to move blood through tired legs, not to build fitness.\nIf you feel worse at the end than the start, you ran it too hard.",
-              "description": "Easy shakeout on tired legs.",
+              "id": "w6-sun-rest",
+              "sport": "rest",
+              "type": "rest",
+              "name": "Rest \u2014 sleep first",
+              "humanReadable": "You came off shift at 5am. Sleep is the session today.\n\nIf you're up and feel decent, an easy 20-30 min walk helps reset the day \u2014 but only after you've slept.",
+              "description": "Post-shift recovery.",
+              "completed": false
+            },
+            {
+              "id": "w6-sun-str",
+              "sport": "strength",
+              "type": "strength",
+              "name": "Optional strength",
+              "durationMinutes": 20,
+              "humanReadable": "OPTIONAL \u2014 only if you slept properly.\n\nGoblet squat 3x10\nPull-up 4x max  \u2014 PST event, log the number\nPush-up 4x max  \u2014 PST event, log the number\nRomanian deadlift 3x10\n\nSkip without guilt. This is the first thing that should go in a bad week.",
+              "description": "Optional second lift.",
               "completed": false
             }
           ]
         }
       ],
       "summary": {
-        "totalMiles": 12.0,
-        "longRun": 4.5,
-        "runs": 4,
-        "strengthSessions": 2
+        "totalMiles": 11.0,
+        "longRun": 5.0,
+        "runs": 3,
+        "strengthSessions": 1
       }
     },
     {
@@ -902,8 +1023,8 @@
       "startDate": "2026-09-28",
       "endDate": "2026-10-04",
       "phase": "Base",
-      "focus": "All runs continuous now. Long run crosses 5 miles.",
-      "targetMiles": 13.5,
+      "focus": "Long run past 5 miles. Fuel breakfast properly on Mondays now.",
+      "targetMiles": 12.0,
       "isRecoveryWeek": false,
       "days": [
         {
@@ -911,13 +1032,14 @@
           "dayOfWeek": "Monday",
           "workouts": [
             {
-              "id": "w7-mon-str",
-              "sport": "strength",
-              "type": "strength",
-              "name": "Strength \u2014 Loading",
-              "durationMinutes": 35,
-              "humanReadable": "Goblet squat 3x10\nPull-up 4x max  \u2014 PST carryover, start here and never stop\nPush-up 4x max  \u2014 PST carryover\nRomanian deadlift 3x10\nSingle-leg calf raise 3x15\nSide plank 3x30s/side",
-              "description": "Lift before the week's running load accumulates.",
+              "id": "w7-mon-long",
+              "sport": "run",
+              "type": "long",
+              "name": "Long run",
+              "distanceMiles": 5.5,
+              "durationMinutes": 66,
+              "humanReadable": "Continuous, conversational. If you can't talk in full sentences you are running too hard \u2014 that is the single most common way a base block quietly turns into junk miles.\nLet Strava record it. Don't run to the pace on the screen.",
+              "description": "The week's key session.",
               "completed": false
             }
           ]
@@ -931,10 +1053,20 @@
               "sport": "run",
               "type": "easy",
               "name": "Easy run",
-              "distanceMiles": 3.5,
-              "durationMinutes": 40,
-              "humanReadable": "Continuous, conversational pace. If you can't talk in full sentences, you're going too fast \u2014 this is the single most common way beginners stall out.\nEstimated pace ~10:30-12:00/mi, but run by feel, not by number.\nFinish with 4x20s strides: relaxed acceleration to about mile-race speed, then full walk recovery. Form work, not a workout.",
-              "description": "Aerobic base.",
+              "distanceMiles": 4.0,
+              "durationMinutes": 46,
+              "humanReadable": "Continuous, conversational. If you can't talk in full sentences you are running too hard \u2014 that is the single most common way a base block quietly turns into junk miles.\nLet Strava record it. Don't run to the pace on the screen.\nFinish with 4x20s strides: relaxed acceleration, full walk recovery. Form, not a workout.",
+              "description": "Aerobic base on your most recovered day.",
+              "completed": false
+            },
+            {
+              "id": "w7-tue-str",
+              "sport": "strength",
+              "type": "strength",
+              "name": "Strength \u2014 Loading",
+              "durationMinutes": 35,
+              "humanReadable": "Goblet squat 3x10\nPull-up 4x max  \u2014 PST event, log the number\nPush-up 4x max  \u2014 PST event, log the number\nRomanian deadlift 3x10\nSingle-leg calf raise 3x15\nSide plank 3x30s/side",
+              "description": "Lift after the run, or split it to the evening.",
               "completed": false
             }
           ]
@@ -944,12 +1076,14 @@
           "dayOfWeek": "Wednesday",
           "workouts": [
             {
-              "id": "w7-wed-rest",
-              "sport": "rest",
-              "type": "rest",
-              "name": "Rest",
-              "humanReadable": "Full rest, or a 20-30 min walk if you're restless.\nAdaptation happens today, not on the run days.",
-              "description": "Recovery.",
+              "id": "w7-wed-run",
+              "sport": "run",
+              "type": "easy",
+              "name": "Short easy run",
+              "distanceMiles": 2.5,
+              "durationMinutes": 28,
+              "humanReadable": "Get this in during the day \u2014 you're on shift at 6:30pm.\n\nContinuous, conversational. If you can't talk in full sentences you are running too hard \u2014 that is the single most common way a base block quietly turns into junk miles.\nLet Strava record it. Don't run to the pace on the screen.\nKeep it genuinely short. You're on your feet for 10.5 hours tonight; this run is not the hard part of your day.",
+              "description": "Third and last run of the week.",
               "completed": false
             }
           ]
@@ -959,14 +1093,13 @@
           "dayOfWeek": "Thursday",
           "workouts": [
             {
-              "id": "w7-thu-run",
-              "sport": "run",
-              "type": "easy",
-              "name": "Easy run",
-              "distanceMiles": 3.5,
-              "durationMinutes": 40,
-              "humanReadable": "Continuous, conversational pace. If you can't talk in full sentences, you're going too fast \u2014 this is the single most common way beginners stall out.\nEstimated pace ~10:30-12:00/mi, but run by feel, not by number.\nFinish with 4x20s strides: relaxed acceleration to about mile-race speed, then full walk recovery. Form work, not a workout.",
-              "description": "Aerobic base.",
+              "id": "w7-thu-rest",
+              "sport": "rest",
+              "type": "rest",
+              "name": "Work \u2014 rest",
+              "durationMinutes": null,
+              "humanReadable": "Shift night. No training.\n10.5 hours on your feet is 15-25k steps \u2014 that is real aerobic work and real energy out the door. It counts toward the cut even though it isn't in the mileage.",
+              "description": "Night shift.",
               "completed": false
             }
           ]
@@ -976,13 +1109,13 @@
           "dayOfWeek": "Friday",
           "workouts": [
             {
-              "id": "w7-fri-str",
-              "sport": "strength",
-              "type": "strength",
-              "name": "Strength \u2014 Loading",
-              "durationMinutes": 35,
-              "humanReadable": "Goblet squat 3x10\nPull-up 4x max  \u2014 PST carryover, start here and never stop\nPush-up 4x max  \u2014 PST carryover\nRomanian deadlift 3x10\nSingle-leg calf raise 3x15\nSide plank 3x30s/side",
-              "description": "Second lift. Keep it 24h clear of the long run.",
+              "id": "w7-fri-rest",
+              "sport": "rest",
+              "type": "rest",
+              "name": "Work \u2014 rest",
+              "durationMinutes": null,
+              "humanReadable": "Shift night. No training.\n10.5 hours on your feet is 15-25k steps \u2014 that is real aerobic work and real energy out the door. It counts toward the cut even though it isn't in the mileage.",
+              "description": "Night shift.",
               "completed": false
             }
           ]
@@ -992,14 +1125,13 @@
           "dayOfWeek": "Saturday",
           "workouts": [
             {
-              "id": "w7-sat-run",
-              "sport": "run",
-              "type": "long",
-              "name": "Long run",
-              "distanceMiles": 5.0,
-              "durationMinutes": 60,
-              "humanReadable": "Continuous, conversational pace. If you can't talk in full sentences, you're going too fast \u2014 this is the single most common way beginners stall out.\nEstimated pace ~10:30-12:00/mi, but run by feel, not by number.",
-              "description": "The week's key session.",
+              "id": "w7-sat-rest",
+              "sport": "rest",
+              "type": "rest",
+              "name": "Work \u2014 rest",
+              "durationMinutes": null,
+              "humanReadable": "Shift night. No training.\n10.5 hours on your feet is 15-25k steps \u2014 that is real aerobic work and real energy out the door. It counts toward the cut even though it isn't in the mileage.",
+              "description": "Night shift.",
               "completed": false
             }
           ]
@@ -1009,24 +1141,32 @@
           "dayOfWeek": "Sunday",
           "workouts": [
             {
-              "id": "w7-sun-run",
-              "sport": "run",
-              "type": "recovery",
-              "name": "Recovery run",
-              "distanceMiles": 1.5,
-              "durationMinutes": 19,
-              "humanReadable": "Genuinely easy. Slower than your easy pace. This run exists to move blood through tired legs, not to build fitness.\nIf you feel worse at the end than the start, you ran it too hard.",
-              "description": "Easy shakeout on tired legs.",
+              "id": "w7-sun-rest",
+              "sport": "rest",
+              "type": "rest",
+              "name": "Rest \u2014 sleep first",
+              "humanReadable": "You came off shift at 5am. Sleep is the session today.\n\nIf you're up and feel decent, an easy 20-30 min walk helps reset the day \u2014 but only after you've slept.",
+              "description": "Post-shift recovery.",
+              "completed": false
+            },
+            {
+              "id": "w7-sun-str",
+              "sport": "strength",
+              "type": "strength",
+              "name": "Optional strength",
+              "durationMinutes": 20,
+              "humanReadable": "OPTIONAL \u2014 only if you slept properly.\n\nGoblet squat 3x10\nPull-up 4x max  \u2014 PST event, log the number\nPush-up 4x max  \u2014 PST event, log the number\nRomanian deadlift 3x10\n\nSkip without guilt. This is the first thing that should go in a bad week.",
+              "description": "Optional second lift.",
               "completed": false
             }
           ]
         }
       ],
       "summary": {
-        "totalMiles": 13.5,
-        "longRun": 5.0,
-        "runs": 4,
-        "strengthSessions": 2
+        "totalMiles": 12.0,
+        "longRun": 5.5,
+        "runs": 3,
+        "strengthSessions": 1
       }
     },
     {
@@ -1034,8 +1174,8 @@
       "startDate": "2026-10-05",
       "endDate": "2026-10-11",
       "phase": "Base",
-      "focus": "Down week #2. Optional: first field test Saturday (see notes).",
-      "targetMiles": 9.5,
+      "focus": "Down week #2. Optional: first field test Monday (see the note).",
+      "targetMiles": 8.5,
       "isRecoveryWeek": true,
       "days": [
         {
@@ -1043,13 +1183,14 @@
           "dayOfWeek": "Monday",
           "workouts": [
             {
-              "id": "w8-mon-str",
-              "sport": "strength",
-              "type": "strength",
-              "name": "Strength \u2014 Loading",
-              "durationMinutes": 35,
-              "humanReadable": "Goblet squat 3x10\nPull-up 4x max  \u2014 PST carryover, start here and never stop\nPush-up 4x max  \u2014 PST carryover\nRomanian deadlift 3x10\nSingle-leg calf raise 3x15\nSide plank 3x30s/side",
-              "description": "Lift before the week's running load accumulates.",
+              "id": "w8-mon-long",
+              "sport": "run",
+              "type": "long",
+              "name": "Long run + optional 1-mile test",
+              "distanceMiles": 4.0,
+              "durationMinutes": 48,
+              "humanReadable": "Continuous, conversational. If you can't talk in full sentences you are running too hard \u2014 that is the single most common way a base block quietly turns into junk miles.\nLet Strava record it. Don't run to the pace on the screen.\n\nOPTIONAL FIELD TEST \u2014 only if you slept and nothing hurts:\n10 min easy, then 1 mile as hard as you can hold, then jog easy.\nReplaces the estimated zones with real ones. Skip it freely; week 16 is the one that matters.",
+              "description": "The week's key session.",
               "completed": false
             }
           ]
@@ -1063,10 +1204,20 @@
               "sport": "run",
               "type": "easy",
               "name": "Easy run",
-              "distanceMiles": 2.5,
-              "durationMinutes": 28,
-              "humanReadable": "Continuous, conversational pace. If you can't talk in full sentences, you're going too fast \u2014 this is the single most common way beginners stall out.\nEstimated pace ~10:30-12:00/mi, but run by feel, not by number.\nFinish with 4x20s strides: relaxed acceleration to about mile-race speed, then full walk recovery. Form work, not a workout.",
-              "description": "Aerobic base.",
+              "distanceMiles": 3.0,
+              "durationMinutes": 34,
+              "humanReadable": "Continuous, conversational. If you can't talk in full sentences you are running too hard \u2014 that is the single most common way a base block quietly turns into junk miles.\nLet Strava record it. Don't run to the pace on the screen.\nFinish with 4x20s strides: relaxed acceleration, full walk recovery. Form, not a workout.",
+              "description": "Aerobic base on your most recovered day.",
+              "completed": false
+            },
+            {
+              "id": "w8-tue-str",
+              "sport": "strength",
+              "type": "strength",
+              "name": "Strength \u2014 Loading",
+              "durationMinutes": 35,
+              "humanReadable": "Goblet squat 3x10\nPull-up 4x max  \u2014 PST event, log the number\nPush-up 4x max  \u2014 PST event, log the number\nRomanian deadlift 3x10\nSingle-leg calf raise 3x15\nSide plank 3x30s/side",
+              "description": "Lift after the run, or split it to the evening.",
               "completed": false
             }
           ]
@@ -1076,12 +1227,14 @@
           "dayOfWeek": "Wednesday",
           "workouts": [
             {
-              "id": "w8-wed-rest",
-              "sport": "rest",
-              "type": "rest",
-              "name": "Rest",
-              "humanReadable": "Full rest, or a 20-30 min walk if you're restless.\nAdaptation happens today, not on the run days.",
-              "description": "Recovery.",
+              "id": "w8-wed-run",
+              "sport": "run",
+              "type": "easy",
+              "name": "Short easy run",
+              "distanceMiles": 1.5,
+              "durationMinutes": 17,
+              "humanReadable": "Get this in during the day \u2014 you're on shift at 6:30pm.\n\nContinuous, conversational. If you can't talk in full sentences you are running too hard \u2014 that is the single most common way a base block quietly turns into junk miles.\nLet Strava record it. Don't run to the pace on the screen.\nKeep it genuinely short. You're on your feet for 10.5 hours tonight; this run is not the hard part of your day.",
+              "description": "Third and last run of the week.",
               "completed": false
             }
           ]
@@ -1091,14 +1244,13 @@
           "dayOfWeek": "Thursday",
           "workouts": [
             {
-              "id": "w8-thu-run",
-              "sport": "run",
-              "type": "easy",
-              "name": "Easy run",
-              "distanceMiles": 2.5,
-              "durationMinutes": 28,
-              "humanReadable": "Continuous, conversational pace. If you can't talk in full sentences, you're going too fast \u2014 this is the single most common way beginners stall out.\nEstimated pace ~10:30-12:00/mi, but run by feel, not by number.\nFinish with 4x20s strides: relaxed acceleration to about mile-race speed, then full walk recovery. Form work, not a workout.",
-              "description": "Aerobic base.",
+              "id": "w8-thu-rest",
+              "sport": "rest",
+              "type": "rest",
+              "name": "Work \u2014 rest",
+              "durationMinutes": null,
+              "humanReadable": "Shift night. No training.\n10.5 hours on your feet is 15-25k steps \u2014 that is real aerobic work and real energy out the door. It counts toward the cut even though it isn't in the mileage.",
+              "description": "Night shift.",
               "completed": false
             }
           ]
@@ -1108,13 +1260,13 @@
           "dayOfWeek": "Friday",
           "workouts": [
             {
-              "id": "w8-fri-str",
-              "sport": "strength",
-              "type": "strength",
-              "name": "Strength \u2014 Loading",
-              "durationMinutes": 35,
-              "humanReadable": "Goblet squat 3x10\nPull-up 4x max  \u2014 PST carryover, start here and never stop\nPush-up 4x max  \u2014 PST carryover\nRomanian deadlift 3x10\nSingle-leg calf raise 3x15\nSide plank 3x30s/side",
-              "description": "Second lift. Keep it 24h clear of the long run.",
+              "id": "w8-fri-rest",
+              "sport": "rest",
+              "type": "rest",
+              "name": "Work \u2014 rest",
+              "durationMinutes": null,
+              "humanReadable": "Shift night. No training.\n10.5 hours on your feet is 15-25k steps \u2014 that is real aerobic work and real energy out the door. It counts toward the cut even though it isn't in the mileage.",
+              "description": "Night shift.",
               "completed": false
             }
           ]
@@ -1124,14 +1276,13 @@
           "dayOfWeek": "Saturday",
           "workouts": [
             {
-              "id": "w8-sat-run",
-              "sport": "run",
-              "type": "long",
-              "name": "Long run + optional 1-mile test",
-              "distanceMiles": 3.0,
-              "durationMinutes": 36,
-              "humanReadable": "Continuous, conversational pace. If you can't talk in full sentences, you're going too fast \u2014 this is the single most common way beginners stall out.\nEstimated pace ~10:30-12:00/mi, but run by feel, not by number.\n\nOPTIONAL FIELD TEST (only if you feel good and have no niggles):\nAfter a 10-min easy warm-up, run 1 mile as hard as you can sustain, then jog the rest easy.\nThis replaces the estimated zones with real ones. If anything hurts, skip it \u2014 there will be another chance.",
-              "description": "The week's key session.",
+              "id": "w8-sat-rest",
+              "sport": "rest",
+              "type": "rest",
+              "name": "Work \u2014 rest",
+              "durationMinutes": null,
+              "humanReadable": "Shift night. No training.\n10.5 hours on your feet is 15-25k steps \u2014 that is real aerobic work and real energy out the door. It counts toward the cut even though it isn't in the mileage.",
+              "description": "Night shift.",
               "completed": false
             }
           ]
@@ -1141,24 +1292,32 @@
           "dayOfWeek": "Sunday",
           "workouts": [
             {
-              "id": "w8-sun-run",
-              "sport": "run",
-              "type": "recovery",
-              "name": "Recovery run",
-              "distanceMiles": 1.5,
-              "durationMinutes": 19,
-              "humanReadable": "Genuinely easy. Slower than your easy pace. This run exists to move blood through tired legs, not to build fitness.\nIf you feel worse at the end than the start, you ran it too hard.",
-              "description": "Easy shakeout on tired legs.",
+              "id": "w8-sun-rest",
+              "sport": "rest",
+              "type": "rest",
+              "name": "Rest \u2014 sleep first",
+              "humanReadable": "You came off shift at 5am. Sleep is the session today.\n\nIf you're up and feel decent, an easy 20-30 min walk helps reset the day \u2014 but only after you've slept.",
+              "description": "Post-shift recovery.",
+              "completed": false
+            },
+            {
+              "id": "w8-sun-str",
+              "sport": "strength",
+              "type": "strength",
+              "name": "Optional strength",
+              "durationMinutes": 20,
+              "humanReadable": "OPTIONAL \u2014 only if you slept properly.\n\nGoblet squat 3x10\nPull-up 4x max  \u2014 PST event, log the number\nPush-up 4x max  \u2014 PST event, log the number\nRomanian deadlift 3x10\n\nSkip without guilt. This is the first thing that should go in a bad week.",
+              "description": "Optional second lift.",
               "completed": false
             }
           ]
         }
       ],
       "summary": {
-        "totalMiles": 9.5,
-        "longRun": 3.0,
-        "runs": 4,
-        "strengthSessions": 2
+        "totalMiles": 8.5,
+        "longRun": 4.0,
+        "runs": 3,
+        "strengthSessions": 1
       }
     },
     {
@@ -1166,8 +1325,8 @@
       "startDate": "2026-10-12",
       "endDate": "2026-10-18",
       "phase": "Base",
-      "focus": "Volume block begins. Everything still conversational.",
-      "targetMiles": 15.0,
+      "focus": "Volume block. This is where niggles show up \u2014 report them, don't ride them out.",
+      "targetMiles": 13.0,
       "isRecoveryWeek": false,
       "days": [
         {
@@ -1175,13 +1334,14 @@
           "dayOfWeek": "Monday",
           "workouts": [
             {
-              "id": "w9-mon-str",
-              "sport": "strength",
-              "type": "strength",
-              "name": "Strength \u2014 Strength",
-              "durationMinutes": 35,
-              "humanReadable": "Back squat or goblet squat 4x6-8\nPull-up 4x max  \u2014 track the number, it's a PST event\nPush-up 4x max  \u2014 track the number, it's a PST event\nRomanian deadlift 3x8\nSplit squat 3x8/side\nHanging knee raise 3x12\nSingle-leg calf raise 3x15",
-              "description": "Lift before the week's running load accumulates.",
+              "id": "w9-mon-long",
+              "sport": "run",
+              "type": "long",
+              "name": "Long run",
+              "distanceMiles": 6.0,
+              "durationMinutes": 72,
+              "humanReadable": "Continuous, conversational. If you can't talk in full sentences you are running too hard \u2014 that is the single most common way a base block quietly turns into junk miles.\nLet Strava record it. Don't run to the pace on the screen.\nLast mile: lift it slightly if you feel good. Only if you feel good.",
+              "description": "The week's key session.",
               "completed": false
             }
           ]
@@ -1195,10 +1355,20 @@
               "sport": "run",
               "type": "easy",
               "name": "Easy run",
-              "distanceMiles": 4.0,
-              "durationMinutes": 46,
-              "humanReadable": "Continuous, conversational pace. If you can't talk in full sentences, you're going too fast \u2014 this is the single most common way beginners stall out.\nEstimated pace ~10:30-12:00/mi, but run by feel, not by number.\nFinish with 4x20s strides: relaxed acceleration to about mile-race speed, then full walk recovery. Form work, not a workout.",
-              "description": "Aerobic base.",
+              "distanceMiles": 4.5,
+              "durationMinutes": 51,
+              "humanReadable": "Continuous, conversational. If you can't talk in full sentences you are running too hard \u2014 that is the single most common way a base block quietly turns into junk miles.\nLet Strava record it. Don't run to the pace on the screen.\nFinish with 4x20s strides: relaxed acceleration, full walk recovery. Form, not a workout.",
+              "description": "Aerobic base on your most recovered day.",
+              "completed": false
+            },
+            {
+              "id": "w9-tue-str",
+              "sport": "strength",
+              "type": "strength",
+              "name": "Strength \u2014 Strength",
+              "durationMinutes": 35,
+              "humanReadable": "Squat 4x6-8\nPull-up 4x max  \u2014 PST event\nPush-up 4x max  \u2014 PST event\nRomanian deadlift 3x8\nSplit squat 3x8/side\nHanging knee raise 3x12\nSingle-leg calf raise 3x15",
+              "description": "Lift after the run, or split it to the evening.",
               "completed": false
             }
           ]
@@ -1208,12 +1378,14 @@
           "dayOfWeek": "Wednesday",
           "workouts": [
             {
-              "id": "w9-wed-rest",
-              "sport": "rest",
-              "type": "rest",
-              "name": "Rest",
-              "humanReadable": "Full rest, or a 20-30 min walk if you're restless.\nAdaptation happens today, not on the run days.",
-              "description": "Recovery.",
+              "id": "w9-wed-run",
+              "sport": "run",
+              "type": "easy",
+              "name": "Short easy run",
+              "distanceMiles": 2.5,
+              "durationMinutes": 28,
+              "humanReadable": "Get this in during the day \u2014 you're on shift at 6:30pm.\n\nContinuous, conversational. If you can't talk in full sentences you are running too hard \u2014 that is the single most common way a base block quietly turns into junk miles.\nLet Strava record it. Don't run to the pace on the screen.\nKeep it genuinely short. You're on your feet for 10.5 hours tonight; this run is not the hard part of your day.",
+              "description": "Third and last run of the week.",
               "completed": false
             }
           ]
@@ -1223,14 +1395,13 @@
           "dayOfWeek": "Thursday",
           "workouts": [
             {
-              "id": "w9-thu-run",
-              "sport": "run",
-              "type": "easy",
-              "name": "Easy run",
-              "distanceMiles": 4.0,
-              "durationMinutes": 46,
-              "humanReadable": "Continuous, conversational pace. If you can't talk in full sentences, you're going too fast \u2014 this is the single most common way beginners stall out.\nEstimated pace ~10:30-12:00/mi, but run by feel, not by number.\nFinish with 4x20s strides: relaxed acceleration to about mile-race speed, then full walk recovery. Form work, not a workout.",
-              "description": "Aerobic base.",
+              "id": "w9-thu-rest",
+              "sport": "rest",
+              "type": "rest",
+              "name": "Work \u2014 rest",
+              "durationMinutes": null,
+              "humanReadable": "Shift night. No training.\n10.5 hours on your feet is 15-25k steps \u2014 that is real aerobic work and real energy out the door. It counts toward the cut even though it isn't in the mileage.",
+              "description": "Night shift.",
               "completed": false
             }
           ]
@@ -1240,13 +1411,13 @@
           "dayOfWeek": "Friday",
           "workouts": [
             {
-              "id": "w9-fri-str",
-              "sport": "strength",
-              "type": "strength",
-              "name": "Strength \u2014 Strength",
-              "durationMinutes": 35,
-              "humanReadable": "Back squat or goblet squat 4x6-8\nPull-up 4x max  \u2014 track the number, it's a PST event\nPush-up 4x max  \u2014 track the number, it's a PST event\nRomanian deadlift 3x8\nSplit squat 3x8/side\nHanging knee raise 3x12\nSingle-leg calf raise 3x15",
-              "description": "Second lift. Keep it 24h clear of the long run.",
+              "id": "w9-fri-rest",
+              "sport": "rest",
+              "type": "rest",
+              "name": "Work \u2014 rest",
+              "durationMinutes": null,
+              "humanReadable": "Shift night. No training.\n10.5 hours on your feet is 15-25k steps \u2014 that is real aerobic work and real energy out the door. It counts toward the cut even though it isn't in the mileage.",
+              "description": "Night shift.",
               "completed": false
             }
           ]
@@ -1256,14 +1427,13 @@
           "dayOfWeek": "Saturday",
           "workouts": [
             {
-              "id": "w9-sat-run",
-              "sport": "run",
-              "type": "long",
-              "name": "Long run",
-              "distanceMiles": 5.5,
-              "durationMinutes": 66,
-              "humanReadable": "Continuous, conversational pace. If you can't talk in full sentences, you're going too fast \u2014 this is the single most common way beginners stall out.\nEstimated pace ~10:30-12:00/mi, but run by feel, not by number.\nLast mile: pick it up slightly if you feel good. Never more than that.",
-              "description": "The week's key session.",
+              "id": "w9-sat-rest",
+              "sport": "rest",
+              "type": "rest",
+              "name": "Work \u2014 rest",
+              "durationMinutes": null,
+              "humanReadable": "Shift night. No training.\n10.5 hours on your feet is 15-25k steps \u2014 that is real aerobic work and real energy out the door. It counts toward the cut even though it isn't in the mileage.",
+              "description": "Night shift.",
               "completed": false
             }
           ]
@@ -1273,24 +1443,32 @@
           "dayOfWeek": "Sunday",
           "workouts": [
             {
-              "id": "w9-sun-run",
-              "sport": "run",
-              "type": "recovery",
-              "name": "Recovery run",
-              "distanceMiles": 1.5,
-              "durationMinutes": 19,
-              "humanReadable": "Genuinely easy. Slower than your easy pace. This run exists to move blood through tired legs, not to build fitness.\nIf you feel worse at the end than the start, you ran it too hard.",
-              "description": "Easy shakeout on tired legs.",
+              "id": "w9-sun-rest",
+              "sport": "rest",
+              "type": "rest",
+              "name": "Rest \u2014 sleep first",
+              "humanReadable": "You came off shift at 5am. Sleep is the session today.\n\nIf you're up and feel decent, an easy 20-30 min walk helps reset the day \u2014 but only after you've slept.",
+              "description": "Post-shift recovery.",
+              "completed": false
+            },
+            {
+              "id": "w9-sun-str",
+              "sport": "strength",
+              "type": "strength",
+              "name": "Optional strength",
+              "durationMinutes": 20,
+              "humanReadable": "OPTIONAL \u2014 only if you slept properly.\n\nSquat 4x6-8\nPull-up 4x max  \u2014 PST event\nPush-up 4x max  \u2014 PST event\nRomanian deadlift 3x8\n\nSkip without guilt. This is the first thing that should go in a bad week.",
+              "description": "Optional second lift.",
               "completed": false
             }
           ]
         }
       ],
       "summary": {
-        "totalMiles": 15.0,
-        "longRun": 5.5,
-        "runs": 4,
-        "strengthSessions": 2
+        "totalMiles": 13.0,
+        "longRun": 6.0,
+        "runs": 3,
+        "strengthSessions": 1
       }
     },
     {
@@ -1298,8 +1476,8 @@
       "startDate": "2026-10-19",
       "endDate": "2026-10-25",
       "phase": "Base",
-      "focus": "Strides now twice weekly. Long run at 6 miles.",
-      "targetMiles": 16.5,
+      "focus": "Long run at 7. Midterms territory; if sleep goes, the Wednesday run goes first.",
+      "targetMiles": 14.5,
       "isRecoveryWeek": false,
       "days": [
         {
@@ -1307,13 +1485,14 @@
           "dayOfWeek": "Monday",
           "workouts": [
             {
-              "id": "w10-mon-str",
-              "sport": "strength",
-              "type": "strength",
-              "name": "Strength \u2014 Strength",
-              "durationMinutes": 35,
-              "humanReadable": "Back squat or goblet squat 4x6-8\nPull-up 4x max  \u2014 track the number, it's a PST event\nPush-up 4x max  \u2014 track the number, it's a PST event\nRomanian deadlift 3x8\nSplit squat 3x8/side\nHanging knee raise 3x12\nSingle-leg calf raise 3x15",
-              "description": "Lift before the week's running load accumulates.",
+              "id": "w10-mon-long",
+              "sport": "run",
+              "type": "long",
+              "name": "Long run",
+              "distanceMiles": 7.0,
+              "durationMinutes": 84,
+              "humanReadable": "Continuous, conversational. If you can't talk in full sentences you are running too hard \u2014 that is the single most common way a base block quietly turns into junk miles.\nLet Strava record it. Don't run to the pace on the screen.\nLast mile: lift it slightly if you feel good. Only if you feel good.",
+              "description": "The week's key session.",
               "completed": false
             }
           ]
@@ -1327,10 +1506,20 @@
               "sport": "run",
               "type": "easy",
               "name": "Easy run",
-              "distanceMiles": 4.0,
-              "durationMinutes": 46,
-              "humanReadable": "Continuous, conversational pace. If you can't talk in full sentences, you're going too fast \u2014 this is the single most common way beginners stall out.\nEstimated pace ~10:30-12:00/mi, but run by feel, not by number.\nFinish with 4x20s strides: relaxed acceleration to about mile-race speed, then full walk recovery. Form work, not a workout.",
-              "description": "Aerobic base.",
+              "distanceMiles": 5.0,
+              "durationMinutes": 57,
+              "humanReadable": "Continuous, conversational. If you can't talk in full sentences you are running too hard \u2014 that is the single most common way a base block quietly turns into junk miles.\nLet Strava record it. Don't run to the pace on the screen.\nFinish with 4x20s strides: relaxed acceleration, full walk recovery. Form, not a workout.",
+              "description": "Aerobic base on your most recovered day.",
+              "completed": false
+            },
+            {
+              "id": "w10-tue-str",
+              "sport": "strength",
+              "type": "strength",
+              "name": "Strength \u2014 Strength",
+              "durationMinutes": 35,
+              "humanReadable": "Squat 4x6-8\nPull-up 4x max  \u2014 PST event\nPush-up 4x max  \u2014 PST event\nRomanian deadlift 3x8\nSplit squat 3x8/side\nHanging knee raise 3x12\nSingle-leg calf raise 3x15",
+              "description": "Lift after the run, or split it to the evening.",
               "completed": false
             }
           ]
@@ -1340,12 +1529,14 @@
           "dayOfWeek": "Wednesday",
           "workouts": [
             {
-              "id": "w10-wed-rest",
-              "sport": "rest",
-              "type": "rest",
-              "name": "Rest",
-              "humanReadable": "Full rest, or a 20-30 min walk if you're restless.\nAdaptation happens today, not on the run days.",
-              "description": "Recovery.",
+              "id": "w10-wed-run",
+              "sport": "run",
+              "type": "easy",
+              "name": "Short easy run",
+              "distanceMiles": 2.5,
+              "durationMinutes": 28,
+              "humanReadable": "Get this in during the day \u2014 you're on shift at 6:30pm.\n\nContinuous, conversational. If you can't talk in full sentences you are running too hard \u2014 that is the single most common way a base block quietly turns into junk miles.\nLet Strava record it. Don't run to the pace on the screen.\nKeep it genuinely short. You're on your feet for 10.5 hours tonight; this run is not the hard part of your day.",
+              "description": "Third and last run of the week.",
               "completed": false
             }
           ]
@@ -1355,14 +1546,13 @@
           "dayOfWeek": "Thursday",
           "workouts": [
             {
-              "id": "w10-thu-run",
-              "sport": "run",
-              "type": "easy",
-              "name": "Easy run",
-              "distanceMiles": 4.5,
-              "durationMinutes": 51,
-              "humanReadable": "Continuous, conversational pace. If you can't talk in full sentences, you're going too fast \u2014 this is the single most common way beginners stall out.\nEstimated pace ~10:30-12:00/mi, but run by feel, not by number.\nFinish with 4x20s strides: relaxed acceleration to about mile-race speed, then full walk recovery. Form work, not a workout.",
-              "description": "Aerobic base.",
+              "id": "w10-thu-rest",
+              "sport": "rest",
+              "type": "rest",
+              "name": "Work \u2014 rest",
+              "durationMinutes": null,
+              "humanReadable": "Shift night. No training.\n10.5 hours on your feet is 15-25k steps \u2014 that is real aerobic work and real energy out the door. It counts toward the cut even though it isn't in the mileage.",
+              "description": "Night shift.",
               "completed": false
             }
           ]
@@ -1372,13 +1562,13 @@
           "dayOfWeek": "Friday",
           "workouts": [
             {
-              "id": "w10-fri-str",
-              "sport": "strength",
-              "type": "strength",
-              "name": "Strength \u2014 Strength",
-              "durationMinutes": 35,
-              "humanReadable": "Back squat or goblet squat 4x6-8\nPull-up 4x max  \u2014 track the number, it's a PST event\nPush-up 4x max  \u2014 track the number, it's a PST event\nRomanian deadlift 3x8\nSplit squat 3x8/side\nHanging knee raise 3x12\nSingle-leg calf raise 3x15",
-              "description": "Second lift. Keep it 24h clear of the long run.",
+              "id": "w10-fri-rest",
+              "sport": "rest",
+              "type": "rest",
+              "name": "Work \u2014 rest",
+              "durationMinutes": null,
+              "humanReadable": "Shift night. No training.\n10.5 hours on your feet is 15-25k steps \u2014 that is real aerobic work and real energy out the door. It counts toward the cut even though it isn't in the mileage.",
+              "description": "Night shift.",
               "completed": false
             }
           ]
@@ -1388,14 +1578,13 @@
           "dayOfWeek": "Saturday",
           "workouts": [
             {
-              "id": "w10-sat-run",
-              "sport": "run",
-              "type": "long",
-              "name": "Long run",
-              "distanceMiles": 6.0,
-              "durationMinutes": 72,
-              "humanReadable": "Continuous, conversational pace. If you can't talk in full sentences, you're going too fast \u2014 this is the single most common way beginners stall out.\nEstimated pace ~10:30-12:00/mi, but run by feel, not by number.\nLast mile: pick it up slightly if you feel good. Never more than that.",
-              "description": "The week's key session.",
+              "id": "w10-sat-rest",
+              "sport": "rest",
+              "type": "rest",
+              "name": "Work \u2014 rest",
+              "durationMinutes": null,
+              "humanReadable": "Shift night. No training.\n10.5 hours on your feet is 15-25k steps \u2014 that is real aerobic work and real energy out the door. It counts toward the cut even though it isn't in the mileage.",
+              "description": "Night shift.",
               "completed": false
             }
           ]
@@ -1405,24 +1594,32 @@
           "dayOfWeek": "Sunday",
           "workouts": [
             {
-              "id": "w10-sun-run",
-              "sport": "run",
-              "type": "recovery",
-              "name": "Recovery run",
-              "distanceMiles": 2.0,
-              "durationMinutes": 26,
-              "humanReadable": "Genuinely easy. Slower than your easy pace. This run exists to move blood through tired legs, not to build fitness.\nIf you feel worse at the end than the start, you ran it too hard.",
-              "description": "Easy shakeout on tired legs.",
+              "id": "w10-sun-rest",
+              "sport": "rest",
+              "type": "rest",
+              "name": "Rest \u2014 sleep first",
+              "humanReadable": "You came off shift at 5am. Sleep is the session today.\n\nIf you're up and feel decent, an easy 20-30 min walk helps reset the day \u2014 but only after you've slept.",
+              "description": "Post-shift recovery.",
+              "completed": false
+            },
+            {
+              "id": "w10-sun-str",
+              "sport": "strength",
+              "type": "strength",
+              "name": "Optional strength",
+              "durationMinutes": 20,
+              "humanReadable": "OPTIONAL \u2014 only if you slept properly.\n\nSquat 4x6-8\nPull-up 4x max  \u2014 PST event\nPush-up 4x max  \u2014 PST event\nRomanian deadlift 3x8\n\nSkip without guilt. This is the first thing that should go in a bad week.",
+              "description": "Optional second lift.",
               "completed": false
             }
           ]
         }
       ],
       "summary": {
-        "totalMiles": 16.5,
-        "longRun": 6.0,
-        "runs": 4,
-        "strengthSessions": 2
+        "totalMiles": 14.5,
+        "longRun": 7.0,
+        "runs": 3,
+        "strengthSessions": 1
       }
     },
     {
@@ -1430,8 +1627,8 @@
       "startDate": "2026-10-26",
       "endDate": "2026-11-01",
       "phase": "Base",
-      "focus": "Biggest week so far. Watch for shin/knee niggles \u2014 report them.",
-      "targetMiles": 18.0,
+      "focus": "Biggest week yet. Shins and knees get a veto over this one.",
+      "targetMiles": 15.5,
       "isRecoveryWeek": false,
       "days": [
         {
@@ -1439,13 +1636,14 @@
           "dayOfWeek": "Monday",
           "workouts": [
             {
-              "id": "w11-mon-str",
-              "sport": "strength",
-              "type": "strength",
-              "name": "Strength \u2014 Strength",
-              "durationMinutes": 35,
-              "humanReadable": "Back squat or goblet squat 4x6-8\nPull-up 4x max  \u2014 track the number, it's a PST event\nPush-up 4x max  \u2014 track the number, it's a PST event\nRomanian deadlift 3x8\nSplit squat 3x8/side\nHanging knee raise 3x12\nSingle-leg calf raise 3x15",
-              "description": "Lift before the week's running load accumulates.",
+              "id": "w11-mon-long",
+              "sport": "run",
+              "type": "long",
+              "name": "Long run",
+              "distanceMiles": 7.5,
+              "durationMinutes": 90,
+              "humanReadable": "Continuous, conversational. If you can't talk in full sentences you are running too hard \u2014 that is the single most common way a base block quietly turns into junk miles.\nLet Strava record it. Don't run to the pace on the screen.\nLast mile: lift it slightly if you feel good. Only if you feel good.",
+              "description": "The week's key session.",
               "completed": false
             }
           ]
@@ -1459,10 +1657,20 @@
               "sport": "run",
               "type": "easy",
               "name": "Easy run",
-              "distanceMiles": 4.5,
-              "durationMinutes": 51,
-              "humanReadable": "Continuous, conversational pace. If you can't talk in full sentences, you're going too fast \u2014 this is the single most common way beginners stall out.\nEstimated pace ~10:30-12:00/mi, but run by feel, not by number.\nFinish with 4x20s strides: relaxed acceleration to about mile-race speed, then full walk recovery. Form work, not a workout.",
-              "description": "Aerobic base.",
+              "distanceMiles": 5.0,
+              "durationMinutes": 57,
+              "humanReadable": "Continuous, conversational. If you can't talk in full sentences you are running too hard \u2014 that is the single most common way a base block quietly turns into junk miles.\nLet Strava record it. Don't run to the pace on the screen.\nFinish with 4x20s strides: relaxed acceleration, full walk recovery. Form, not a workout.",
+              "description": "Aerobic base on your most recovered day.",
+              "completed": false
+            },
+            {
+              "id": "w11-tue-str",
+              "sport": "strength",
+              "type": "strength",
+              "name": "Strength \u2014 Strength",
+              "durationMinutes": 35,
+              "humanReadable": "Squat 4x6-8\nPull-up 4x max  \u2014 PST event\nPush-up 4x max  \u2014 PST event\nRomanian deadlift 3x8\nSplit squat 3x8/side\nHanging knee raise 3x12\nSingle-leg calf raise 3x15",
+              "description": "Lift after the run, or split it to the evening.",
               "completed": false
             }
           ]
@@ -1472,12 +1680,14 @@
           "dayOfWeek": "Wednesday",
           "workouts": [
             {
-              "id": "w11-wed-rest",
-              "sport": "rest",
-              "type": "rest",
-              "name": "Rest",
-              "humanReadable": "Full rest, or a 20-30 min walk if you're restless.\nAdaptation happens today, not on the run days.",
-              "description": "Recovery.",
+              "id": "w11-wed-run",
+              "sport": "run",
+              "type": "easy",
+              "name": "Short easy run",
+              "distanceMiles": 3.0,
+              "durationMinutes": 34,
+              "humanReadable": "Get this in during the day \u2014 you're on shift at 6:30pm.\n\nContinuous, conversational. If you can't talk in full sentences you are running too hard \u2014 that is the single most common way a base block quietly turns into junk miles.\nLet Strava record it. Don't run to the pace on the screen.\nKeep it genuinely short. You're on your feet for 10.5 hours tonight; this run is not the hard part of your day.",
+              "description": "Third and last run of the week.",
               "completed": false
             }
           ]
@@ -1487,14 +1697,13 @@
           "dayOfWeek": "Thursday",
           "workouts": [
             {
-              "id": "w11-thu-run",
-              "sport": "run",
-              "type": "easy",
-              "name": "Easy run",
-              "distanceMiles": 5.0,
-              "durationMinutes": 57,
-              "humanReadable": "Continuous, conversational pace. If you can't talk in full sentences, you're going too fast \u2014 this is the single most common way beginners stall out.\nEstimated pace ~10:30-12:00/mi, but run by feel, not by number.\nFinish with 4x20s strides: relaxed acceleration to about mile-race speed, then full walk recovery. Form work, not a workout.",
-              "description": "Aerobic base.",
+              "id": "w11-thu-rest",
+              "sport": "rest",
+              "type": "rest",
+              "name": "Work \u2014 rest",
+              "durationMinutes": null,
+              "humanReadable": "Shift night. No training.\n10.5 hours on your feet is 15-25k steps \u2014 that is real aerobic work and real energy out the door. It counts toward the cut even though it isn't in the mileage.",
+              "description": "Night shift.",
               "completed": false
             }
           ]
@@ -1504,13 +1713,13 @@
           "dayOfWeek": "Friday",
           "workouts": [
             {
-              "id": "w11-fri-str",
-              "sport": "strength",
-              "type": "strength",
-              "name": "Strength \u2014 Strength",
-              "durationMinutes": 35,
-              "humanReadable": "Back squat or goblet squat 4x6-8\nPull-up 4x max  \u2014 track the number, it's a PST event\nPush-up 4x max  \u2014 track the number, it's a PST event\nRomanian deadlift 3x8\nSplit squat 3x8/side\nHanging knee raise 3x12\nSingle-leg calf raise 3x15",
-              "description": "Second lift. Keep it 24h clear of the long run.",
+              "id": "w11-fri-rest",
+              "sport": "rest",
+              "type": "rest",
+              "name": "Work \u2014 rest",
+              "durationMinutes": null,
+              "humanReadable": "Shift night. No training.\n10.5 hours on your feet is 15-25k steps \u2014 that is real aerobic work and real energy out the door. It counts toward the cut even though it isn't in the mileage.",
+              "description": "Night shift.",
               "completed": false
             }
           ]
@@ -1520,14 +1729,13 @@
           "dayOfWeek": "Saturday",
           "workouts": [
             {
-              "id": "w11-sat-run",
-              "sport": "run",
-              "type": "long",
-              "name": "Long run",
-              "distanceMiles": 6.5,
-              "durationMinutes": 78,
-              "humanReadable": "Continuous, conversational pace. If you can't talk in full sentences, you're going too fast \u2014 this is the single most common way beginners stall out.\nEstimated pace ~10:30-12:00/mi, but run by feel, not by number.\nLast mile: pick it up slightly if you feel good. Never more than that.",
-              "description": "The week's key session.",
+              "id": "w11-sat-rest",
+              "sport": "rest",
+              "type": "rest",
+              "name": "Work \u2014 rest",
+              "durationMinutes": null,
+              "humanReadable": "Shift night. No training.\n10.5 hours on your feet is 15-25k steps \u2014 that is real aerobic work and real energy out the door. It counts toward the cut even though it isn't in the mileage.",
+              "description": "Night shift.",
               "completed": false
             }
           ]
@@ -1537,24 +1745,32 @@
           "dayOfWeek": "Sunday",
           "workouts": [
             {
-              "id": "w11-sun-run",
-              "sport": "run",
-              "type": "recovery",
-              "name": "Recovery run",
-              "distanceMiles": 2.0,
-              "durationMinutes": 26,
-              "humanReadable": "Genuinely easy. Slower than your easy pace. This run exists to move blood through tired legs, not to build fitness.\nIf you feel worse at the end than the start, you ran it too hard.",
-              "description": "Easy shakeout on tired legs.",
+              "id": "w11-sun-rest",
+              "sport": "rest",
+              "type": "rest",
+              "name": "Rest \u2014 sleep first",
+              "humanReadable": "You came off shift at 5am. Sleep is the session today.\n\nIf you're up and feel decent, an easy 20-30 min walk helps reset the day \u2014 but only after you've slept.",
+              "description": "Post-shift recovery.",
+              "completed": false
+            },
+            {
+              "id": "w11-sun-str",
+              "sport": "strength",
+              "type": "strength",
+              "name": "Optional strength",
+              "durationMinutes": 20,
+              "humanReadable": "OPTIONAL \u2014 only if you slept properly.\n\nSquat 4x6-8\nPull-up 4x max  \u2014 PST event\nPush-up 4x max  \u2014 PST event\nRomanian deadlift 3x8\n\nSkip without guilt. This is the first thing that should go in a bad week.",
+              "description": "Optional second lift.",
               "completed": false
             }
           ]
         }
       ],
       "summary": {
-        "totalMiles": 18.0,
-        "longRun": 6.5,
-        "runs": 4,
-        "strengthSessions": 2
+        "totalMiles": 15.5,
+        "longRun": 7.5,
+        "runs": 3,
+        "strengthSessions": 1
       }
     },
     {
@@ -1562,8 +1778,8 @@
       "startDate": "2026-11-02",
       "endDate": "2026-11-08",
       "phase": "Base",
-      "focus": "Down week #3. Deload hard; the next block is the real one.",
-      "targetMiles": 12.5,
+      "focus": "Down week #3. Deload properly \u2014 the last block is the one that counts.",
+      "targetMiles": 11.0,
       "isRecoveryWeek": true,
       "days": [
         {
@@ -1571,13 +1787,14 @@
           "dayOfWeek": "Monday",
           "workouts": [
             {
-              "id": "w12-mon-str",
-              "sport": "strength",
-              "type": "strength",
-              "name": "Strength \u2014 Strength",
-              "durationMinutes": 35,
-              "humanReadable": "Back squat or goblet squat 4x6-8\nPull-up 4x max  \u2014 track the number, it's a PST event\nPush-up 4x max  \u2014 track the number, it's a PST event\nRomanian deadlift 3x8\nSplit squat 3x8/side\nHanging knee raise 3x12\nSingle-leg calf raise 3x15",
-              "description": "Lift before the week's running load accumulates.",
+              "id": "w12-mon-long",
+              "sport": "run",
+              "type": "long",
+              "name": "Long run",
+              "distanceMiles": 5.0,
+              "durationMinutes": 60,
+              "humanReadable": "Continuous, conversational. If you can't talk in full sentences you are running too hard \u2014 that is the single most common way a base block quietly turns into junk miles.\nLet Strava record it. Don't run to the pace on the screen.\nLast mile: lift it slightly if you feel good. Only if you feel good.",
+              "description": "The week's key session.",
               "completed": false
             }
           ]
@@ -1591,10 +1808,20 @@
               "sport": "run",
               "type": "easy",
               "name": "Easy run",
-              "distanceMiles": 3.5,
-              "durationMinutes": 40,
-              "humanReadable": "Continuous, conversational pace. If you can't talk in full sentences, you're going too fast \u2014 this is the single most common way beginners stall out.\nEstimated pace ~10:30-12:00/mi, but run by feel, not by number.\nFinish with 4x20s strides: relaxed acceleration to about mile-race speed, then full walk recovery. Form work, not a workout.",
-              "description": "Aerobic base.",
+              "distanceMiles": 4.0,
+              "durationMinutes": 46,
+              "humanReadable": "Continuous, conversational. If you can't talk in full sentences you are running too hard \u2014 that is the single most common way a base block quietly turns into junk miles.\nLet Strava record it. Don't run to the pace on the screen.\nFinish with 4x20s strides: relaxed acceleration, full walk recovery. Form, not a workout.",
+              "description": "Aerobic base on your most recovered day.",
+              "completed": false
+            },
+            {
+              "id": "w12-tue-str",
+              "sport": "strength",
+              "type": "strength",
+              "name": "Strength \u2014 Strength",
+              "durationMinutes": 35,
+              "humanReadable": "Squat 4x6-8\nPull-up 4x max  \u2014 PST event\nPush-up 4x max  \u2014 PST event\nRomanian deadlift 3x8\nSplit squat 3x8/side\nHanging knee raise 3x12\nSingle-leg calf raise 3x15",
+              "description": "Lift after the run, or split it to the evening.",
               "completed": false
             }
           ]
@@ -1604,12 +1831,14 @@
           "dayOfWeek": "Wednesday",
           "workouts": [
             {
-              "id": "w12-wed-rest",
-              "sport": "rest",
-              "type": "rest",
-              "name": "Rest",
-              "humanReadable": "Full rest, or a 20-30 min walk if you're restless.\nAdaptation happens today, not on the run days.",
-              "description": "Recovery.",
+              "id": "w12-wed-run",
+              "sport": "run",
+              "type": "easy",
+              "name": "Short easy run",
+              "distanceMiles": 2.0,
+              "durationMinutes": 23,
+              "humanReadable": "Get this in during the day \u2014 you're on shift at 6:30pm.\n\nContinuous, conversational. If you can't talk in full sentences you are running too hard \u2014 that is the single most common way a base block quietly turns into junk miles.\nLet Strava record it. Don't run to the pace on the screen.\nKeep it genuinely short. You're on your feet for 10.5 hours tonight; this run is not the hard part of your day.",
+              "description": "Third and last run of the week.",
               "completed": false
             }
           ]
@@ -1619,14 +1848,13 @@
           "dayOfWeek": "Thursday",
           "workouts": [
             {
-              "id": "w12-thu-run",
-              "sport": "run",
-              "type": "easy",
-              "name": "Easy run",
-              "distanceMiles": 3.5,
-              "durationMinutes": 40,
-              "humanReadable": "Continuous, conversational pace. If you can't talk in full sentences, you're going too fast \u2014 this is the single most common way beginners stall out.\nEstimated pace ~10:30-12:00/mi, but run by feel, not by number.\nFinish with 4x20s strides: relaxed acceleration to about mile-race speed, then full walk recovery. Form work, not a workout.",
-              "description": "Aerobic base.",
+              "id": "w12-thu-rest",
+              "sport": "rest",
+              "type": "rest",
+              "name": "Work \u2014 rest",
+              "durationMinutes": null,
+              "humanReadable": "Shift night. No training.\n10.5 hours on your feet is 15-25k steps \u2014 that is real aerobic work and real energy out the door. It counts toward the cut even though it isn't in the mileage.",
+              "description": "Night shift.",
               "completed": false
             }
           ]
@@ -1636,13 +1864,13 @@
           "dayOfWeek": "Friday",
           "workouts": [
             {
-              "id": "w12-fri-str",
-              "sport": "strength",
-              "type": "strength",
-              "name": "Strength \u2014 Strength",
-              "durationMinutes": 35,
-              "humanReadable": "Back squat or goblet squat 4x6-8\nPull-up 4x max  \u2014 track the number, it's a PST event\nPush-up 4x max  \u2014 track the number, it's a PST event\nRomanian deadlift 3x8\nSplit squat 3x8/side\nHanging knee raise 3x12\nSingle-leg calf raise 3x15",
-              "description": "Second lift. Keep it 24h clear of the long run.",
+              "id": "w12-fri-rest",
+              "sport": "rest",
+              "type": "rest",
+              "name": "Work \u2014 rest",
+              "durationMinutes": null,
+              "humanReadable": "Shift night. No training.\n10.5 hours on your feet is 15-25k steps \u2014 that is real aerobic work and real energy out the door. It counts toward the cut even though it isn't in the mileage.",
+              "description": "Night shift.",
               "completed": false
             }
           ]
@@ -1652,14 +1880,13 @@
           "dayOfWeek": "Saturday",
           "workouts": [
             {
-              "id": "w12-sat-run",
-              "sport": "run",
-              "type": "long",
-              "name": "Long run",
-              "distanceMiles": 4.0,
-              "durationMinutes": 48,
-              "humanReadable": "Continuous, conversational pace. If you can't talk in full sentences, you're going too fast \u2014 this is the single most common way beginners stall out.\nEstimated pace ~10:30-12:00/mi, but run by feel, not by number.\nLast mile: pick it up slightly if you feel good. Never more than that.",
-              "description": "The week's key session.",
+              "id": "w12-sat-rest",
+              "sport": "rest",
+              "type": "rest",
+              "name": "Work \u2014 rest",
+              "durationMinutes": null,
+              "humanReadable": "Shift night. No training.\n10.5 hours on your feet is 15-25k steps \u2014 that is real aerobic work and real energy out the door. It counts toward the cut even though it isn't in the mileage.",
+              "description": "Night shift.",
               "completed": false
             }
           ]
@@ -1669,24 +1896,32 @@
           "dayOfWeek": "Sunday",
           "workouts": [
             {
-              "id": "w12-sun-run",
-              "sport": "run",
-              "type": "recovery",
-              "name": "Recovery run",
-              "distanceMiles": 1.5,
-              "durationMinutes": 19,
-              "humanReadable": "Genuinely easy. Slower than your easy pace. This run exists to move blood through tired legs, not to build fitness.\nIf you feel worse at the end than the start, you ran it too hard.",
-              "description": "Easy shakeout on tired legs.",
+              "id": "w12-sun-rest",
+              "sport": "rest",
+              "type": "rest",
+              "name": "Rest \u2014 sleep first",
+              "humanReadable": "You came off shift at 5am. Sleep is the session today.\n\nIf you're up and feel decent, an easy 20-30 min walk helps reset the day \u2014 but only after you've slept.",
+              "description": "Post-shift recovery.",
+              "completed": false
+            },
+            {
+              "id": "w12-sun-str",
+              "sport": "strength",
+              "type": "strength",
+              "name": "Optional strength",
+              "durationMinutes": 20,
+              "humanReadable": "OPTIONAL \u2014 only if you slept properly.\n\nSquat 4x6-8\nPull-up 4x max  \u2014 PST event\nPush-up 4x max  \u2014 PST event\nRomanian deadlift 3x8\n\nSkip without guilt. This is the first thing that should go in a bad week.",
+              "description": "Optional second lift.",
               "completed": false
             }
           ]
         }
       ],
       "summary": {
-        "totalMiles": 12.5,
-        "longRun": 4.0,
-        "runs": 4,
-        "strengthSessions": 2
+        "totalMiles": 11.0,
+        "longRun": 5.0,
+        "runs": 3,
+        "strengthSessions": 1
       }
     },
     {
@@ -1694,8 +1929,8 @@
       "startDate": "2026-11-09",
       "endDate": "2026-11-15",
       "phase": "Base",
-      "focus": "First steady-state work Tuesday \u2014 comfortably hard, not racing.",
-      "targetMiles": 19.5,
+      "focus": "Steady-state work on Tuesday: 10-15 min comfortably hard, still controlled.",
+      "targetMiles": 16.5,
       "isRecoveryWeek": false,
       "days": [
         {
@@ -1703,13 +1938,14 @@
           "dayOfWeek": "Monday",
           "workouts": [
             {
-              "id": "w13-mon-str",
-              "sport": "strength",
-              "type": "strength",
-              "name": "Strength \u2014 Maintain + Power",
-              "durationMinutes": 35,
-              "humanReadable": "Squat 3x5 (heavier, low volume)\nPull-up 4x max\nPush-up 4x max\nSit-up 3x2min  \u2014 full PST event, time it\nBox step-up 3x8/side\nPogo hops 3x20  \u2014 tendon stiffness for running economy",
-              "description": "Lift before the week's running load accumulates.",
+              "id": "w13-mon-long",
+              "sport": "run",
+              "type": "long",
+              "name": "Long run",
+              "distanceMiles": 8.0,
+              "durationMinutes": 96,
+              "humanReadable": "Continuous, conversational. If you can't talk in full sentences you are running too hard \u2014 that is the single most common way a base block quietly turns into junk miles.\nLet Strava record it. Don't run to the pace on the screen.\nLast mile: lift it slightly if you feel good. Only if you feel good.",
+              "description": "The week's key session.",
               "completed": false
             }
           ]
@@ -1723,10 +1959,20 @@
               "sport": "run",
               "type": "easy",
               "name": "Easy run",
-              "distanceMiles": 5.0,
-              "durationMinutes": 57,
-              "humanReadable": "Continuous, conversational pace. If you can't talk in full sentences, you're going too fast \u2014 this is the single most common way beginners stall out.\nEstimated pace ~10:30-12:00/mi, but run by feel, not by number.\nMiddle portion: 10-15 min at steady effort \u2014 comfortably hard, still controlled. Not a race.",
-              "description": "Aerobic base.",
+              "distanceMiles": 5.5,
+              "durationMinutes": 63,
+              "humanReadable": "Continuous, conversational. If you can't talk in full sentences you are running too hard \u2014 that is the single most common way a base block quietly turns into junk miles.\nLet Strava record it. Don't run to the pace on the screen.\nMiddle 10-15 min at steady effort \u2014 comfortably hard, controlled. Not a race.",
+              "description": "Aerobic base on your most recovered day.",
+              "completed": false
+            },
+            {
+              "id": "w13-tue-str",
+              "sport": "strength",
+              "type": "strength",
+              "name": "Strength \u2014 Power",
+              "durationMinutes": 35,
+              "humanReadable": "Squat 3x5 (heavier, low volume)\nPull-up 4x max\nPush-up 4x max\nSit-up 2 min \u2014 full PST event, time it\nBox step-up 3x8/side\nPogo hops 3x20  \u2014 tendon stiffness, cheap speed",
+              "description": "Lift after the run, or split it to the evening.",
               "completed": false
             }
           ]
@@ -1736,12 +1982,14 @@
           "dayOfWeek": "Wednesday",
           "workouts": [
             {
-              "id": "w13-wed-rest",
-              "sport": "rest",
-              "type": "rest",
-              "name": "Rest",
-              "humanReadable": "Full rest, or a 20-30 min walk if you're restless.\nAdaptation happens today, not on the run days.",
-              "description": "Recovery.",
+              "id": "w13-wed-run",
+              "sport": "run",
+              "type": "easy",
+              "name": "Short easy run",
+              "distanceMiles": 3.0,
+              "durationMinutes": 34,
+              "humanReadable": "Get this in during the day \u2014 you're on shift at 6:30pm.\n\nContinuous, conversational. If you can't talk in full sentences you are running too hard \u2014 that is the single most common way a base block quietly turns into junk miles.\nLet Strava record it. Don't run to the pace on the screen.\nKeep it genuinely short. You're on your feet for 10.5 hours tonight; this run is not the hard part of your day.",
+              "description": "Third and last run of the week.",
               "completed": false
             }
           ]
@@ -1751,14 +1999,13 @@
           "dayOfWeek": "Thursday",
           "workouts": [
             {
-              "id": "w13-thu-run",
-              "sport": "run",
-              "type": "easy",
-              "name": "Easy run",
-              "distanceMiles": 5.0,
-              "durationMinutes": 57,
-              "humanReadable": "Continuous, conversational pace. If you can't talk in full sentences, you're going too fast \u2014 this is the single most common way beginners stall out.\nEstimated pace ~10:30-12:00/mi, but run by feel, not by number.\nMiddle portion: 10-15 min at steady effort \u2014 comfortably hard, still controlled. Not a race.",
-              "description": "Aerobic base.",
+              "id": "w13-thu-rest",
+              "sport": "rest",
+              "type": "rest",
+              "name": "Work \u2014 rest",
+              "durationMinutes": null,
+              "humanReadable": "Shift night. No training.\n10.5 hours on your feet is 15-25k steps \u2014 that is real aerobic work and real energy out the door. It counts toward the cut even though it isn't in the mileage.",
+              "description": "Night shift.",
               "completed": false
             }
           ]
@@ -1768,13 +2015,13 @@
           "dayOfWeek": "Friday",
           "workouts": [
             {
-              "id": "w13-fri-str",
-              "sport": "strength",
-              "type": "strength",
-              "name": "Strength \u2014 Maintain + Power",
-              "durationMinutes": 35,
-              "humanReadable": "Squat 3x5 (heavier, low volume)\nPull-up 4x max\nPush-up 4x max\nSit-up 3x2min  \u2014 full PST event, time it\nBox step-up 3x8/side\nPogo hops 3x20  \u2014 tendon stiffness for running economy",
-              "description": "Second lift. Keep it 24h clear of the long run.",
+              "id": "w13-fri-rest",
+              "sport": "rest",
+              "type": "rest",
+              "name": "Work \u2014 rest",
+              "durationMinutes": null,
+              "humanReadable": "Shift night. No training.\n10.5 hours on your feet is 15-25k steps \u2014 that is real aerobic work and real energy out the door. It counts toward the cut even though it isn't in the mileage.",
+              "description": "Night shift.",
               "completed": false
             }
           ]
@@ -1784,14 +2031,13 @@
           "dayOfWeek": "Saturday",
           "workouts": [
             {
-              "id": "w13-sat-run",
-              "sport": "run",
-              "type": "long",
-              "name": "Long run",
-              "distanceMiles": 7.0,
-              "durationMinutes": 84,
-              "humanReadable": "Continuous, conversational pace. If you can't talk in full sentences, you're going too fast \u2014 this is the single most common way beginners stall out.\nEstimated pace ~10:30-12:00/mi, but run by feel, not by number.\nLast mile: pick it up slightly if you feel good. Never more than that.",
-              "description": "The week's key session.",
+              "id": "w13-sat-rest",
+              "sport": "rest",
+              "type": "rest",
+              "name": "Work \u2014 rest",
+              "durationMinutes": null,
+              "humanReadable": "Shift night. No training.\n10.5 hours on your feet is 15-25k steps \u2014 that is real aerobic work and real energy out the door. It counts toward the cut even though it isn't in the mileage.",
+              "description": "Night shift.",
               "completed": false
             }
           ]
@@ -1801,24 +2047,32 @@
           "dayOfWeek": "Sunday",
           "workouts": [
             {
-              "id": "w13-sun-run",
-              "sport": "run",
-              "type": "recovery",
-              "name": "Recovery run",
-              "distanceMiles": 2.5,
-              "durationMinutes": 32,
-              "humanReadable": "Genuinely easy. Slower than your easy pace. This run exists to move blood through tired legs, not to build fitness.\nIf you feel worse at the end than the start, you ran it too hard.",
-              "description": "Easy shakeout on tired legs.",
+              "id": "w13-sun-rest",
+              "sport": "rest",
+              "type": "rest",
+              "name": "Rest \u2014 sleep first",
+              "humanReadable": "You came off shift at 5am. Sleep is the session today.\n\nIf you're up and feel decent, an easy 20-30 min walk helps reset the day \u2014 but only after you've slept.",
+              "description": "Post-shift recovery.",
+              "completed": false
+            },
+            {
+              "id": "w13-sun-str",
+              "sport": "strength",
+              "type": "strength",
+              "name": "Optional strength",
+              "durationMinutes": 20,
+              "humanReadable": "OPTIONAL \u2014 only if you slept properly.\n\nSquat 3x5 (heavier, low volume)\nPull-up 4x max\nPush-up 4x max\nSit-up 2 min \u2014 full PST event, time it\n\nSkip without guilt. This is the first thing that should go in a bad week.",
+              "description": "Optional second lift.",
               "completed": false
             }
           ]
         }
       ],
       "summary": {
-        "totalMiles": 19.5,
-        "longRun": 7.0,
-        "runs": 4,
-        "strengthSessions": 2
+        "totalMiles": 16.5,
+        "longRun": 8.0,
+        "runs": 3,
+        "strengthSessions": 1
       }
     },
     {
@@ -1826,8 +2080,8 @@
       "startDate": "2026-11-16",
       "endDate": "2026-11-22",
       "phase": "Base",
-      "focus": "Long run at 8. Practice mid-run fueling from here on.",
-      "targetMiles": 21.0,
+      "focus": "Practice mid-run fuelling from here: 20-25g carbs at the 45-minute mark.",
+      "targetMiles": 17.5,
       "isRecoveryWeek": false,
       "days": [
         {
@@ -1835,13 +2089,14 @@
           "dayOfWeek": "Monday",
           "workouts": [
             {
-              "id": "w14-mon-str",
-              "sport": "strength",
-              "type": "strength",
-              "name": "Strength \u2014 Maintain + Power",
-              "durationMinutes": 35,
-              "humanReadable": "Squat 3x5 (heavier, low volume)\nPull-up 4x max\nPush-up 4x max\nSit-up 3x2min  \u2014 full PST event, time it\nBox step-up 3x8/side\nPogo hops 3x20  \u2014 tendon stiffness for running economy",
-              "description": "Lift before the week's running load accumulates.",
+              "id": "w14-mon-long",
+              "sport": "run",
+              "type": "long",
+              "name": "Long run",
+              "distanceMiles": 9.0,
+              "durationMinutes": 108,
+              "humanReadable": "Continuous, conversational. If you can't talk in full sentences you are running too hard \u2014 that is the single most common way a base block quietly turns into junk miles.\nLet Strava record it. Don't run to the pace on the screen.\nLast mile: lift it slightly if you feel good. Only if you feel good.\nFuelling practice: 20-25g carbs at 45 minutes \u2014 gel, chews, whatever you'll use on race day. Your gut adapts slower than your legs.",
+              "description": "The week's key session.",
               "completed": false
             }
           ]
@@ -1855,10 +2110,20 @@
               "sport": "run",
               "type": "easy",
               "name": "Easy run",
-              "distanceMiles": 5.0,
-              "durationMinutes": 57,
-              "humanReadable": "Continuous, conversational pace. If you can't talk in full sentences, you're going too fast \u2014 this is the single most common way beginners stall out.\nEstimated pace ~10:30-12:00/mi, but run by feel, not by number.\nMiddle portion: 10-15 min at steady effort \u2014 comfortably hard, still controlled. Not a race.",
-              "description": "Aerobic base.",
+              "distanceMiles": 5.5,
+              "durationMinutes": 63,
+              "humanReadable": "Continuous, conversational. If you can't talk in full sentences you are running too hard \u2014 that is the single most common way a base block quietly turns into junk miles.\nLet Strava record it. Don't run to the pace on the screen.\nMiddle 10-15 min at steady effort \u2014 comfortably hard, controlled. Not a race.",
+              "description": "Aerobic base on your most recovered day.",
+              "completed": false
+            },
+            {
+              "id": "w14-tue-str",
+              "sport": "strength",
+              "type": "strength",
+              "name": "Strength \u2014 Power",
+              "durationMinutes": 35,
+              "humanReadable": "Squat 3x5 (heavier, low volume)\nPull-up 4x max\nPush-up 4x max\nSit-up 2 min \u2014 full PST event, time it\nBox step-up 3x8/side\nPogo hops 3x20  \u2014 tendon stiffness, cheap speed",
+              "description": "Lift after the run, or split it to the evening.",
               "completed": false
             }
           ]
@@ -1868,12 +2133,14 @@
           "dayOfWeek": "Wednesday",
           "workouts": [
             {
-              "id": "w14-wed-rest",
-              "sport": "rest",
-              "type": "rest",
-              "name": "Rest",
-              "humanReadable": "Full rest, or a 20-30 min walk if you're restless.\nAdaptation happens today, not on the run days.",
-              "description": "Recovery.",
+              "id": "w14-wed-run",
+              "sport": "run",
+              "type": "easy",
+              "name": "Short easy run",
+              "distanceMiles": 3.0,
+              "durationMinutes": 34,
+              "humanReadable": "Get this in during the day \u2014 you're on shift at 6:30pm.\n\nContinuous, conversational. If you can't talk in full sentences you are running too hard \u2014 that is the single most common way a base block quietly turns into junk miles.\nLet Strava record it. Don't run to the pace on the screen.\nKeep it genuinely short. You're on your feet for 10.5 hours tonight; this run is not the hard part of your day.",
+              "description": "Third and last run of the week.",
               "completed": false
             }
           ]
@@ -1883,14 +2150,13 @@
           "dayOfWeek": "Thursday",
           "workouts": [
             {
-              "id": "w14-thu-run",
-              "sport": "run",
-              "type": "easy",
-              "name": "Easy run",
-              "distanceMiles": 5.5,
-              "durationMinutes": 63,
-              "humanReadable": "Continuous, conversational pace. If you can't talk in full sentences, you're going too fast \u2014 this is the single most common way beginners stall out.\nEstimated pace ~10:30-12:00/mi, but run by feel, not by number.\nMiddle portion: 10-15 min at steady effort \u2014 comfortably hard, still controlled. Not a race.",
-              "description": "Aerobic base.",
+              "id": "w14-thu-rest",
+              "sport": "rest",
+              "type": "rest",
+              "name": "Work \u2014 rest",
+              "durationMinutes": null,
+              "humanReadable": "Shift night. No training.\n10.5 hours on your feet is 15-25k steps \u2014 that is real aerobic work and real energy out the door. It counts toward the cut even though it isn't in the mileage.",
+              "description": "Night shift.",
               "completed": false
             }
           ]
@@ -1900,13 +2166,13 @@
           "dayOfWeek": "Friday",
           "workouts": [
             {
-              "id": "w14-fri-str",
-              "sport": "strength",
-              "type": "strength",
-              "name": "Strength \u2014 Maintain + Power",
-              "durationMinutes": 35,
-              "humanReadable": "Squat 3x5 (heavier, low volume)\nPull-up 4x max\nPush-up 4x max\nSit-up 3x2min  \u2014 full PST event, time it\nBox step-up 3x8/side\nPogo hops 3x20  \u2014 tendon stiffness for running economy",
-              "description": "Second lift. Keep it 24h clear of the long run.",
+              "id": "w14-fri-rest",
+              "sport": "rest",
+              "type": "rest",
+              "name": "Work \u2014 rest",
+              "durationMinutes": null,
+              "humanReadable": "Shift night. No training.\n10.5 hours on your feet is 15-25k steps \u2014 that is real aerobic work and real energy out the door. It counts toward the cut even though it isn't in the mileage.",
+              "description": "Night shift.",
               "completed": false
             }
           ]
@@ -1916,14 +2182,13 @@
           "dayOfWeek": "Saturday",
           "workouts": [
             {
-              "id": "w14-sat-run",
-              "sport": "run",
-              "type": "long",
-              "name": "Long run",
-              "distanceMiles": 8.0,
-              "durationMinutes": 96,
-              "humanReadable": "Continuous, conversational pace. If you can't talk in full sentences, you're going too fast \u2014 this is the single most common way beginners stall out.\nEstimated pace ~10:30-12:00/mi, but run by feel, not by number.\nFueling practice: take 20-25g carbs at the 45-minute mark (gel, chews, whatever you'll use on race day). Start training your gut now \u2014 it adapts slower than your legs.\nLast mile: pick it up slightly if you feel good. Never more than that.",
-              "description": "The week's key session.",
+              "id": "w14-sat-rest",
+              "sport": "rest",
+              "type": "rest",
+              "name": "Work \u2014 rest",
+              "durationMinutes": null,
+              "humanReadable": "Shift night. No training.\n10.5 hours on your feet is 15-25k steps \u2014 that is real aerobic work and real energy out the door. It counts toward the cut even though it isn't in the mileage.",
+              "description": "Night shift.",
               "completed": false
             }
           ]
@@ -1933,24 +2198,32 @@
           "dayOfWeek": "Sunday",
           "workouts": [
             {
-              "id": "w14-sun-run",
-              "sport": "run",
-              "type": "recovery",
-              "name": "Recovery run",
-              "distanceMiles": 2.5,
-              "durationMinutes": 32,
-              "humanReadable": "Genuinely easy. Slower than your easy pace. This run exists to move blood through tired legs, not to build fitness.\nIf you feel worse at the end than the start, you ran it too hard.",
-              "description": "Easy shakeout on tired legs.",
+              "id": "w14-sun-rest",
+              "sport": "rest",
+              "type": "rest",
+              "name": "Rest \u2014 sleep first",
+              "humanReadable": "You came off shift at 5am. Sleep is the session today.\n\nIf you're up and feel decent, an easy 20-30 min walk helps reset the day \u2014 but only after you've slept.",
+              "description": "Post-shift recovery.",
+              "completed": false
+            },
+            {
+              "id": "w14-sun-str",
+              "sport": "strength",
+              "type": "strength",
+              "name": "Optional strength",
+              "durationMinutes": 20,
+              "humanReadable": "OPTIONAL \u2014 only if you slept properly.\n\nSquat 3x5 (heavier, low volume)\nPull-up 4x max\nPush-up 4x max\nSit-up 2 min \u2014 full PST event, time it\n\nSkip without guilt. This is the first thing that should go in a bad week.",
+              "description": "Optional second lift.",
               "completed": false
             }
           ]
         }
       ],
       "summary": {
-        "totalMiles": 21.0,
-        "longRun": 8.0,
-        "runs": 4,
-        "strengthSessions": 2
+        "totalMiles": 17.5,
+        "longRun": 9.0,
+        "runs": 3,
+        "strengthSessions": 1
       }
     },
     {
@@ -1958,8 +2231,8 @@
       "startDate": "2026-11-23",
       "endDate": "2026-11-29",
       "phase": "Base",
-      "focus": "Base peak. 9-mile long run \u2014 the handoff into the formal block.",
-      "targetMiles": 23.0,
+      "focus": "Base peak. Double digits. This is the handoff into the formal block.",
+      "targetMiles": 18.5,
       "isRecoveryWeek": false,
       "days": [
         {
@@ -1967,13 +2240,14 @@
           "dayOfWeek": "Monday",
           "workouts": [
             {
-              "id": "w15-mon-str",
-              "sport": "strength",
-              "type": "strength",
-              "name": "Strength \u2014 Maintain + Power",
-              "durationMinutes": 35,
-              "humanReadable": "Squat 3x5 (heavier, low volume)\nPull-up 4x max\nPush-up 4x max\nSit-up 3x2min  \u2014 full PST event, time it\nBox step-up 3x8/side\nPogo hops 3x20  \u2014 tendon stiffness for running economy",
-              "description": "Lift before the week's running load accumulates.",
+              "id": "w15-mon-long",
+              "sport": "run",
+              "type": "long",
+              "name": "Long run",
+              "distanceMiles": 10.0,
+              "durationMinutes": 120,
+              "humanReadable": "Continuous, conversational. If you can't talk in full sentences you are running too hard \u2014 that is the single most common way a base block quietly turns into junk miles.\nLet Strava record it. Don't run to the pace on the screen.\nLast mile: lift it slightly if you feel good. Only if you feel good.\nFuelling practice: 20-25g carbs at 45 minutes \u2014 gel, chews, whatever you'll use on race day. Your gut adapts slower than your legs.",
+              "description": "The week's key session.",
               "completed": false
             }
           ]
@@ -1989,8 +2263,18 @@
               "name": "Easy run",
               "distanceMiles": 5.5,
               "durationMinutes": 63,
-              "humanReadable": "Continuous, conversational pace. If you can't talk in full sentences, you're going too fast \u2014 this is the single most common way beginners stall out.\nEstimated pace ~10:30-12:00/mi, but run by feel, not by number.\nMiddle portion: 10-15 min at steady effort \u2014 comfortably hard, still controlled. Not a race.",
-              "description": "Aerobic base.",
+              "humanReadable": "Continuous, conversational. If you can't talk in full sentences you are running too hard \u2014 that is the single most common way a base block quietly turns into junk miles.\nLet Strava record it. Don't run to the pace on the screen.\nMiddle 10-15 min at steady effort \u2014 comfortably hard, controlled. Not a race.",
+              "description": "Aerobic base on your most recovered day.",
+              "completed": false
+            },
+            {
+              "id": "w15-tue-str",
+              "sport": "strength",
+              "type": "strength",
+              "name": "Strength \u2014 Power",
+              "durationMinutes": 35,
+              "humanReadable": "Squat 3x5 (heavier, low volume)\nPull-up 4x max\nPush-up 4x max\nSit-up 2 min \u2014 full PST event, time it\nBox step-up 3x8/side\nPogo hops 3x20  \u2014 tendon stiffness, cheap speed",
+              "description": "Lift after the run, or split it to the evening.",
               "completed": false
             }
           ]
@@ -2000,12 +2284,14 @@
           "dayOfWeek": "Wednesday",
           "workouts": [
             {
-              "id": "w15-wed-rest",
-              "sport": "rest",
-              "type": "rest",
-              "name": "Rest",
-              "humanReadable": "Full rest, or a 20-30 min walk if you're restless.\nAdaptation happens today, not on the run days.",
-              "description": "Recovery.",
+              "id": "w15-wed-run",
+              "sport": "run",
+              "type": "easy",
+              "name": "Short easy run",
+              "distanceMiles": 3.0,
+              "durationMinutes": 34,
+              "humanReadable": "Get this in during the day \u2014 you're on shift at 6:30pm.\n\nContinuous, conversational. If you can't talk in full sentences you are running too hard \u2014 that is the single most common way a base block quietly turns into junk miles.\nLet Strava record it. Don't run to the pace on the screen.\nKeep it genuinely short. You're on your feet for 10.5 hours tonight; this run is not the hard part of your day.",
+              "description": "Third and last run of the week.",
               "completed": false
             }
           ]
@@ -2015,14 +2301,13 @@
           "dayOfWeek": "Thursday",
           "workouts": [
             {
-              "id": "w15-thu-run",
-              "sport": "run",
-              "type": "easy",
-              "name": "Easy run",
-              "distanceMiles": 6.0,
-              "durationMinutes": 69,
-              "humanReadable": "Continuous, conversational pace. If you can't talk in full sentences, you're going too fast \u2014 this is the single most common way beginners stall out.\nEstimated pace ~10:30-12:00/mi, but run by feel, not by number.\nMiddle portion: 10-15 min at steady effort \u2014 comfortably hard, still controlled. Not a race.",
-              "description": "Aerobic base.",
+              "id": "w15-thu-rest",
+              "sport": "rest",
+              "type": "rest",
+              "name": "Work \u2014 rest",
+              "durationMinutes": null,
+              "humanReadable": "Shift night. No training.\n10.5 hours on your feet is 15-25k steps \u2014 that is real aerobic work and real energy out the door. It counts toward the cut even though it isn't in the mileage.",
+              "description": "Night shift.",
               "completed": false
             }
           ]
@@ -2032,13 +2317,13 @@
           "dayOfWeek": "Friday",
           "workouts": [
             {
-              "id": "w15-fri-str",
-              "sport": "strength",
-              "type": "strength",
-              "name": "Strength \u2014 Maintain + Power",
-              "durationMinutes": 35,
-              "humanReadable": "Squat 3x5 (heavier, low volume)\nPull-up 4x max\nPush-up 4x max\nSit-up 3x2min  \u2014 full PST event, time it\nBox step-up 3x8/side\nPogo hops 3x20  \u2014 tendon stiffness for running economy",
-              "description": "Second lift. Keep it 24h clear of the long run.",
+              "id": "w15-fri-rest",
+              "sport": "rest",
+              "type": "rest",
+              "name": "Work \u2014 rest",
+              "durationMinutes": null,
+              "humanReadable": "Shift night. No training.\n10.5 hours on your feet is 15-25k steps \u2014 that is real aerobic work and real energy out the door. It counts toward the cut even though it isn't in the mileage.",
+              "description": "Night shift.",
               "completed": false
             }
           ]
@@ -2048,14 +2333,13 @@
           "dayOfWeek": "Saturday",
           "workouts": [
             {
-              "id": "w15-sat-run",
-              "sport": "run",
-              "type": "long",
-              "name": "Long run",
-              "distanceMiles": 9.0,
-              "durationMinutes": 108,
-              "humanReadable": "Continuous, conversational pace. If you can't talk in full sentences, you're going too fast \u2014 this is the single most common way beginners stall out.\nEstimated pace ~10:30-12:00/mi, but run by feel, not by number.\nFueling practice: take 20-25g carbs at the 45-minute mark (gel, chews, whatever you'll use on race day). Start training your gut now \u2014 it adapts slower than your legs.\nLast mile: pick it up slightly if you feel good. Never more than that.",
-              "description": "The week's key session.",
+              "id": "w15-sat-rest",
+              "sport": "rest",
+              "type": "rest",
+              "name": "Work \u2014 rest",
+              "durationMinutes": null,
+              "humanReadable": "Shift night. No training.\n10.5 hours on your feet is 15-25k steps \u2014 that is real aerobic work and real energy out the door. It counts toward the cut even though it isn't in the mileage.",
+              "description": "Night shift.",
               "completed": false
             }
           ]
@@ -2065,24 +2349,32 @@
           "dayOfWeek": "Sunday",
           "workouts": [
             {
-              "id": "w15-sun-run",
-              "sport": "run",
-              "type": "recovery",
-              "name": "Recovery run",
-              "distanceMiles": 2.5,
-              "durationMinutes": 32,
-              "humanReadable": "Genuinely easy. Slower than your easy pace. This run exists to move blood through tired legs, not to build fitness.\nIf you feel worse at the end than the start, you ran it too hard.",
-              "description": "Easy shakeout on tired legs.",
+              "id": "w15-sun-rest",
+              "sport": "rest",
+              "type": "rest",
+              "name": "Rest \u2014 sleep first",
+              "humanReadable": "You came off shift at 5am. Sleep is the session today.\n\nIf you're up and feel decent, an easy 20-30 min walk helps reset the day \u2014 but only after you've slept.",
+              "description": "Post-shift recovery.",
+              "completed": false
+            },
+            {
+              "id": "w15-sun-str",
+              "sport": "strength",
+              "type": "strength",
+              "name": "Optional strength",
+              "durationMinutes": 20,
+              "humanReadable": "OPTIONAL \u2014 only if you slept properly.\n\nSquat 3x5 (heavier, low volume)\nPull-up 4x max\nPush-up 4x max\nSit-up 2 min \u2014 full PST event, time it\n\nSkip without guilt. This is the first thing that should go in a bad week.",
+              "description": "Optional second lift.",
               "completed": false
             }
           ]
         }
       ],
       "summary": {
-        "totalMiles": 23.0,
-        "longRun": 9.0,
-        "runs": 4,
-        "strengthSessions": 2
+        "totalMiles": 18.5,
+        "longRun": 10.0,
+        "runs": 3,
+        "strengthSessions": 1
       }
     },
     {
@@ -2090,8 +2382,8 @@
       "startDate": "2026-11-30",
       "endDate": "2026-12-06",
       "phase": "Base",
-      "focus": "Transition week. Reassess, re-test, and lock the block targets.",
-      "targetMiles": 16.0,
+      "focus": "Job ends, semester ends. Re-test Monday and we build the marathon block off it.",
+      "targetMiles": 13.0,
       "isRecoveryWeek": true,
       "days": [
         {
@@ -2099,13 +2391,14 @@
           "dayOfWeek": "Monday",
           "workouts": [
             {
-              "id": "w16-mon-str",
-              "sport": "strength",
-              "type": "strength",
-              "name": "Strength \u2014 Maintain + Power",
-              "durationMinutes": 35,
-              "humanReadable": "Squat 3x5 (heavier, low volume)\nPull-up 4x max\nPush-up 4x max\nSit-up 3x2min  \u2014 full PST event, time it\nBox step-up 3x8/side\nPogo hops 3x20  \u2014 tendon stiffness for running economy",
-              "description": "Lift before the week's running load accumulates.",
+              "id": "w16-mon-long",
+              "sport": "run",
+              "type": "long",
+              "name": "Long run + 2-mile threshold test",
+              "distanceMiles": 6.0,
+              "durationMinutes": 72,
+              "humanReadable": "Continuous, conversational. If you can't talk in full sentences you are running too hard \u2014 that is the single most common way a base block quietly turns into junk miles.\nLet Strava record it. Don't run to the pace on the screen.\nLast mile: lift it slightly if you feel good. Only if you feel good.\nFuelling practice: 20-25g carbs at 45 minutes \u2014 gel, chews, whatever you'll use on race day. Your gut adapts slower than your legs.\n\nBLOCK TRANSITION TEST \u2014 do not skip this one:\n15 min warm-up, then 2 miles at the hardest pace you could hold for an hour.\nThis sets every pace in the formal marathon block.",
+              "description": "The week's key session.",
               "completed": false
             }
           ]
@@ -2121,8 +2414,18 @@
               "name": "Easy run",
               "distanceMiles": 4.0,
               "durationMinutes": 46,
-              "humanReadable": "Continuous, conversational pace. If you can't talk in full sentences, you're going too fast \u2014 this is the single most common way beginners stall out.\nEstimated pace ~10:30-12:00/mi, but run by feel, not by number.\nMiddle portion: 10-15 min at steady effort \u2014 comfortably hard, still controlled. Not a race.",
-              "description": "Aerobic base.",
+              "humanReadable": "Continuous, conversational. If you can't talk in full sentences you are running too hard \u2014 that is the single most common way a base block quietly turns into junk miles.\nLet Strava record it. Don't run to the pace on the screen.\nMiddle 10-15 min at steady effort \u2014 comfortably hard, controlled. Not a race.",
+              "description": "Aerobic base on your most recovered day.",
+              "completed": false
+            },
+            {
+              "id": "w16-tue-str",
+              "sport": "strength",
+              "type": "strength",
+              "name": "Strength \u2014 Power",
+              "durationMinutes": 35,
+              "humanReadable": "Squat 3x5 (heavier, low volume)\nPull-up 4x max\nPush-up 4x max\nSit-up 2 min \u2014 full PST event, time it\nBox step-up 3x8/side\nPogo hops 3x20  \u2014 tendon stiffness, cheap speed",
+              "description": "Lift after the run, or split it to the evening.",
               "completed": false
             }
           ]
@@ -2132,12 +2435,14 @@
           "dayOfWeek": "Wednesday",
           "workouts": [
             {
-              "id": "w16-wed-rest",
-              "sport": "rest",
-              "type": "rest",
-              "name": "Rest",
-              "humanReadable": "Full rest, or a 20-30 min walk if you're restless.\nAdaptation happens today, not on the run days.",
-              "description": "Recovery.",
+              "id": "w16-wed-run",
+              "sport": "run",
+              "type": "easy",
+              "name": "Short easy run",
+              "distanceMiles": 3.0,
+              "durationMinutes": 34,
+              "humanReadable": "Get this in during the day \u2014 you're on shift at 6:30pm.\n\nContinuous, conversational. If you can't talk in full sentences you are running too hard \u2014 that is the single most common way a base block quietly turns into junk miles.\nLet Strava record it. Don't run to the pace on the screen.\nKeep it genuinely short. You're on your feet for 10.5 hours tonight; this run is not the hard part of your day.",
+              "description": "Third and last run of the week.",
               "completed": false
             }
           ]
@@ -2147,14 +2452,13 @@
           "dayOfWeek": "Thursday",
           "workouts": [
             {
-              "id": "w16-thu-run",
-              "sport": "run",
-              "type": "easy",
-              "name": "Easy run",
-              "distanceMiles": 4.0,
-              "durationMinutes": 46,
-              "humanReadable": "Continuous, conversational pace. If you can't talk in full sentences, you're going too fast \u2014 this is the single most common way beginners stall out.\nEstimated pace ~10:30-12:00/mi, but run by feel, not by number.\nMiddle portion: 10-15 min at steady effort \u2014 comfortably hard, still controlled. Not a race.",
-              "description": "Aerobic base.",
+              "id": "w16-thu-rest",
+              "sport": "rest",
+              "type": "rest",
+              "name": "Work \u2014 rest",
+              "durationMinutes": null,
+              "humanReadable": "Shift night. No training.\n10.5 hours on your feet is 15-25k steps \u2014 that is real aerobic work and real energy out the door. It counts toward the cut even though it isn't in the mileage.",
+              "description": "Night shift.",
               "completed": false
             }
           ]
@@ -2164,13 +2468,13 @@
           "dayOfWeek": "Friday",
           "workouts": [
             {
-              "id": "w16-fri-str",
-              "sport": "strength",
-              "type": "strength",
-              "name": "Strength \u2014 Maintain + Power",
-              "durationMinutes": 35,
-              "humanReadable": "Squat 3x5 (heavier, low volume)\nPull-up 4x max\nPush-up 4x max\nSit-up 3x2min  \u2014 full PST event, time it\nBox step-up 3x8/side\nPogo hops 3x20  \u2014 tendon stiffness for running economy",
-              "description": "Second lift. Keep it 24h clear of the long run.",
+              "id": "w16-fri-rest",
+              "sport": "rest",
+              "type": "rest",
+              "name": "Work \u2014 rest",
+              "durationMinutes": null,
+              "humanReadable": "Shift night. No training.\n10.5 hours on your feet is 15-25k steps \u2014 that is real aerobic work and real energy out the door. It counts toward the cut even though it isn't in the mileage.",
+              "description": "Night shift.",
               "completed": false
             }
           ]
@@ -2180,14 +2484,13 @@
           "dayOfWeek": "Saturday",
           "workouts": [
             {
-              "id": "w16-sat-run",
-              "sport": "run",
-              "type": "long",
-              "name": "Long run + 2-mile threshold test",
-              "distanceMiles": 6.0,
-              "durationMinutes": 72,
-              "humanReadable": "Continuous, conversational pace. If you can't talk in full sentences, you're going too fast \u2014 this is the single most common way beginners stall out.\nEstimated pace ~10:30-12:00/mi, but run by feel, not by number.\nFueling practice: take 20-25g carbs at the 45-minute mark (gel, chews, whatever you'll use on race day). Start training your gut now \u2014 it adapts slower than your legs.\nLast mile: pick it up slightly if you feel good. Never more than that.\n\nBLOCK-TRANSITION TEST: after a 15-min warm-up, run a hard 2 miles at the fastest pace you could hold for an hour.\nThis sets the paces for the entire formal block. Do not skip it.",
-              "description": "The week's key session.",
+              "id": "w16-sat-rest",
+              "sport": "rest",
+              "type": "rest",
+              "name": "Work \u2014 rest",
+              "durationMinutes": null,
+              "humanReadable": "Shift night. No training.\n10.5 hours on your feet is 15-25k steps \u2014 that is real aerobic work and real energy out the door. It counts toward the cut even though it isn't in the mileage.",
+              "description": "Night shift.",
               "completed": false
             }
           ]
@@ -2197,24 +2500,32 @@
           "dayOfWeek": "Sunday",
           "workouts": [
             {
-              "id": "w16-sun-run",
-              "sport": "run",
-              "type": "recovery",
-              "name": "Recovery run",
-              "distanceMiles": 2.0,
-              "durationMinutes": 26,
-              "humanReadable": "Genuinely easy. Slower than your easy pace. This run exists to move blood through tired legs, not to build fitness.\nIf you feel worse at the end than the start, you ran it too hard.",
-              "description": "Easy shakeout on tired legs.",
+              "id": "w16-sun-rest",
+              "sport": "rest",
+              "type": "rest",
+              "name": "Rest \u2014 sleep first",
+              "humanReadable": "You came off shift at 5am. Sleep is the session today.\n\nIf you're up and feel decent, an easy 20-30 min walk helps reset the day \u2014 but only after you've slept.",
+              "description": "Post-shift recovery.",
+              "completed": false
+            },
+            {
+              "id": "w16-sun-str",
+              "sport": "strength",
+              "type": "strength",
+              "name": "Optional strength",
+              "durationMinutes": 20,
+              "humanReadable": "OPTIONAL \u2014 only if you slept properly.\n\nSquat 3x5 (heavier, low volume)\nPull-up 4x max\nPush-up 4x max\nSit-up 2 min \u2014 full PST event, time it\n\nSkip without guilt. This is the first thing that should go in a bad week.",
+              "description": "Optional second lift.",
               "completed": false
             }
           ]
         }
       ],
       "summary": {
-        "totalMiles": 16.0,
+        "totalMiles": 13.0,
         "longRun": 6.0,
-        "runs": 4,
-        "strengthSessions": 2
+        "runs": 3,
+        "strengthSessions": 1
       }
     }
   ]
